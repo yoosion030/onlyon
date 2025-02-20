@@ -1,9 +1,10 @@
-import { Button } from "@repo/ui/button";
+import { Footer } from "@repo/ui";
+import { cn } from "@repo/utils";
 
 export default function Home() {
   return (
-    <div>
-      blog<Button appName="blog">button</Button>
+    <div className={cn("bg-primary")}>
+      <Footer />
     </div>
   );
 }
