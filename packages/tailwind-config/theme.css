@@ -1,8 +1,23 @@
 @theme {
   --color-primary: #3674b5;
+  --color-primary-200: #275382;
+  --color-primary-300: #1f4369;
+  --color-primary-400: #18334f;
+}
 
-  --color-linear-100: #3674b5;
-  --color-linear-200: #275382;
-  --color-linear-300: #1f4369;
-  --color-linear-400: #18334f;
+@layer utilities {
+  .text-primary-linear {
+    background: linear-gradient(
+      to right,
+      var(--color-primary),
+      var(--color-primary-200),
+      var(--color-primary-300),
+      var(--color-primary-400)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
 }
