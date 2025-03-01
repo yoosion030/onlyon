@@ -3,9 +3,7 @@ import { GithubIcon, LinkedinIcon, VelogIcon } from "../assets";
 
 export const Footer = () => {
   return (
-    <footer
-      className={cn("w-[43.75rem]", "h-[12.5rem]", "space-y-4", "mx-auto")}
-    >
+    <footer className={cn("w-full", "h-[12.5rem]", "space-y-4", "mx-auto")}>
       <p className={cn("text-[0.75rem]", "font-thin", "text-primary-linear")}>
         ©2025. OnlyOn all rights reserved.
       </p>

@@ -12,7 +12,7 @@ export const Header = ({ workspace }: HeaderProps) => {
     >
       <div
         className={cn(
-          "w-[43.75rem]",
+          "w-full",
           "h-[3.25rem]",
           "mx-auto",
           "flex",

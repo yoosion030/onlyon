@@ -15,6 +15,7 @@
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.2.0",
     "@repo/ui": "workspace:*",
+    "@vercel/og": "^0.6.5",
     "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
