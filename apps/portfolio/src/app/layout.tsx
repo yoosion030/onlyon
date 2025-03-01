@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./global.css";
 import "@repo/ui/styles.css";
 import { Footer, Header } from "@repo/ui";
+import { cn } from "@repo/utils";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={cn("max-w-[43.75rem]", "mx-auto", "px-8")}>
         <Header workspace="portfolio" />
         {children}
         <Footer />

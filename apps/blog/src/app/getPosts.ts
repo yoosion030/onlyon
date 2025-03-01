@@ -1,7 +1,8 @@
 import { readdir } from "fs/promises";
 import path from "path";
+import { type Post } from "../types";
 
-export async function getPosts() {
+export async function getPosts(): Promise<Post[]> {
   const postPath = path.resolve(process.cwd(), "src", "app", "(posts)");
 
   const slugs = (await readdir(postPath, { withFileTypes: true })).filter(
@@ -15,5 +16,6 @@ export async function getPosts() {
     })
   );
 
+  posts.sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime());
   return posts;
 }
