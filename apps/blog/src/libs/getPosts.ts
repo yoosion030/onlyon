@@ -11,7 +11,7 @@ export async function getPosts(): Promise<Post[]> {
 
   const posts = await Promise.all(
     slugs.map(async ({ name }) => {
-      const { metadata } = await import(`./(posts)/${name}/metadata.ts`);
+      const { metadata } = await import(`../app/(posts)/${name}/metadata.ts`);
       return { slug: name, ...metadata };
     })
   );
