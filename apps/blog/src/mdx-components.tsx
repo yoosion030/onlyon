@@ -52,6 +52,75 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <ol className={cn("pl-6", "list-decimal", "my-4")}>{children}</ol>
     ),
     li: ({ children }) => <li className={cn("mb-2")}>{children}</li>,
+    a: ({ children, href }) => (
+      <a
+        href={href}
+        className={cn(
+          "text-primary-400",
+          "hover:text-primary",
+          "underline",
+          "transition-colors",
+          "duration-300",
+          "ease-in-out"
+        )}
+        target={href?.startsWith("http") ? "_blank" : undefined}
+        rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
+      >
+        {children}
+      </a>
+    ),
+    strong: ({ children }) => (
+      <strong className={cn("font-bold", "text-primary-400")}>
+        {children}
+      </strong>
+    ),
+    blockquote: ({ children }) => (
+      <blockquote
+        className={cn(
+          "border-l-2",
+          "border-primary-300",
+          "pl-4",
+          "py-1",
+          "my-4",
+          "bg-primary-50/10",
+          "italic",
+          "text-gray-700",
+          "[&>p:first-child]:mt-0",
+          "[&>p:last-child]:mb-0"
+        )}
+      >
+        {children}
+      </blockquote>
+    ),
+    hr: () => (
+      <hr
+        className={cn(
+          "my-8",
+          "border-0",
+          "h-px",
+          "bg-gray-300",
+          "w-full",
+          "mx-auto"
+        )}
+      />
+    ),
+    code: ({ children }) => (
+      <code
+        className={cn(
+          "bg-gray-100",
+          "text-primary-700",
+          "rounded",
+          "px-1.5",
+          "py-0.5",
+          "font-mono",
+          "text-sm",
+          "border",
+          "border-gray-200"
+        )}
+      >
+        {children}
+      </code>
+    ),
     ...components,
   };
 }

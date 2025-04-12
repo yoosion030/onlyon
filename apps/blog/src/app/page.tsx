@@ -1,5 +1,5 @@
 import { cn } from "@repo/utils";
-import { getPosts } from "./getPosts";
+import { getPosts } from "../libs/getPosts";
 import Post from "../components/Post";
 import RepresentPost from "../components/RepresentPost";
 import { Header, Footer } from "@repo/ui";
