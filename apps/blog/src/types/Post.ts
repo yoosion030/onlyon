@@ -1,8 +1,8 @@
 export type Post = {
   slug: string;
   title: string;
-  description: string;
+  description?: string;
   publishDate: Date;
-  posterImage: string | null;
+  posterImage?: string;
   categories: string[];
 };
