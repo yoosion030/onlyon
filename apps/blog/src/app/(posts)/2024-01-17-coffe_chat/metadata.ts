@@ -1,4 +1,4 @@
-import { type Post } from "../../../types";
+import { type Post } from "@blog/types";
 
 export const metadata: Omit<Post, "slug"> = {
   title: "신입 개발자의 질문 방법(커피챗)",

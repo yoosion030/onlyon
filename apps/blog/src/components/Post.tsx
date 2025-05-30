@@ -1,9 +1,13 @@
 import { cn } from "@repo/utils";
-import { type Post } from "../types";
-import GeneratedPosterImage from "./GeneratedPosterImage";
+import { type Post as PostType } from "@blog/types";
+import { GeneratedPosterImage } from "@blog/components";
 import Link from "next/link";
 
-const Post = ({ post }: { post: Post }) => {
+type PostProps = {
+  post: PostType;
+};
+
+const Post = ({ post }: PostProps) => {
   const { title, description, publishDate, posterImage, categories, slug } =
     post;
 

@@ -1,4 +1,4 @@
-import { type Post } from "../../../types";
+import { type Post } from "@blog/types";
 
 export const metadata: Omit<Post, "slug"> = {
   title: "Git, 왜 쓰는거야?",

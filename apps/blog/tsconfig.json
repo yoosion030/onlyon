@@ -5,7 +5,15 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@blog/types": ["./src/types/index.ts"],
+      "@blog/types/*": ["./src/types/*"],
+      "@blog/libs": ["./src/libs/index.ts"],
+      "@blog/libs/*": ["./src/libs/*"],
+      "@blog/components": ["./src/components/index.ts"],
+      "@blog/components/*": ["./src/components/*"]
+    }
   },
   "include": [
     "**/*.ts",

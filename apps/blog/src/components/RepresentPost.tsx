@@ -1,6 +1,6 @@
 import { cn } from "@repo/utils";
-import { type Post } from "../types";
-import BasePosterImage from "./GeneratedPosterImage";
+import { type Post } from "@blog/types";
+import { GeneratedPosterImage } from "@blog/components";
 import Link from "next/link";
 
 const RepresentPost = ({ post }: { post: Post }) => {
@@ -18,7 +18,7 @@ const RepresentPost = ({ post }: { post: Post }) => {
           className={cn("aspect-video", "rounded-2xl")}
         />
       ) : (
-        <BasePosterImage title={title} width={700} height={360} alt={title} />
+        <GeneratedPosterImage title={title} width={700} height={360} alt={title} />
       )}
 
       <div className={cn("flex", "flex-col", "gap-1", "py-3")}>
