@@ -29,7 +29,7 @@ export const Header = ({ workspace }: HeaderProps) => {
         <div className={cn("flex", "gap-10")}>
           {workspace === "blog" && (
             <a
-              href="http://localhost:3001"
+              href={process.env.NEXT_PUBLIC_PORTFOLIO_URL}
               className={cn("text-primary", "font-semibold")}
             >
               Portfolio
@@ -37,7 +37,7 @@ export const Header = ({ workspace }: HeaderProps) => {
           )}
           {workspace === "portfolio" && (
             <a
-              href="http://localhost:3000"
+              href={process.env.NEXT_PUBLIC_BLOG_URL}
               className={cn("text-primary", "font-semibold")}
             >
               Blog

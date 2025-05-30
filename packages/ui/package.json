@@ -25,10 +25,11 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/tailwind-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@types/react": "^19.0.8",
-    "typescript": "^5.7.3",
     "@tailwindcss/cli": "^4.0.6",
-    "@tailwindcss/postcss": "^4.0.3"
+    "@tailwindcss/postcss": "^4.0.3",
+    "@types/node": "^22.15.27",
+    "@types/react": "^19.0.8",
+    "typescript": "^5.7.3"
   },
   "dependencies": {
     "@repo/utils": "workspace:*",
