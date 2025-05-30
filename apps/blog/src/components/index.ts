@@ -1,3 +1,5 @@
-export { default as Post } from "./Post";
-export { default as RepresentPost } from "./RepresentPost";
-export { default as GeneratedPosterImage } from "./GeneratedPosterImage";
+export { default as Post } from "./Post/Post";
+export { default as RepresentPost } from "./Post/RepresentPost";
+export { default as GeneratedPosterImage } from "./Post/GeneratedPosterImage";
+export { default as CategoryBadge } from "./Category/CategoryBadge";
+export { default as CategoryFilter } from "./Category/CategoryFilter";
