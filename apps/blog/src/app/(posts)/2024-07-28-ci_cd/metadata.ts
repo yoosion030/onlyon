@@ -1,4 +1,4 @@
-import { type Post } from "../../../types";
+import { type Post } from "@blog/types";
 
 export const metadata: Omit<Post, "slug"> = {
   title: "프론트엔드 개발자도 CI/CD를 배워야 할까?",

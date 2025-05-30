@@ -1,7 +1,6 @@
 import { cn } from "@repo/utils";
-import { getPosts } from "../libs/getPosts";
-import Post from "../components/Post";
-import RepresentPost from "../components/RepresentPost";
+import { getPosts } from "@blog/libs";
+import { Post, RepresentPost } from "@blog/components";
 import { Header, Footer } from "@repo/ui";
 
 export default async function Home() {
