@@ -13,10 +13,12 @@ export default function DetailLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={cn("max-w-[43.75rem]", "mx-auto", "px-8")}>
-      <Header workspace="blog" />
-      <section className={cn("py-2")}>{children}</section>
-      <Footer />
-    </div>
+    <>
+      <Header workspace="blog" className={cn("max-w-[43.75rem]", "px-8")} />
+      <div className={cn("max-w-[43.75rem]", "mx-auto", "px-8")}>
+        <section className={cn("py-2")}>{children}</section>
+      </div>
+      <Footer className={cn("max-w-[43.75rem]", "px-8")} />
+    </>
   );
 }

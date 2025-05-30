@@ -16,10 +16,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("max-w-[43.75rem]", "mx-auto", "px-8")}>
-        <Header workspace="portfolio" />
-        {children}
-        <Footer />
+      <body>
+        <Header
+          workspace="portfolio"
+          className={cn("max-w-[43.75rem]", "px-8")}
+        />
+        <section className={cn("max-w-[43.75rem]", "mx-auto", "px-8")}>
+          {children}
+        </section>
+        <Footer className={cn("max-w-[43.75rem]", "px-8")} />
       </body>
     </html>
   );

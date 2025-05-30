@@ -1,9 +1,17 @@
 import { cn } from "@repo/utils";
 import { GithubIcon, LinkedinIcon, VelogIcon } from "../assets";
+import { HTMLAttributes } from "react";
 
-export const Footer = () => {
+type FooterProps = {
+  className?: string;
+} & HTMLAttributes<HTMLDivElement>;
+
+export const Footer = ({ className, ...props }: FooterProps) => {
   return (
-    <footer className={cn("w-full", "h-[12.5rem]", "space-y-4", "mx-auto")}>
+    <footer
+      {...props}
+      className={cn("w-full", "h-[12.5rem]", "space-y-4", "mx-auto", className)}
+    >
       <p className={cn("text-[0.75rem]", "font-thin", "text-primary-linear")}>
         ©2025. OnlyOn all rights reserved.
       </p>

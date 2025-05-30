@@ -1,23 +1,26 @@
 import { cn } from "@repo/utils";
+import { HTMLAttributes } from "react";
 
 type WorkspaceType = "blog" | "portfolio";
 type HeaderProps = {
   workspace: WorkspaceType;
-};
+  className?: string;
+} & HTMLAttributes<HTMLDivElement>;
 
-export const Header = ({ workspace }: HeaderProps) => {
+export const Header = ({ workspace, className, ...props }: HeaderProps) => {
   return (
     <header
       className={cn("sticky", "top-0", "backdrop-blur-sm", "bg-white/10")}
     >
       <div
+        {...props}
         className={cn(
-          "w-full",
           "h-[3.25rem]",
           "mx-auto",
           "flex",
           "justify-between",
-          "items-center"
+          "items-center",
+          className
         )}
       >
         <a
