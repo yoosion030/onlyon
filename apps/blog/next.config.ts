@@ -4,7 +4,11 @@ import createMDX from "@next/mdx";
 const nextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
-    domains: ["velog.velcdn.com"],
+    remotePatterns: [
+      {
+        hostname: "velog.velcdn.com",
+      },
+    ],
   },
 };
 

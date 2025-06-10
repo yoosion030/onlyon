@@ -41,7 +41,7 @@ const CategoryBadge = ({ category, isActive, count }: CategoryBadgeProps) => {
         "font-medium",
         "border",
         "transition-colors",
-        "hover:bg-primary/10",
+        "hover:bg-primary-400/5",
         isActive
           ? ["bg-primary", "text-white", "border-primary", "hover:text-primary"]
           : ["text-primary", "border-primary", "bg-transparent"]

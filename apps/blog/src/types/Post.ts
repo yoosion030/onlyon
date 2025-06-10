@@ -5,4 +5,5 @@ export type Post = {
   publishDate: Date;
   posterImage?: string;
   categories: string[];
+  recommended?: boolean;
 };
