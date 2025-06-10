@@ -13,7 +13,17 @@ const Post = ({ post }: PostProps) => {
     post;
 
   return (
-    <Link href={slug}>
+    <Link
+      href={slug}
+      className={cn(
+        "hover:bg-primary-400/5",
+        "rounded-2xl",
+        "p-2",
+        "transition",
+        "duration-300",
+        "ease-in-out"
+      )}
+    >
       {posterImage ? (
         <Image
           src={posterImage}

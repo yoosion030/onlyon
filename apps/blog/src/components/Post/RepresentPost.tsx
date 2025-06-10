@@ -9,7 +9,19 @@ const RepresentPost = ({ post }: { post: Post }) => {
     post;
 
   return (
-    <Link href={slug} className={cn("max-w-[43.75rem]")}>
+    <Link
+      href={slug}
+      className={cn(
+        "max-w-[43.75rem]",
+        "hover:bg-primary-400/5",
+        "block",
+        "rounded-2xl",
+        "p-2",
+        "transition",
+        "duration-300",
+        "ease-in-out"
+      )}
+    >
       {posterImage ? (
         <Image
           src={posterImage}

@@ -5,4 +5,5 @@ export const metadata: Omit<Post, "slug"> = {
   description: "비유 하면서 git 배우기",
   publishDate: new Date("2023-03-24"),
   categories: ["Git"],
+  recommended: true,
 };

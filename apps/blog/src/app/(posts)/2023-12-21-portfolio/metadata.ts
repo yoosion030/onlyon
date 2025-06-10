@@ -8,4 +8,5 @@ export const metadata: Omit<Post, "slug"> = {
   posterImage:
     "https://velog.velcdn.com/images/yoosion030/post/cc68d194-ed3a-41f5-9c77-83efda460c06/image.png",
   categories: ["신입 개발자의 취업 회고"],
+  recommended: true,
 };

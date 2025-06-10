@@ -6,4 +6,5 @@ export const metadata: Omit<Post, "slug"> = {
   posterImage:
     "https://velog.velcdn.com/images/yoosion030/post/276c2895-da29-46cc-8f88-6c88b967a2f7/image.png",
   categories: ["테스트 코드"],
+  recommended: true,
 };
