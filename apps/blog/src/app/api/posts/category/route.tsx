@@ -20,7 +20,7 @@ export async function GET(): Promise<
       slugs.map(async ({ name }) => {
         try {
           const { metadata } = await import(
-            `../../../../app/(posts)/${name}/metadata.ts`
+            `../../../../app/(posts)/${name}/page.mdx`
           );
           return { slug: name, ...metadata };
         } catch {
