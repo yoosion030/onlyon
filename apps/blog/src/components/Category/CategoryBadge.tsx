@@ -1,56 +1,32 @@
-"use client";
-
-import { cn } from "@repo/utils";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { cn } from "@repo/utils";
 
 type CategoryBadgeProps = {
   category: string;
-  count?: number;
   isActive: boolean;
+  count?: number;
 };
 
-const defaultCategory = "전체";
-
-const CategoryBadge = ({ category, isActive, count }: CategoryBadgeProps) => {
-  const searchParams = useSearchParams();
-
-  const createQueryString = (category: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (category === defaultCategory) {
-      params.delete("category");
-    } else {
-      params.set("category", encodeURIComponent(category));
-    }
-
-    return params.toString();
-  };
-
+export default function CategoryBadge({
+  category,
+  isActive,
+  count = 0,
+}: CategoryBadgeProps) {
   const href =
-    category === defaultCategory ? "/" : `?${createQueryString(category)}`;
+    category === "전체" ? "/" : `?category=${encodeURIComponent(category)}`;
 
   return (
     <Link
       href={href}
       className={cn(
-        "px-3",
-        "py-1",
-        "text-[0.625rem]",
-        "rounded-[0.25rem]",
-        "font-medium",
-        "border",
-        "transition-colors",
-        "hover:bg-primary-400/5",
+        "px-3 py-1 text-[0.625rem] rounded-[0.25rem] font-medium border transition-colors hover:bg-primary-400/5",
         isActive
           ? ["bg-primary", "text-white", "border-primary", "hover:text-primary"]
           : ["text-primary", "border-primary", "bg-transparent"]
       )}
     >
       {category}
-      {count && <span className={cn("ml-1")}>({count})</span>}
+      {count > 0 && <span className="ml-1">({count})</span>}
     </Link>
   );
-};
-
-export default CategoryBadge;
+}

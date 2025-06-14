@@ -1,8 +1,10 @@
 import { cn } from "@repo/utils";
 import type { MDXComponents } from "mdx/types";
+import { PostHeader } from "@blog/components";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
+    PostHeader,
     h1: ({ children }) => (
       <h1
         className={cn(
