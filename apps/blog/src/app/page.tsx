@@ -6,7 +6,7 @@ import {
   RecommendPost,
 } from "@blog/components";
 import { Header, Footer } from "@repo/ui";
-import { type Post as PostType } from "@blog/types";
+import { getPosts, getCategory, getRecommendPosts } from "@blog/libs";
 
 type HomeProps = {
   searchParams: Promise<{ category?: string }>;
@@ -16,28 +16,10 @@ export default async function Home(props: HomeProps) {
   const { searchParams } = props;
   const selectedCategory = (await searchParams).category;
 
-  const buildApiUrl = (endpoint: string) => {
-    const url = new URL(process.env.NEXT_PUBLIC_API_URL + endpoint);
-    if (selectedCategory) {
-      url.searchParams.set("category", selectedCategory);
-    }
-    return url.toString();
-  };
-
   const [posts, categories, recommendPosts] = await Promise.all([
-    fetch(buildApiUrl("/api/posts"), {
-      cache: "force-cache",
-    }).then((res) => res.json()) as Promise<PostType[]>,
-
-    fetch(process.env.NEXT_PUBLIC_API_URL + "/api/posts/category", {
-      cache: "force-cache",
-    }).then((res) => res.json()) as Promise<
-      { category: string; count: number }[]
-    >,
-
-    fetch(process.env.NEXT_PUBLIC_API_URL + "/api/posts/recommend", {
-      cache: "force-cache",
-    }).then((res) => res.json()) as Promise<PostType[]>,
+    getPosts({ category: selectedCategory }),
+    getCategory(),
+    getRecommendPosts(),
   ]);
 
   const representPost = posts[0];

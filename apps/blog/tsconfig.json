@@ -12,7 +12,9 @@
       "@blog/libs": ["./src/libs/index.ts"],
       "@blog/libs/*": ["./src/libs/*"],
       "@blog/components": ["./src/components/index.ts"],
-      "@blog/components/*": ["./src/components/*"]
+      "@blog/components/*": ["./src/components/*"],
+      "@blog/hooks": ["./src/hooks/index.ts"],
+      "@blog/hooks/*": ["./src/hooks/*"]
     }
   },
   "include": [
