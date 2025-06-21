@@ -21,7 +21,8 @@ const Post = ({ post }: PostProps) => {
         "p-2",
         "transition",
         "duration-300",
-        "ease-in-out"
+        "ease-in-out",
+        "inline-block"
       )}
     >
       {posterImage ? (

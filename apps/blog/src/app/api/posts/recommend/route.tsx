@@ -1,40 +1,25 @@
-import { readdir } from "fs/promises";
-import path from "path";
 import { NextResponse } from "next/server";
 import { type Post } from "@blog/types";
+import { getPosts } from "@blog/libs";
 
 export async function GET(): Promise<
   NextResponse<Post[] | { error: unknown }>
 > {
   try {
-    const postPath = path.resolve(process.cwd(), "src", "app", "(posts)");
+    const posts = await getPosts();
 
-    const slugs = (await readdir(postPath, { withFileTypes: true })).filter(
-      (dirent) => dirent.isDirectory()
-    );
-
-    const posts: (Post | null)[] = await Promise.all(
-      slugs.map(async ({ name }) => {
-        try {
-          const { metadata } = await import(
-            `../../../../app/(posts)/${name}/page.mdx`
-          );
-          return { slug: name, ...metadata };
-        } catch {
-          return null;
-        }
+    const recommendedPosts = posts
+      ?.filter((post) => {
+        return post.recommended === true;
       })
-    );
-
-    const recommendedPosts = posts?.filter(
-      (post): post is Post => post !== null && post.recommended === true
-    );
-
-    const sortedPosts = recommendedPosts
-      ?.sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime())
+      ?.sort((a, b) => {
+        return (
+          new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+        );
+      })
       .slice(0, 5);
 
-    return NextResponse.json(sortedPosts);
+    return NextResponse.json(recommendedPosts);
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
