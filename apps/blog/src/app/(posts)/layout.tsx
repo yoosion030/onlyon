@@ -1,4 +1,4 @@
-import { PostToc } from "@blog/components";
+import { PostComment, PostToc } from "@blog/components";
 import { Footer, Header } from "@repo/ui";
 import { cn } from "@repo/utils";
 
@@ -13,6 +13,7 @@ export default function DetailLayout({
 
       <div className={cn("max-w-[52rem]", "mx-auto", "px-8")}>
         <article className={cn("py-2")}>{children}</article>
+        <PostComment />
       </div>
 
       <PostToc />
