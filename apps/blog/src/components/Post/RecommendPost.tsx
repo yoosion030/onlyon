@@ -10,7 +10,7 @@ const RecommendPost = ({ title, publishDate, categories, slug }: Post) => {
         "flex",
         "flex-col",
         "gap-2",
-        "hover:bg-primary-400/5",
+        "hover:bg-blue-50",
         "rounded-2xl",
         "p-2",
         "transition",

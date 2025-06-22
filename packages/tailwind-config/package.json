@@ -4,7 +4,6 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./tailwind.config.ts",
     "./theme.css": "./theme.css"
   },
   "dependencies": {

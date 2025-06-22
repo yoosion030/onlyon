@@ -190,9 +190,6 @@ importers:
       '@repo/utils':
         specifier: workspace:*
         version: link:../utils
-      postcss:
-        specifier: ^8.5.2
-        version: 8.5.3
       react:
         specifier: ^18.2.0
         version: 18.3.1

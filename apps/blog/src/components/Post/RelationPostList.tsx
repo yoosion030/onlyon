@@ -4,14 +4,15 @@ import { type Post as PostType } from "@blog/types";
 import Post from "./Post";
 import { cn } from "@repo/utils";
 import { useGetRelationPosts } from "@blog/hooks";
-import { SkeletonPost } from "..";
+import { PostHeadingLink, SkeletonPost } from "..";
 
 const RelationPostList = ({ post }: { post: PostType }) => {
   const { relationPosts, loading, error } = useGetRelationPosts({ post });
 
   return (
-    <div className={cn("my-[3.125rem]")}>
-      <h3
+    <div className={cn("mb-[1rem]", "mt-[8rem]")}>
+      <PostHeadingLink
+        as="h2"
         className={cn(
           "text-primary-linear",
           "font-bold",
@@ -21,7 +22,7 @@ const RelationPostList = ({ post }: { post: PostType }) => {
         )}
       >
         연관 포스트 {!loading && `(${relationPosts.length})`}
-      </h3>
+      </PostHeadingLink>
 
       <p
         className={cn(

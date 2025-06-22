@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./global.css";
-import "@repo/ui/styles.css";
+import { cn } from "@repo/utils";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={cn("relative")}>{children}</body>
     </html>
   );
 }

@@ -40,7 +40,7 @@ export default async function Home(props: HomeProps) {
         >
           <div className={cn("flex", "flex-col", "gap-6")}>
             <div className={cn("flex", "gap-[4.375rem]")}>
-              <div className={cn("max-w-[43.75rem]", "space-y-6")}>
+              <div className={cn("max-w-[52rem]", "space-y-6")}>
                 <CategoryFilter categories={categories} />
                 {representPost && <RepresentPost post={representPost} />}
               </div>

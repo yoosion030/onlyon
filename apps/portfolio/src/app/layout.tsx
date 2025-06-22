@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./global.css";
-import "@repo/ui/styles.css";
 import { Footer, Header } from "@repo/ui";
 import { cn } from "@repo/utils";
 
@@ -17,14 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header
-          workspace="portfolio"
-          className={cn("max-w-[43.75rem]", "px-8")}
-        />
-        <section className={cn("max-w-[43.75rem]", "mx-auto", "px-8")}>
+        <Header workspace="portfolio" className={cn("max-w-[52rem]", "px-8")} />
+        <section className={cn("max-w-[52rem]", "mx-auto", "px-8")}>
           {children}
         </section>
-        <Footer className={cn("max-w-[43.75rem]", "px-8")} />
+        <Footer className={cn("max-w-[52rem]", "px-8")} />
       </body>
     </html>
   );
