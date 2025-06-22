@@ -1,6 +1,7 @@
 export { default as CodeBlock } from "./CodeBlock";
 export { default as GeneratedPosterImage } from "./GeneratedPosterImage";
 export { default as ImageZoom } from "./ImageZoom";
+export { default as PostComment } from "./PostComment";
 export { default as PostHeader } from "./PostHeader/PostHeader";
 export { default as PostHeadingLink } from "./PostHeadingLink/PostHeadingLink";
 export { default as PostItem } from "./PostItem/PostItem";

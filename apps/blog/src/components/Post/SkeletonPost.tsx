@@ -1,6 +1,6 @@
 import { cn } from "@repo/utils";
 
-const PostSkeleton = () => {
+const SkeletonPost = () => {
   return (
     <div
       className={cn(
@@ -61,4 +61,4 @@ const PostSkeleton = () => {
   );
 };
 
-export default PostSkeleton;
+export default SkeletonPost;
