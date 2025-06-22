@@ -13,7 +13,7 @@ const RepresentPost = ({ post }: { post: Post }) => {
       href={slug}
       className={cn(
         "max-w-[43.75rem]",
-        "hover:bg-primary-400/5",
+        "hover:bg-blue-50",
         "block",
         "rounded-2xl",
         "p-2",

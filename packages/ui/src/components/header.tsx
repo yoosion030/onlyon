@@ -10,7 +10,13 @@ type HeaderProps = {
 export const Header = ({ workspace, className, ...props }: HeaderProps) => {
   return (
     <header
-      className={cn("sticky", "top-0", "backdrop-blur-sm", "bg-white/10")}
+      className={cn(
+        "sticky",
+        "top-0",
+        "backdrop-blur-sm",
+        "bg-white/10",
+        "z-10"
+      )}
     >
       <div
         {...props}

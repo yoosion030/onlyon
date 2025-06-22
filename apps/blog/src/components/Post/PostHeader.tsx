@@ -2,13 +2,17 @@ import { type Post } from "@blog/types";
 import { cn } from "@repo/utils";
 import CategoryBadge from "../Category/CategoryBadge";
 import Image from "next/image";
+import PostHeadingLink from "./PostHeadingLink";
 
 const PostHeader = async ({ post }: { post: Post }) => {
   return (
     <div className={cn("flex", "flex-col", "gap-2")}>
-      <h1 className={cn("text-[2rem]", "text-primary-linear", "font-bold")}>
+      <PostHeadingLink
+        className={cn("text-[2.5rem]", "text-primary-linear", "font-bold")}
+        as="h1"
+      >
         {post?.title}
-      </h1>
+      </PostHeadingLink>
       <div className={cn("flex", "items-center", "gap-2")}>
         <time className={cn("text-primary-400", "font-thin", "text-[0.75rem]")}>
           {new Date(post.publishDate).toLocaleDateString()}

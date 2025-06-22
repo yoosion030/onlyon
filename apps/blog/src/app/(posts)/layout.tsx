@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header, Footer } from "@repo/ui";
 import { cn } from "@repo/utils";
+import { PostToc } from "@blog/components";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,11 +15,14 @@ export default function DetailLayout({
 }>) {
   return (
     <>
-      <Header workspace="blog" className={cn("max-w-[43.75rem]", "px-8")} />
-      <div className={cn("max-w-[43.75rem]", "mx-auto", "px-8")}>
-        <section className={cn("py-2")}>{children}</section>
+      <Header workspace="blog" className={cn("max-w-[52rem]", "px-8")} />
+
+      <div className={cn("max-w-[52rem]", "mx-auto", "px-8")}>
+        <article className={cn("py-2")}>{children}</article>
       </div>
-      <Footer className={cn("max-w-[43.75rem]", "px-8")} />
+
+      <PostToc />
+      <Footer className={cn("max-w-[52rem]", "px-8")} />
     </>
   );
 }

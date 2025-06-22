@@ -16,7 +16,7 @@ const Post = ({ post }: PostProps) => {
     <Link
       href={slug}
       className={cn(
-        "hover:bg-primary-400/5",
+        "hover:bg-blue-50",
         "rounded-2xl",
         "p-2",
         "transition",

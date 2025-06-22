@@ -3,6 +3,7 @@
   --color-primary-200: #275382;
   --color-primary-300: #1f4369;
   --color-primary-400: #18334f;
+  --breakpoint-3xl: 105rem; /* 1680px */
 }
 
 @layer utilities {
@@ -18,6 +19,6 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
-    display: inline-block;
+    display: flex;
   }
 }

@@ -4,7 +4,7 @@ const PostSkeleton = () => {
   return (
     <div
       className={cn(
-        "hover:bg-primary-400/5",
+        "hover:bg-blue-50",
         "rounded-2xl",
         "p-2",
         "transition",

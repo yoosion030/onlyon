@@ -1,49 +1,56 @@
 import { cn } from "@repo/utils";
 import type { MDXComponents } from "mdx/types";
-import { PostHeader, RelationPostList } from "@blog/components";
+import {
+  PostHeader,
+  RelationPostList,
+  PostHeadingLink,
+} from "@blog/components";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     PostHeader,
     RelationPostList,
     h1: ({ children }) => (
-      <h1
+      <PostHeadingLink
+        as="h1"
         className={cn(
           "text-primary-linear",
           "font-bold",
-          "text-[1.75rem]",
-          "mt-8",
+          "text-[2.5rem]",
+          "mt-10",
           "mb-4"
         )}
       >
         {children}
-      </h1>
+      </PostHeadingLink>
     ),
     h2: ({ children }) => (
-      <h2
-        className={cn(
-          "text-primary-linear",
-          "font-bold",
-          "text-[1.5rem]",
-          "mt-6",
-          "mb-3"
-        )}
-      >
-        {children}
-      </h2>
-    ),
-    h3: ({ children }) => (
-      <h3
+      <PostHeadingLink
+        as="h2"
         className={cn(
           "text-primary-400",
           "font-bold",
-          "text-[1.25rem]",
-          "mt-5",
+          "text-[2rem]",
+          "mt-10",
+          "mb-4"
+        )}
+      >
+        {children}
+      </PostHeadingLink>
+    ),
+    h3: ({ children }) => (
+      <PostHeadingLink
+        as="h3"
+        className={cn(
+          "text-primary-400",
+          "font-bold",
+          "text-[1.5rem]",
+          "mt-4",
           "mb-2"
         )}
       >
         {children}
-      </h3>
+      </PostHeadingLink>
     ),
     p: ({ children }) => (
       <p className={cn("my-4", "leading-relaxed")}>{children}</p>
