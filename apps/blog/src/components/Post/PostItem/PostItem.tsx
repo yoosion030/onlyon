@@ -44,8 +44,18 @@ const Post = ({ post }: PostProps) => {
       )}
 
       <div className={cn("flex", "flex-col", "gap-1", "py-3")}>
-        <p className={cn("text-primary-400", "font-thin", "text-[0.75rem]")}>
-          {new Date(publishDate).toLocaleDateString()} | {categories.join(", ")}
+        <p
+          className={cn(
+            "text-primary-400",
+            "font-thin",
+            "text-[0.75rem]",
+            "flex",
+            "gap-1"
+          )}
+        >
+          <span>{new Date(publishDate).toLocaleDateString()}</span>
+          <span>|</span>
+          <span>{categories.join(", ")}</span>
         </p>
         <h1 className={cn("text-primary-linear", "font-bold")}>{title}</h1>
         <p className={cn("text-primary-400", "font-thin", "text-[0.75rem]")}>

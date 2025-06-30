@@ -1,11 +1,2 @@
-export { default as Post } from "./Post/Post";
-export { default as RepresentPost } from "./Post/RepresentPost";
-export { default as GeneratedPosterImage } from "./Post/GeneratedPosterImage";
-export { default as PostHeader } from "./Post/PostHeader";
-export { default as RecommendPost } from "./Post/RecommendPost";
-export { default as RelationPostList } from "./Post/RelationPostList";
-export { default as PostHeadingLink } from "./Post/PostHeadingLink";
-export { default as PostToc } from "./Post/PostToc";
-export { default as SkeletonPost } from "./Post/SkeletonPost";
-export { default as CategoryBadge } from "./Category/CategoryBadge";
-export { default as CategoryFilter } from "./Category/CategoryFilter";
+export * from "./Post";
+export * from "./Category";

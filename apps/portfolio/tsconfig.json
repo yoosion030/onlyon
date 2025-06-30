@@ -7,13 +7,26 @@
       }
     ],
     "paths": {
-      "@portfolio/types": ["./src/types/index.ts"],
-      "@portfolio/types/*": ["./src/types/*"],
-      "@portfolio/libs": ["./src/libs/index.ts"],
-      "@portfolio/libs/*": ["./src/libs/*"],
-      "@portfolio/components": ["./src/components/index.ts"],
-      "@portfolio/components/*": ["./src/components/*"]
-    }
+      "@portfolio/types": [
+        "./src/types/index.ts"
+      ],
+      "@portfolio/types/*": [
+        "./src/types/*"
+      ],
+      "@portfolio/libs": [
+        "./src/libs/index.ts"
+      ],
+      "@portfolio/libs/*": [
+        "./src/libs/*"
+      ],
+      "@portfolio/components": [
+        "./src/components/index.ts"
+      ],
+      "@portfolio/components/*": [
+        "./src/components/*"
+      ]
+    },
+    "jsx": "preserve"
   },
   "include": [
     "**/*.ts",
@@ -22,5 +35,7 @@
     "next.config.js",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

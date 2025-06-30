@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 
 import { cn } from "@repo/utils";
-import CategoryBadge from "./CategoryBadge";
+import { CategoryBadge } from "@blog/components";
 
 type CategoryFilterProps = {
   categories: { category: string; count: number }[];

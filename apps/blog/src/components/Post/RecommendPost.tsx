@@ -20,8 +20,18 @@ const RecommendPost = ({ title, publishDate, categories, slug }: Post) => {
       )}
     >
       <h2 className={cn("text-primary-400", "font-bold")}>{title}</h2>
-      <p className={cn("text-primary-400", "font-thin", "text-[0.75rem]")}>
-        {new Date(publishDate).toLocaleDateString()} | {categories.join(", ")}
+      <p
+        className={cn(
+          "text-primary-400",
+          "font-thin",
+          "text-[0.75rem]",
+          "flex",
+          "gap-1"
+        )}
+      >
+        <span>{new Date(publishDate).toLocaleDateString()}</span>
+        <span>|</span>
+        <span>{categories.join(", ")}</span>
       </p>
     </Link>
   );

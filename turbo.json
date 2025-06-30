@@ -22,6 +22,17 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "test": {
+      "dependsOn": ["transit", "@repo/vitest-config#build"],
+      "outputs": ["coverage/**", "!coverage/coverage.json"]
+    },
+    "test:watch": {
+      "cache": false,
+      "persistent": true
+    },
+    "transit": {
+      "dependsOn": ["^transit"]
     }
   },
   "globalDependencies": ["tsconfig.json"]

@@ -3,7 +3,7 @@
 import { cn } from "@repo/utils";
 import Link from "next/link";
 import { MouseEvent } from "react";
-import { usePostToc } from "@blog/components/Post/PostToc/usePostToc";
+import { usePostToc } from "@blog/components/Post/PostToc";
 
 const STYLES = {
   MARGIN_PER_LEVEL: 16,

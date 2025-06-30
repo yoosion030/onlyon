@@ -7,10 +7,6 @@
     "./theme.css": "./theme.css"
   },
   "dependencies": {
-    "tailwindcss": "^4.0.7",
     "@repo/typescript-config": "workspace:*"
-  },
-  "devDependencies": {
-    "@types/node": "^22.13.4"
   }
 }

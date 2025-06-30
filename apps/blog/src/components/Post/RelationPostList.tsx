@@ -1,10 +1,9 @@
 "use client";
 
 import { type Post as PostType } from "@blog/types";
-import Post from "./Post";
 import { cn } from "@repo/utils";
 import { useGetRelationPosts } from "@blog/hooks";
-import { PostHeadingLink, SkeletonPost } from "..";
+import { PostHeadingLink, SkeletonPost, PostItem } from "@blog/components";
 
 const RelationPostList = ({ post }: { post: PostType }) => {
   const { relationPosts, loading, error } = useGetRelationPosts({ post });
@@ -71,7 +70,7 @@ const RelationPostList = ({ post }: { post: PostType }) => {
         >
           {relationPosts.map((post: PostType) => (
             <div className={cn("w-[18.75rem]", "shrink-0")} key={post.slug}>
-              <Post post={post} />
+              <PostItem post={post} />
             </div>
           ))}
         </div>

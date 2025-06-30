@@ -1,10 +1,13 @@
 import { type Post } from "@blog/types";
 import { cn } from "@repo/utils";
-import CategoryBadge from "../Category/CategoryBadge";
 import Image from "next/image";
-import PostHeadingLink from "./PostHeadingLink";
+import { CategoryBadge, PostHeadingLink } from "@blog/components";
 
-const PostHeader = async ({ post }: { post: Post }) => {
+type PostHeaderProps = {
+  post: Post;
+};
+
+const PostHeader = ({ post }: PostHeaderProps) => {
   return (
     <div className={cn("flex", "flex-col", "gap-2")}>
       <PostHeadingLink

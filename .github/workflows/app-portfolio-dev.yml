@@ -1,0 +1,32 @@
+name: App Portfolio Dev
+
+on:
+  pull_request:
+    paths:
+      - "apps/portfolio/**"
+      - "packages/**"
+      - ".github/workflows/app-portfolio-dev.yml"
+
+jobs:
+  unit-testing:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: ./.github/actions/setup-pnpm
+
+      - name: Run unit tests
+        run: turbo test --filter=portfolio && turbo report
+
+      - name: Upload Coverage Report
+        if: always()
+        uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          working-directory: apps/portfolio
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: "Coverage Report - ${{ github.sha }}"
