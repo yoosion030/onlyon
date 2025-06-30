@@ -15,7 +15,8 @@
       "@blog/components/*": ["./src/components/*"],
       "@blog/hooks": ["./src/hooks/index.ts"],
       "@blog/hooks/*": ["./src/hooks/*"]
-    }
+    },
+    "jsx": "preserve"
   },
   "include": [
     "**/*.ts",

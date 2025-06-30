@@ -1,6 +1,6 @@
 import { cn } from "@repo/utils";
 import {
-  Post,
+  PostItem,
   RepresentPost,
   CategoryFilter,
   RecommendPost,
@@ -72,7 +72,7 @@ export default async function Home(props: HomeProps) {
             {otherPosts.length > 0 && (
               <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-5">
                 {otherPosts.map((post, index) => (
-                  <Post key={index} post={post} />
+                  <PostItem key={index} post={post} />
                 ))}
               </div>
             )}

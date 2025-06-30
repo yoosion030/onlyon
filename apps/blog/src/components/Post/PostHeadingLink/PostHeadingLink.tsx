@@ -15,7 +15,7 @@ function extractTextFromChildren(children: ReactNode): string {
   return "";
 }
 
-type PostHeadingLinkProps = {
+export type PostHeadingLinkProps = {
   as: "h1" | "h2" | "h3";
   children: ReactNode;
   className?: string;

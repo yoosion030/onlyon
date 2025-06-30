@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cn } from "@repo/utils";
 
-type CategoryBadgeProps = {
+export type CategoryBadgeProps = {
   category: string;
   isActive: boolean;
   count?: number;
