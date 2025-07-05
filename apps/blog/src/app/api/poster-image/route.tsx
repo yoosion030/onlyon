@@ -5,6 +5,7 @@ export const runtime = "edge";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const title = searchParams.get("title") || "Untitled";
+  const slicedTitle = title.length > 40 ? title.slice(0, 40) + "..." : title;
   const width = searchParams.get("w") || "350";
   const height = searchParams.get("h") || "180";
 
@@ -33,7 +34,7 @@ export async function GET(request: Request) {
             WebkitTextStroke: "1px white",
           }}
         >
-          {title}
+          {slicedTitle}
         </p>
       </div>
     ),

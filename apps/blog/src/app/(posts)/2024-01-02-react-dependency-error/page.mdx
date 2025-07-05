@@ -1,0 +1,59 @@
+export const metadata = {
+  title: "Error: Invalid Hook Call Error, React 종속성 문제 해결",
+  publishDate: new Date("2024-01-02"),
+  categories: ["React", "Trouble Shooting"],
+  posterImage:
+    "https://onlyon.s3.ap-southeast-2.amazonaws.com/React+%E1%84%8C%E1%85%A9%E1%86%BC%E1%84%89%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A5%E1%86%BC/React+%E1%84%8C%E1%85%A9%E1%86%BC%E1%84%89%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A5%E1%86%BC-%E1%84%8A%E1%85%A5%E1%86%B7%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF.png",
+  recommended: false,
+};
+
+<PostHeader post={metadata} />
+
+이전에 개발했던 next 프로젝트를 수정 없이 실행했는데, 3달전에는 멀쩡히 실행됐던 프로젝트가 다음과 같은 에러가 발생하여 실행되지 않았습니다.
+
+분명 코드 내부를 수정한 적이 없고, 실행만 했으니 종속성 문제라고 판단했습니다.
+
+### 1. react, react-dom 버전 업그레이드
+
+[에러해결 Invalid Hook Call Error](https://pimpdevelop.tistory.com/14)
+
+레퍼런스를 더 찾아보니 React 버전 문제일수도 있어 version을 17에서 18로 업그레이드하였습니다.
+
+```bash
+yarn install react react-dom
+```
+
+저같은 경우는 모노레포 환경이라 다음과 같이 설치하였습니다.
+
+```bash
+yarn workspace [workspace name] add react react-dom
+```
+
+하지만 똑같은 에러가 계속 반복해서 추가로 찾아보았습니다.
+
+### 2. Duplicate React
+
+해당 에러의 근본적인 원인은 하나의 라이브러리에서 여러 react로 해석된다는 말이었습니다. 참고한 레퍼런스의 말을 인용해보겠습니다.
+
+"Hooks가 제대로 작동하려면 내 어플리케이션의 코드의 import와 react-dom의 import가 같은 모듈로 해석되어야 한다.
+만일 다른 두개의 export 객체로 해석하게 된다면 결국 두개의 react package가 복사된 경우가 발생 할 수있다" 
+
+npm ls react 명령어를 통해 하나 이상의 react가 있나 확인해보았습니다.
+
+```
+npm ls react
+```
+
+이렇게 해당 라이브러리에서는 react가 @17.0.2인데, 설치된거는 @18.2.0이라고 에러가 발생하였습니다.
+
+다시 확인해보니 모노레포에서 root package에 react, react-dom 버전은 17로 그대로였습니다. 그래서 root package.json의 버전도 마찬가지로 업그레이드 하니 해결 되었습니다 :)
+
+```bash
+yarn react react-dom -W
+```
+
+[관련 PR](https://github.com/themoment-team/hello-gsm-front/pull/347)
+
+관련 pr 첨부하면서 글 마치도록 하겠습니다!
+
+<RelationPostList post={metadata} />

@@ -33,9 +33,7 @@ export async function GET(
 
     if (category && category !== "전체") {
       filteredPosts = filteredPosts.filter((post) =>
-        post.categories?.some((cat) =>
-          cat.toLowerCase().includes(category.toLowerCase())
-        )
+        post.categories?.some((cat) => cat === category)
       );
     }
 

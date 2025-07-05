@@ -40,7 +40,8 @@ const PostToc = () => {
         "h-full",
         "right-30",
         "3xl:block",
-        "hidden"
+        "hidden",
+        "max-w-[21.875rem]"
       )}
     >
       <div className={cn("sticky", "top-13", "p-4")}>
@@ -62,9 +63,12 @@ const PostToc = () => {
                       "duration-200",
                       "p-2",
                       "rounded-sm",
-                      "w-fit",
+                      "w-full",
                       "hover:bg-blue-50",
                       "hover:text-primary-200",
+                      "overflow-hidden",
+                      "whitespace-nowrap",
+                      "text-ellipsis",
                       isActive
                         ? ["text-primary-200", "font-semibold", "bg-blue-50"]
                         : ["text-primary-400"]

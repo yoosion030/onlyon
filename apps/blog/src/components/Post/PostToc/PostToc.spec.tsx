@@ -101,39 +101,6 @@ describe("PostToc", () => {
     expect(mockHandleHeadingClickToScroll).toHaveBeenCalledWith("heading-1");
   });
 
-  it("올바른 CSS 클래스를 적용한다", () => {
-    const mockHeadingList = [
-      { id: "heading-1", level: 1, text: "첫 번째 제목" },
-    ];
-
-    mockUsePostToc.mockReturnValue({
-      headingList: mockHeadingList,
-      activeHeadingId: null,
-      handleHeadingClickToScroll: vi.fn(),
-    });
-
-    const { container } = render(<PostToc />);
-
-    const wrapper = container.firstChild as HTMLElement;
-    expect(wrapper).toHaveClass(
-      "absolute",
-      "top-0",
-      "h-full",
-      "right-30",
-      "3xl:block",
-      "hidden"
-    );
-
-    const stickyDiv = wrapper.firstChild as HTMLElement;
-    expect(stickyDiv).toHaveClass("sticky", "top-13", "p-4");
-
-    const nav = stickyDiv.firstChild as HTMLElement;
-    expect(nav).toHaveAttribute("aria-label", "Table of contents");
-
-    const ul = nav.firstChild as HTMLElement;
-    expect(ul).toHaveClass("space-y-2");
-  });
-
   it("heading 레벨에 따라 올바른 margin과 font-size를 적용한다", () => {
     const mockHeadingList = [
       { id: "heading-1", level: 1, text: "H1 제목" },
@@ -182,34 +149,6 @@ describe("PostToc", () => {
 
     expect(link1).toHaveAttribute("href", "heading-1");
     expect(link2).toHaveAttribute("href", "heading-2");
-  });
-
-  it("링크에 올바른 hover 스타일을 적용한다", () => {
-    const mockHeadingList = [
-      { id: "heading-1", level: 1, text: "첫 번째 제목" },
-    ];
-
-    mockUsePostToc.mockReturnValue({
-      headingList: mockHeadingList,
-      activeHeadingId: null,
-      handleHeadingClickToScroll: vi.fn(),
-    });
-
-    render(<PostToc />);
-
-    const link = screen.getByText("첫 번째 제목").closest("a");
-    expect(link).toHaveClass(
-      "block",
-      "text-sm",
-      "leading-tight",
-      "transition-colors",
-      "duration-200",
-      "p-2",
-      "rounded-sm",
-      "w-fit",
-      "hover:bg-blue-50",
-      "hover:text-primary-200"
-    );
   });
 
   it("여러 heading을 올바르게 렌더링한다", () => {

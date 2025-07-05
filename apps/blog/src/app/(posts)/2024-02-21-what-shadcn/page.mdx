@@ -1,0 +1,228 @@
+export const metadata = {
+  title: "Shadcn/ui가 무엇이고, 왜 사용할까?",
+  publishDate: new Date("2024-02-21"),
+  categories: ["Shadcn/ui"],
+
+description: "",
+recommended: true,
+};
+
+<PostHeader post={metadata} />
+
+이전에 내가 알고있던 배경 지식은 vercel 디자인 ai [v0](https://www.notion.so/Shadcn-4b75777f759445bd96c2a82b8f7df135?pvs=21)이 shadcn/ui 기반인 것만 알고있었다.
+
+부트스트랩 같이 미리 디자인 된 컴포넌트를 제공해주는 라이브러리 같다. 이러한 라이브러리는 수없이 많은데 shadcn을 왜 쓰는지 조사해보겠다.
+
+### 컴포넌트 라이브러리가 아니다?
+
+공식문서에 보면 처음부터 shadcn을 이렇게 소개한다.
+
+> This is NOT a component library.
+
+부트스트랩 처럼 공통 컴포넌트를 지원하는 컴포넌트 라이브러리인줄 알았는데, 컴포넌트 라이브러리가 아니라고 선을 그었다. 그럼 도대체 무엇이 다를까?
+
+shadcn은 이렇게 말한다.
+
+> It's a collection of re-usable components that you can copy and paste into your apps.
+> I mean you do not install it as a dependency. It is not available or distributed via npm.
+
+바로 앱에 복사하여 붙여넣을 수 있고, 재사용성이 가능한 컴포넌트 모음이라는 말이다.
+
+컴포넌트 라이브러리가 아닌 이유는 종속성을 설치하지 않아서 npm을 통해 사용할 수 없거나 배포되지 않는다.
+
+필요한 컴포넌트가 생기면 그에 맞게 코드를 붙여넣고 커스텀을 할 수 있다.
+
+> 부트 스트랩도 커스텀할 수 있지 않나? 아직은 shadcn에 대한 의문이 생긴다.
+
+### 부트스트랩 비교
+
+shadcn 사용법을 알기 전에 유사한 라이브러리인 부트스트랩에 대해서 알아보겠다.
+
+부트스트랩이란 미리 만들어진 컴포넌트들을 가져와 사용하는 프레임워크이다.
+
+```tsx
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+/>
+```
+
+이렇게 cdn을 가져와 그에 맞는 컴포넌트를 복사 혹은 미리 정의된 클래스 이름을 불러와 공통 컴포넌트를 사용한다.
+
+```tsx
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseOne"
+        aria-expanded="true"
+        aria-controls="collapseOne"
+      >
+        Accordion Item #1
+      </button>
+    </h2>
+  </div>
+</div>
+```
+
+장점
+
+1.  반응형 지원
+2.  미리 만들어진 컴포넌트를 사용함으로 빠른 개발 시간으로 높은 생산성
+
+단점
+
+1.  디자인의 개성이 떨어짐
+2.  사용하지 않는 컴포넌트라도 템플릿을 모두 다 가져오기 때문에 낮은 성능
+
+shadcn은 부트스트랩의 가장 큰 단점인 낮은 성능이라는 근본적인 문제를 해결하기 위해 바로 종속성을 없애는 것이다.
+
+그래서 shadcn은 자신을 This is **NOT** a component library.라고 소개한 것이기도 하다.
+
+### 자주 묻는 질문
+
+> Why copy/paste and not packaged as a dependency?(왜 복사붙여 넣기를 하고, 종속성을 패키지하지 않은 이유는 무엇인가요?)
+
+몇가지의 세팅으로만 통해 필요에 맞는 컴포넌트를 커스텀화 할 수 있기 때문입니다.
+
+> Do you plan to publish it as an npm package? (npm패키지로 출시할 계획이 있나요?)
+
+이에 대해서는 shadcn은 단호하게 없다고 한다.
+
+> npm으로 출시하면 무슨 단점이 있길래 이렇게 단호하게 말할 수 있는 것일까?
+
+npm패키지로 컴포넌트를 패키징하는 것의 단점 중 하나는 스타일이 구현과 결합된다는 것이다. 컴포넌트의 디자인은 구현과 분리되어야 한다고 주장한다.
+
+### 설치 & 사용 방법
+
+공식 문서에도 잘 나와있어, 핵심적인 부분만 작성했다.
+
+[Next.js Install and configure](https://ui.shadcn.com/docs/installation/next)
+
+```bash
+npx create-next-app@latest my-app --typescript --tailwind --eslint
+```
+
+```bash
+npx shadcn-ui@latest init
+```
+
+신기하게 명령어를 통해서 컴포넌트를 불러오는 것 같았다.
+
+npm으로 배포하지 않는다는 것을 보고 package.json 파일을 보았는데, shadcn에 대한 명시가 되어있지 않았다.
+
+```bash
+npx shadcn-ui@latest add button
+```
+
+버튼을 추가하는 명령어를 입력했더니 패키지에 추가되는게 아니라 컴포넌트 폴더 > 파일에 추가되었다.
+
+처음에 컴포넌트들의 스타일이 적용이 안되는 문제가 발생했었는데 tailwind css세팅이 되지 않았다.
+
+```css
+import "../app/globals.css";
+```
+
+컴포넌트 파일에 해당 css 파일을 불러오니 해결 되었다.
+
+css 파일에는 다음과 같은 선언이 있었기 때문에 스타일이 적용된다.
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+```tsx
+const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive:
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline:
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+...
+  }
+)
+
+export interface ButtonProps
+...
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button"
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+...
+```
+
+이런 식으로 코드가 자동적으로 불러와지는 것을 볼 수 있다.
+
+### tailwind와 같이 사용되는 이유?
+
+먼저 처음 생각나는건 zero runtime이기 때문일 것 같다.
+
+server component에서 css in js 라이브러리인 styled-components 나 emotion css를 사용하게 된다면 실행되지 않는다. 왜냐하면 두 라이브러리는 런타임 환경 설정이 필요하기 때문이다.
+
+하지만, tailwind css는 zero run time으로 따로 런타임 환경이 필요하지 않기 때문에 가장 큰 장점으로 보았다.
+
+(”shadcn을 제작한 회사 vercel은 next도 제작하였기 때문에 해당 app dir 환경에서도 돌아갈 수 있도록 구성하기 위해 tailwind를 채택하지 않았을까?” 라고 추측 해보았다.)
+
+추가로 tailwind를 사용하는 이유를 알기 위해서 tailwind의 장점을 찾아보았다.
+
+- 스타일 클래스의 이름을 생각할 필요가 없습니다.
+
+클래스 이름 자체가 스타일 적용 문법이기 때문에 따로 해당 컴포넌트에 맞는 클래스 이름을 제작할 필요가 없다는 것이다.
+
+- 스타일 파일과 컴포넌트 구성 파일이 동일합니다.
+
+컴포넌트 제작 파일에서 스타일도 적용하기 때문에 코드 사이의 컨텍스트 전환이 훨씬 적다.
+
+### Shadcn/ui를 사용하는 이유
+
+tailwind css를 사용한다면 shadcn/ui를 안쓸 이유가 없다. 별도의 npm 설치가 필요한 것이 아니기 때문에 번들 사이즈가 커지지도 않고, 커스텀하기 쉽기 때문이다.
+
+shadcn이 왜 컴포넌트 라이브러리라고 주장하지 않는지 알 것 같다. 
+
+1.  별도의 설치가 필요 없음
+2.  bootstrap은 별도의 스타일 파일이 필요하지만, shadcn은 tailwind 만 있으면 직접 구현 가능
+3.  필요한 구현 부분안 쉽게 가져다 쓰기 때문에 커스텀이 쉬움
+
+### 우리 회사에서 shadcn을 사용하는 이유?
+
+빠른 개발 생산성이 가장 큰 이유이지 않을까 싶다.
+
+파일 구성도 명령어로 빠르게 가능하고, shadcn이 구성한 디자인이 아니더라도 tailwind css만 알고 있다면 빠르게 커스터마이징이 가능하기 때문에 사용하는 것 같다.
+
+또한 복잡한 구현이 필요한 아코디언, 툴팁, 페이지네이션 등 이러한 컴포넌트를 바로 구현해줄 수 있다. 물론 디자인은 그에 맞게 변경을 해야하지만 shadcn이 구현을 다 해주기 때문에 개발자는 구현보다 스타일에 집중할 수 있다.
+
+### Reference
+
+[(번역) Tailwind CSS의 장점과 단점](https://ykss.netlify.app/translation/the_pros_and_cons_of_tailwindcss/)
+
+[\[CSS\] 왜 Next.js는 tailwind를 추천할까](https://velog.io/@shinhw371/CSS-why-Nextjs-recommand-Tailwind)
+
+[shadcn/ui 를 이용한 공유 UI 컴포넌트 사용 경험](https://velog.io/@ckstn0777/shadcnui-%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EA%B3%B5%EC%9C%A0-UI-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%82%AC%EC%9A%A9-%EA%B2%BD%ED%97%98)
+
+[부트스트랩 ( bootstrap ) 이란?](https://velog.io/@5o_hyun/%EB%B6%80%ED%8A%B8%EC%8A%A4%ED%8A%B8%EB%9E%A9-bootstrap-%EC%9D%B4%EB%9E%80)
+
+<RelationPostList post={metadata} />

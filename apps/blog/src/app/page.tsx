@@ -40,7 +40,7 @@ export default async function Home(props: HomeProps) {
         >
           <div className={cn("flex", "flex-col", "gap-6")}>
             <div className={cn("flex", "gap-[4.375rem]")}>
-              <div className={cn("max-w-[52rem]", "space-y-6")}>
+              <div className={cn("max-w-[43.75rem]", "space-y-6")}>
                 <CategoryFilter categories={categories} />
                 {representPost && <RepresentPost post={representPost} />}
               </div>
@@ -70,7 +70,7 @@ export default async function Home(props: HomeProps) {
           </div>
           <div className={cn("flex", "flex-col", "gap-[3.125rem]")}>
             {otherPosts.length > 0 && (
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-5">
+              <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5">
                 {otherPosts.map((post, index) => (
                   <PostItem key={index} post={post} />
                 ))}

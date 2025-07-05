@@ -4,6 +4,7 @@ import {
   PostHeader,
   RelationPostList,
   PostHeadingLink,
+  CodeBlock,
 } from "@blog/components";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -45,7 +46,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           "text-primary-400",
           "font-bold",
           "text-[1.5rem]",
-          "mt-4",
+          "mt-10",
           "mb-2"
         )}
       >
@@ -88,15 +89,16 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <blockquote
         className={cn(
           "border-l-2",
-          "border-primary-300",
+          "border-primary-400",
           "pl-4",
           "py-1",
           "my-4",
           "bg-primary-50/10",
-          "italic",
-          "text-gray-700",
+          "text-gray-500",
           "[&>p:first-child]:mt-0",
-          "[&>p:last-child]:mb-0"
+          "[&>p:last-child]:mb-0",
+          "w-full",
+          "break-all"
         )}
       >
         {children}
@@ -114,22 +116,40 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         )}
       />
     ),
-    code: ({ children }) => (
-      <code
-        className={cn(
-          "bg-gray-100",
-          "text-primary-700",
-          "rounded",
-          "px-1.5",
-          "py-0.5",
-          "font-mono",
-          "text-sm",
-          "border",
-          "border-gray-200"
-        )}
-      >
-        {children}
-      </code>
+
+    code: ({ children, className, ...props }) => {
+      const isCodeBlock = className?.includes("language-");
+
+      if (isCodeBlock) {
+        return (
+          <code className={className} {...props}>
+            {children}
+          </code>
+        );
+      }
+
+      return (
+        <code
+          className={cn(
+            "bg-gray-100",
+            "text-primary-700",
+            "rounded",
+            "px-1.5",
+            "py-0.5",
+            "font-mono",
+            "text-sm",
+            "border",
+            "border-gray-200"
+          )}
+          {...props}
+        >
+          {children}
+        </code>
+      );
+    },
+
+    pre: ({ children, ...props }) => (
+      <CodeBlock {...props}>{children}</CodeBlock>
     ),
     ...components,
   };
