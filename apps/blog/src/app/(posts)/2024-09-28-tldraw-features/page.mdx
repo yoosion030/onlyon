@@ -1,0 +1,236 @@
+export const metadata = {
+  title: "2. tldraw features (tldraw 기능)",
+  publishDate: new Date("2024-09-28"),
+  posterImage:
+    "https://onlyon.s3.ap-southeast-2.amazonaws.com/tldraw+features/debug.gif",
+  description: "tldraw 주요 개념 및 기능 정리",
+  categories: ["tldraw"],
+  recommended: false,
+};
+
+<PostHeader post={metadata} />
+
+### 들어가기 전에
+
+Tldraw 공식 문서(Docs)를 보면, 내용은 많지만 직접 코드를 입력하지 않는 이상 어떻게 동작하는지 알수 없다. 이로 인해 작업 시간이 길어졌던 적이 많았는데, 이 글을 보는 사람들에게는 비효율적인 시간들을 줄여주기 위해 Tldraw에 어떤 주요 개념들이 있고, 어떤 기능들을 제공해주는지 작성해보려 한다.
+
+## Main Concepts (주요 개념)
+
+## 1\. editor
+
+[https://tldraw.dev/docs/editor](https://tldraw.dev/docs/editor)
+
+Editor 클래스는 tldraw의 에디터(편집기)를 제어하는 주요 개념이다. 에디터의 내부 state를 관리하고, document를 변경하거나, 발생한 변경에 대해서 응답을 하는데 사용한다.
+
+해당 글에서는 주요 개념을 3가지 editor, shape, tool로 나누었지만, 사실상 editor에 모든 개념이 함축되어 있다.
+
+글을 작성하기 위해 개념을 분리한 것이지, 사실상 내부 상태 관리는 전부 editor에 의해 동작한다.
+
+### How to use the editor? (에디터 사용 방법)
+
+editor를 사용하는 방법은 2가지가 있다.
+
+1\. Tldraw 컴포넌트의 onMount 콜백의 첫번째 인자로 제공된다.
+
+```tsx
+function App() {
+  return (
+    <Tldraw
+      onMount={(editor) => {
+        // your editor code here
+      }}
+    />
+  );
+}
+```
+
+리액트에서 해당 에디터를 상태로 사용하기 위해서는 주로 useState 훅으로 editor state를 생성한다.
+
+```tsx
+import { type Editor, Tldraw } from "tldraw";
+
+function App() {
+  const [editor, setEditor] = useState<Editor | null>();
+  return (
+    <Tldraw
+      onMount={(editor) => {
+        setEditor(editor);
+      }}
+    />
+  );
+}
+```
+
+2. useEditor 훅을 통해 editor 값을 받아올 수 있다.
+다만 해당 훅은 Tldraw 컴포넌트 내부에서 호출할 수 있다.
+
+```tsx
+function InsideOfContext() {
+  const editor = useEditor();
+  // your editor code here
+  return null; // or whatever
+}
+
+function App() {
+  return (
+    <Tldraw>
+      <InsideOfContext />
+    </Tldraw>
+  );
+}
+```
+
+이렇게 editor 값을 받아올 수 있게 된다면, 그때부터 우리는 Tldraw의 기능을 제어할 수 있게 된다.
+
+## 2\. Shapes
+
+[https://tldraw.dev/docs/shapes](https://tldraw.dev/docs/shapes)
+
+Shape는 에디터에서 존재하는 모든 것들을 통칭하는 가장 작은 단위이다. 공식문서에서는 “화살표, 이미지, 텍스트 등 페이지에 존재할 수 있는 것”이라고 설명한다.
+
+### Shape Type (shape 종류)
+
+shape에는 크게 3가지 종류가 있다.
+
+1\. 핵심 shape
+
+항상 내장되어있는 shpae이다. 현재 유일한 핵심 shape는 “group shape”이다.
+
+2\. 기본 shape
+
+기본 shape는 Tldraw컴포넌트에 기본적으로 포함된 모든 모양이다.
+
+3\. 커스텀 shape
+
+개발자가 직접 정의한 shape를 의미한다. 커스텀 shape를 만드는 내용은 다른 글에서 정리해볼 예정이다.
+
+shape는 store에 저장되어있는 레코드(JSON객체)일 뿐이고, 직사각형 shape의 경우 다음과 같이 저장된다.
+
+```json
+{
+    "parentId": "page:somePage",
+    "id": "shape:someId",
+    "typeName": "shape"
+    "type": "geo",
+    "x": 106,
+    "y": 294,
+    "rotation": 0,
+    "index": "a28",
+    "opacity": 1,
+    "isLocked": false,
+    "props": {
+        "w": 200,
+        "h": 200,
+        "geo": "rectangle",
+        "color": "black",
+        "labelColor": "black",
+        "fill": "none",
+        "dash": "draw",
+        "size": "m",
+        "font": "draw",
+        "text": "diagram",
+        "align": "middle",
+        "verticalAlign": "middle",
+        "growY": 0,
+        "url": ""
+    },
+    "meta": {},
+}
+```
+
+가장 일반적인 속성들이 있는데, 해당 속성에는 shape의 유형, 위치, 회전, 불투명도 등이 포함된다. shape의 높이와 너비는 기본 속성이 아니다..!
+
+[https://tldraw.dev/reference/tlschema/TLBaseShape](https://tldraw.dev/reference/tlschema/TLBaseShape)
+
+## 3\. Tools
+
+[https://tldraw.dev/docs/tools](https://tldraw.dev/docs/tools)
+
+Tools는 shape를 그릴 수 있게 사용자에게 제공해주는 도구를 의미한다. 선택 도구, 그리기 도구, 화살표 도구 등이 있다.
+
+![](https://onlyon.s3.ap-southeast-2.amazonaws.com/tldraw+features/tool.png)
+
+### Tools Type (tools 종류)
+
+1\. 기본 도구
+
+Tldraw 컴포넌트에서 기본적으로 제공되는 그리기 도구, 선택 도구, 화살표 도구를 의미한다.
+
+2\. 커스텀 도구
+
+Tldraw 컴포넌트에서 제공하는 것 외에 커스텀 도구를 만들 수도 있다.
+
+커스텀 툴을 개발하는 방법은 다른 글에서 자세히 다룰 예정이다.
+
+## Useful Tldraw features (유용한 Tldraw 기능)
+
+간단하게 Tldraw의 주요 개념을 다뤄보았으니 실제 서비스에서 자주 사용할만한 Tldraw 기능들을 정리해보겠다.
+
+### 1\. Debug Mode (디버그 모드)
+
+개발하면서, 어떤 기능들이 동작하는지 확인할 수 있는 디버깅 모드이다. 현재 어떤 툴이 사용되고 있고, 어떤 동작이 되고 있는지 하단에 노출된다.
+
+![](https://onlyon.s3.ap-southeast-2.amazonaws.com/tldraw+features/debug.gif)
+
+그러나 사용자에게 노출되는 에디터라면 대부분 해당 옵션을 사용하지는 않을 것이다.
+
+해당 모드를 사용하는 방법은 editor의 updateInstanceState 메소드를 통해, 에디터의 상태를 업데이트시킬 수 있다. 에디터 상태에 접근해야 하기 때문에 onMount인자로 받은 editor 상태를 이용하여 함수를 생성해주면 된다.
+
+```tsx
+export default function Home() {
+  const handleMount = (editor: Editor) => {
+    editor.updateInstanceState({ isDebugMode: true });
+  };
+  return (
+    <div className="relative w-screen h-screen">
+      <Tldraw onMount={handleMount} />
+    </div>
+  );
+}
+```
+
+### 2\. isReadOnly (읽기 전용 모드)
+
+특정 사용자에게 그리기 액션 권한을 막는 모드이다. 읽기 전용 모드로 전환되면 기본적으로 선택, 이동, 레이저 포인트 도구만 제공된다.
+
+읽기 전용 모드로 전환하는 방법 또한 위에서 언급한 updateInstance 메소드를 사용하면 된다.
+
+![](https://onlyon.s3.ap-southeast-2.amazonaws.com/tldraw+features/readonly.png)
+
+```tsx
+const handleMount = (editor: Editor) => {
+  editor.updateInstanceState({ isReadonly: true });
+};
+```
+
+읽기 전용 모드로 전환될 때 모든 툴을 제공하지 않도록 설정하기 위해선 커스텀 툴바를 이용하거나 interface 숨기도록 설정이 필요하다. 커스텀 툴바에 관한 내용은 다른 글에서 자세히 다룰 예정이다.
+
+### 3\. isGridMode (그리드 모드)
+
+Tldraw 배경에 격자무늬를 표시하는 모드이다.
+
+![](https://onlyon.s3.ap-southeast-2.amazonaws.com/tldraw+features/grid.png)
+
+```tsx
+const handleMount = (editor: Editor) => {
+  editor.updateInstanceState({ isGridMode: true });
+};
+```
+
+### 4\. isLocked (카메라 고정)
+
+카메라를 제어할 수 있는 기능도 존재한다. 카메라를 고정 시키려면 setCameraOptions 메소드를 사용하면 된다.
+
+아래와 같이 onMount로 에디터가 마운트될 때 editor 옵션을 설정하면 된다.
+
+```tsx
+const handleMount = (editor: Editor) => {
+  editor.setCameraOptions({ isLocked: true });
+};
+```
+
+## Next Posting… (다음 포스팅에서는)
+
+이렇게 내가 기능 개발하면서 유용하게 사용했던 옵션들을 알아보았다. 다음 포스팅에서는 커스텀 툴바를 제작하는 방법을 정리해보겠다.
+
+<RelationPostList post={metadata} />

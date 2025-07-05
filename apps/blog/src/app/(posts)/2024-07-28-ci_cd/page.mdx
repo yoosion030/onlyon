@@ -2,7 +2,7 @@ export const metadata = {
   title: "프론트엔드 개발자도 CI/CD를 배워야 할까?",
   publishDate: new Date("2024-07-28"),
   posterImage:
-    "https://velog.velcdn.com/images/yoosion030/post/e7868136-92c8-4796-bbd0-5cf5183b76ae/image.avif",
+    "https://onlyon.s3.ap-southeast-2.amazonaws.com/%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%86%AB%E1%84%90%E1%85%B3%E1%84%8B%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3+%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%E1%84%8C%E1%85%A1%E1%84%83%E1%85%A9+CI%3ACD%E1%84%85%E1%85%B3%E1%86%AF+%E1%84%87%E1%85%A2%E1%84%8B%E1%85%AF%E1%84%8B%E1%85%A3+%E1%84%92%E1%85%A1%E1%86%AF%E1%84%81%E1%85%A1%3F/%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%86%AB%E1%84%90%E1%85%B3%E1%84%8B%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3+%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%E1%84%8C%E1%85%A1%E1%84%83%E1%85%A9+CI%3ACD%E1%84%85%E1%85%B3%E1%86%AF+%E1%84%87%E1%85%A2%E1%84%8B%E1%85%AF%E1%84%8B%E1%85%A3+%E1%84%92%E1%85%A1%E1%86%AF%E1%84%81%E1%85%A1%3F-%E1%84%8A%E1%85%A5%E1%86%B7%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF.avif",
   categories: ["CI/CD"],
   recommended: true,
 };
@@ -196,8 +196,7 @@ step에 if 조건을 걸어 특정 조건일때 step을 실행시킬 수 있습�
 
 1. 이전 step 성공 여부 상관없이 항상 실행 `if: always()`
 
-```yaml![](https://velog.velcdn.com/images/yoosion030/post/95a82bc0-97c2-44b6-a96c-3e199cfc0b2e/image.png)
-
+```yaml
 - name: Report Lint
   if: always()
 ```
@@ -212,12 +211,12 @@ step에 if 조건을 걸어 특정 조건일때 step을 실행시킬 수 있습�
 - lighthouse: lighthouse로 서비스 성능을 측정하여 코멘트 생성
 - assign_reviewer: 팀원 한 명을 무작위로 reviewer로 지정
 
-![](https://velog.velcdn.com/images/yoosion030/post/c135a520-e9eb-4d0a-8277-16f597f4039c/image.png)
+![](https://onlyon.s3.ap-southeast-2.amazonaws.com/%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%86%AB%E1%84%90%E1%85%B3%E1%84%8B%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3+%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%E1%84%8C%E1%85%A1%E1%84%83%E1%85%A9+CI%3ACD%E1%84%85%E1%85%B3%E1%86%AF+%E1%84%87%E1%85%A2%E1%84%8B%E1%85%AF%E1%84%8B%E1%85%A3+%E1%84%92%E1%85%A1%E1%86%AF%E1%84%81%E1%85%A1%3F/%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%86%AB%E1%84%90%E1%85%B3%E1%84%8B%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3+%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%E1%84%8C%E1%85%A1%E1%84%83%E1%85%A9+CI%3ACD%E1%84%85%E1%85%B3%E1%86%AF+%E1%84%87%E1%85%A2%E1%84%8B%E1%85%AF%E1%84%8B%E1%85%A3+%E1%84%92%E1%85%A1%E1%86%AF%E1%84%81%E1%85%A1%3F-%E1%84%8B%E1%85%A2%E1%86%A8%E1%84%89%E1%85%A7%E1%86%AB.png)
 
-![](https://velog.velcdn.com/images/yoosion030/post/8bb21674-184a-42e5-be19-35dafd5cabb5/image.png)
+![](https://onlyon.s3.ap-southeast-2.amazonaws.com/%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%86%AB%E1%84%90%E1%85%B3%E1%84%8B%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3+%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%E1%84%8C%E1%85%A1%E1%84%83%E1%85%A9+CI%3ACD%E1%84%85%E1%85%B3%E1%86%AF+%E1%84%87%E1%85%A2%E1%84%8B%E1%85%AF%E1%84%8B%E1%85%A3+%E1%84%92%E1%85%A1%E1%86%AF%E1%84%81%E1%85%A1%3F/%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%86%AB%E1%84%90%E1%85%B3%E1%84%8B%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3+%E1%84%80%E1%85%A2%E1%84%87%E1%85%A1%E1%86%AF%E1%84%8C%E1%85%A1%E1%84%83%E1%85%A9+CI%3ACD%E1%84%85%E1%85%B3%E1%86%AF+%E1%84%87%E1%85%A2%E1%84%8B%E1%85%AF%E1%84%8B%E1%85%A3+%E1%84%92%E1%85%A1%E1%86%AF%E1%84%81%E1%85%A1%3F-%E1%84%8B%E1%85%A2%E1%86%A8%E1%84%89%E1%85%A7%E1%86%AB2.png)
 
 자세한 과제 내용은 아래 링크를 참고해 주시면 될 것 같습니다~
-https://github.com/yoosion030/front_2nd/pull/5
+[https://github.com/yoosion030/front_2nd/pull/5](https://github.com/yoosion030/front_2nd/pull/5)
 
 ## 마무리 & 한 줄 후기
 

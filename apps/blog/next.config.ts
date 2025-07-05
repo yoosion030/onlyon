@@ -6,7 +6,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "velog.velcdn.com",
+        hostname: "onlyon.s3.ap-southeast-2.amazonaws.com",
       },
     ],
   },

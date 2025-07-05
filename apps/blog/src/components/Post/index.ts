@@ -7,3 +7,4 @@ export { default as RelationPostList } from "./RelationPostList";
 export { default as PostHeadingLink } from "./PostHeadingLink/PostHeadingLink";
 export { default as PostToc } from "./PostToc";
 export { default as SkeletonPost } from "./SkeletonPost";
+export { default as CodeBlock } from "./CodeBlock";
