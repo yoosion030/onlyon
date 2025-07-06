@@ -1,7 +1,7 @@
 import { type Post } from "@blog/types";
 import { cn } from "@repo/utils";
-import Image from "next/image";
-import { CategoryBadge, PostHeadingLink } from "@blog/components";
+
+import { CategoryBadge, ImageZoom, PostHeadingLink } from "@blog/components";
 
 type PostHeaderProps = {
   post: Post;
@@ -28,7 +28,7 @@ const PostHeader = ({ post }: PostHeaderProps) => {
         ))}
       </div>
       {post.posterImage && (
-        <Image
+        <ImageZoom
           src={post.posterImage}
           alt={post.title}
           width={350}

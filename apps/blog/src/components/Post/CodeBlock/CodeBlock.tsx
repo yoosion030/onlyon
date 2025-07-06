@@ -3,7 +3,7 @@
 import { cn } from "@repo/utils";
 import { useState } from "react";
 import { Highlight, themes } from "prism-react-renderer";
-import { MdContentCopy, MdCheck } from "react-icons/md";
+import { Copy, Check } from "lucide-react";
 
 type CodeBlockProps = {
   children: {
@@ -82,7 +82,7 @@ const CodeBlock = ({ children, ...props }: CodeBlockProps) => {
               : "bg-white/10 border-white/20 text-white/80 hover:bg-white/20 hover:border-white/30"
           )}
         >
-          {copied ? <MdCheck size={14} /> : <MdContentCopy size={14} />}
+          {copied ? <Check size={14} /> : <Copy size={14} />}
           {copied ? "Copied!" : "Copy"}
         </button>
       </div>

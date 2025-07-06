@@ -136,24 +136,24 @@ yml 파일에서 script를 작성하게 된다면 문법적 오류를 알기 어
 
 아래 로직은 lighthouse 성능 측정 결과를 깃헙 코멘트로 남기는 workflow이다.
 
-```
-  - name: Report Lighthouse
-    if: success()
-    uses: actions/github-script@v6
-    env:
-      LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-    with:
-      github-token: ${{ secrets.TOKEN_FOR_CI }}
-      script: |
-        const fs = require('fs');
-        const results = JSON.parse(fs.readFileSync("packages/assignment-6/lhci_reports/manifest.json", 'utf-8'))
-        const lighthouse = require('.github/scripts/lighthouse.js');
-        await lighthouse.reportLighthouseSuccess({
-          results,
-          context,
-          github,
-          fs
-        });
+```yml
+- name: Report Lighthouse
+  if: success()
+  uses: actions/github-script@v6
+  env:
+    LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+  with:
+    github-token: ${{ secrets.TOKEN_FOR_CI }}
+    script: |
+      const fs = require('fs');
+      const results = JSON.parse(fs.readFileSync("packages/assignment-6/lhci_reports/manifest.json", 'utf-8'))
+      const lighthouse = require('.github/scripts/lighthouse.js');
+      await lighthouse.reportLighthouseSuccess({
+        results,
+        context,
+        github,
+        fs
+      });
 ```
 
 과제 제출 PR: [https://github.com/yoosion030/front_2nd/pull/5/files](https://github.com/yoosion030/front_2nd/pull/5/files)
@@ -261,7 +261,7 @@ PoC의 필수 조건을 알지 못하여 다른 소소한 기능들을 구현할
 
 하지만 내가 활용했던 구조는 삼항 연산자로 모드를 대체하는 것이어서 콘텐츠 컴포넌트의 내부 상태가 초기화되는 이슈가 발생하였다.
 
-```
+```tsx
 특정 모드임 ?
    <특정 모드 속성 활성화>
       <기존에 노출하던 콘텐츠 />
