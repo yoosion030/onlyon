@@ -5,6 +5,7 @@ import {
   RelationPostList,
   PostHeadingLink,
   CodeBlock,
+  ImageZoom,
 } from "@blog/components";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -150,6 +151,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
     pre: ({ children, ...props }) => (
       <CodeBlock {...props}>{children}</CodeBlock>
+    ),
+    img: ({ src, alt, width, height, ...props }) => (
+      <ImageZoom
+        src={src}
+        alt={alt}
+        width={width ? Number(width) : undefined}
+        height={height ? Number(height) : undefined}
+        {...props}
+      />
     ),
     ...components,
   };

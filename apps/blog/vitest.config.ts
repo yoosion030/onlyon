@@ -1,4 +1,5 @@
 import { uiConfig } from "@repo/vitest-config/ui";
+
 import { resolve } from "path";
 import { mergeConfig } from "vitest/config";
 
@@ -10,8 +11,14 @@ export default mergeConfig(uiConfig, {
       "@blog/utils": resolve(__dirname, "./src/utils"),
       "@blog/hooks": resolve(__dirname, "./src/hooks"),
       "@blog/libs": resolve(__dirname, "./src/libs"),
+      "@repo/ui": resolve(
+        __dirname,
+        "../../packages/ui/src/components/index.ts"
+      ),
+      "@repo/utils": resolve(__dirname, "../../packages/utils/index.ts"),
     },
   },
+
   test: {
     setupFiles: ["./setup-test.tsx"],
     coverage: {

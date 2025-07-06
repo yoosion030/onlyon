@@ -16,7 +16,9 @@ export const getPosts = async ({ category }: GetPostsProps = {}): Promise<
   };
 
   const posts: Post[] = await fetch(buildApiUrl("/api/posts"), {
-    cache: "force-cache",
+    next: {
+      tags: ["posts", category || "all"],
+    },
   }).then((res) => res.json());
 
   return posts.filter((post): post is Post => post !== null);

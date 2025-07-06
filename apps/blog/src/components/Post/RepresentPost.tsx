@@ -29,6 +29,7 @@ const RepresentPost = ({ post }: { post: Post }) => {
           width="700"
           height="360"
           className={cn("aspect-video", "rounded-2xl")}
+          priority
         />
       ) : (
         <GeneratedPosterImage
@@ -36,6 +37,7 @@ const RepresentPost = ({ post }: { post: Post }) => {
           width={700}
           height={360}
           alt={title}
+          priority
         />
       )}
 

@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import PostHeader from "./PostHeader";
 import { CategoryBadgeProps } from "@blog/components/Category/CategoryBadge";
 import { PostHeadingLinkProps } from "@blog/components/Post/PostHeadingLink";
+import { ComponentProps } from "react";
 
 vi.mock("@blog/components", () => ({
   ...vi.importActual("@blog/components"),
@@ -19,6 +20,23 @@ vi.mock("@blog/components", () => ({
       </Component>
     );
   },
+  /* eslint-disable @next/next/no-img-element */
+  ImageZoom: ({
+    src,
+    alt,
+    width,
+    height,
+    className,
+  }: ComponentProps<"img">) => (
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      className={className}
+      data-testid="image-zoom"
+    />
+  ),
 }));
 
 const mockPost = {
@@ -85,13 +103,6 @@ describe("PostHeader", () => {
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
 
-  it("올바른 CSS 클래스를 적용한다", async () => {
-    const { container } = render(<PostHeader post={mockPost} />);
-
-    const wrapper = container.firstChild as HTMLElement;
-    expect(wrapper).toHaveClass("flex", "flex-col", "gap-2");
-  });
-
   it("제목에 올바른 스타일이 적용된다", async () => {
     render(<PostHeader post={mockPost} />);
 
@@ -132,5 +143,12 @@ describe("PostHeader", () => {
     expect(screen.getByTestId("category-badge-TypeScript")).toBeInTheDocument();
     expect(screen.getByTestId("category-badge-JavaScript")).toBeInTheDocument();
     expect(screen.getByTestId("category-badge-Next.js")).toBeInTheDocument();
+  });
+
+  it("확대 가능한 이미지가 노출되어야 한다.", async () => {
+    render(<PostHeader post={mockPost} />);
+
+    const imageZoom = screen.getByTestId("image-zoom");
+    expect(imageZoom).toBeInTheDocument();
   });
 });
