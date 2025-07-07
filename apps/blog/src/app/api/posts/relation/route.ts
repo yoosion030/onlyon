@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 import { type Post } from "@blog/types";
-import { getPosts } from "@blog/libs";
+import { getAllPosts } from "@blog/libs";
 
 const genAI = new GoogleGenerativeAI(
   process.env.NEXT_PUBLIC_GOOGLE_GEMINI_API_KEY || ""
@@ -65,7 +65,7 @@ export async function POST(
     const { currentPost } = await request.json();
     const currentTitle = currentPost?.title || "";
 
-    const allPosts: Post[] = (await getPosts()).filter(
+    const allPosts = (await getAllPosts()).filter(
       (post) => post.title !== currentTitle
     );
 
@@ -87,7 +87,7 @@ export async function POST(
     return NextResponse.json(sortedRecommendations);
   } catch {
     try {
-      const allPosts: Post[] = await getPosts();
+      const allPosts = await getAllPosts();
       const fallback = allPosts
         .sort(
           (a, b) =>

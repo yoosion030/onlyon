@@ -9,3 +9,4 @@ export { default as PostToc } from "./PostToc";
 export { default as SkeletonPost } from "./SkeletonPost";
 export { default as CodeBlock } from "./CodeBlock";
 export { default as ImageZoom } from "./ImageZoom";
+export { default as PostPagination } from "./PostPagination";

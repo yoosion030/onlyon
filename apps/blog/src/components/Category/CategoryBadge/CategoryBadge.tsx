@@ -1,10 +1,9 @@
-import Link from "next/link";
 import { cn } from "@repo/utils";
+import Link from "next/link";
+import { type Category } from "@blog/types";
 
-export type CategoryBadgeProps = {
-  category: string;
+export type CategoryBadgeProps = Category & {
   isActive: boolean;
-  count?: number;
 };
 
 export default function CategoryBadge({
@@ -19,11 +18,12 @@ export default function CategoryBadge({
     <Link
       href={href}
       className={cn(
-        "px-3 py-1 text-[0.625rem] rounded-[0.25rem] font-medium border transition-colors hover:bg-blue-50",
+        "px-3 py-1 text-[0.625rem] rounded-[0.25rem] font-medium border transition-all hover:bg-blue-50 disabled:opacity-50",
         isActive
           ? ["bg-primary", "text-white", "border-primary", "hover:text-primary"]
           : ["text-primary", "border-primary", "bg-transparent"]
       )}
+      prefetch={true}
     >
       {category}
       {count > 0 && <span className="ml-1">({count})</span>}
