@@ -1,5 +1,5 @@
-import { readdir } from "fs/promises";
-import path from "path";
+import { readdir } from "node:fs/promises";
+import path from "node:path";
 import { NextResponse } from "next/server";
 import { type Post } from "@blog/types";
 
@@ -12,14 +12,13 @@ export async function GET(): Promise<
     const slugs = (await readdir(postPath, { withFileTypes: true })).filter(
       (dirent) => dirent.isDirectory()
     );
-
     const posts: (Post | null)[] = await Promise.all(
-      slugs.map(async ({ name }) => {
+      slugs.map(async ({ name: slug }) => {
         try {
-          const postModulePath = path.resolve(postPath, name, "page.mdx");
-          const { metadata } = await import(postModulePath);
-
-          return { slug: name, ...metadata };
+          const { metadata } = await import(
+            `../../../(posts)/${slug}/page.mdx`
+          );
+          return { slug, ...metadata };
         } catch {
           return null;
         }
