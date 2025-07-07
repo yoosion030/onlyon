@@ -13,6 +13,7 @@ export async function GET(
   try {
     let posts = await getAllPosts();
 
+
     const { searchParams } = new URL(request.url);
     const category = decodeURIComponent(searchParams.get("category") || "전체");
     const currentPage = parseInt(searchParams.get("page") || "1") || 1;

@@ -6,7 +6,9 @@ export const getRecommendPosts = async (): Promise<Post[]> => {
     {
       cache: "force-cache",
     }
-  ).then((res) => res.json());
+  )
+    .then((res) => res.json())
+    .catch(() => []);
 
   return posts;
 };

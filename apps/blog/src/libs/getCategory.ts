@@ -6,7 +6,9 @@ export const getCategory = async (): Promise<Category[]> => {
     {
       cache: "force-cache",
     }
-  ).then((res) => res.json());
+  )
+    .then((res) => res.json())
+    .catch(() => []);
 
   return categories;
 };
