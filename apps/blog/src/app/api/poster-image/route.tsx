@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
-
-export const runtime = "edge";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -8,6 +8,10 @@ export async function GET(request: Request) {
   const slicedTitle = title.length > 40 ? title.slice(0, 40) + "..." : title;
   const width = searchParams.get("w") || "350";
   const height = searchParams.get("h") || "180";
+
+  const font = await readFile(
+    join(process.cwd(), "public", "fonts", "BMKkubulim.otf")
+  );
 
   return new ImageResponse(
     (
@@ -24,14 +28,11 @@ export async function GET(request: Request) {
       >
         <p
           style={{
-            fontSize: "50px",
-            fontWeight: 900,
-            fontFamily: "Arial Black, Arial Bold, Gadget, sans-serif",
+            fontSize: "70px",
             color: "white",
-            wordBreak: "break-word",
+            wordBreak: "keep-all",
             maxWidth: "90%",
-            textShadow: "0px 0px 1px white",
-            WebkitTextStroke: "1px white",
+            fontFamily: "BMKkubulim",
           }}
         >
           {slicedTitle}
@@ -41,6 +42,14 @@ export async function GET(request: Request) {
     {
       width: parseInt(width, 10) * 2,
       height: parseInt(height, 10) * 2,
+      fonts: [
+        {
+          name: "BMKkubulim",
+          data: font,
+          weight: 900,
+          style: "normal",
+        },
+      ],
     }
   );
 }
