@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { type Post } from "@blog/types";
-import { getPosts } from "@blog/libs";
+import { getAllPosts } from "@blog/libs";
 
 export async function GET(): Promise<
   NextResponse<Post[] | { error: unknown }>
 > {
   try {
-    const posts = await getPosts();
+    const posts = await getAllPosts();
 
     const recommendedPosts = posts
       ?.filter((post) => {

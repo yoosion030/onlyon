@@ -39,7 +39,7 @@ export const Header = ({ workspace, className, ...props }: HeaderProps) => {
           {workspace === "blog" && (
             <a
               href={process.env.NEXT_PUBLIC_PORTFOLIO_URL}
-              className={cn("text-primary", "font-semibold")}
+              className={cn("text-primary-linear", "font-semibold")}
             >
               Portfolio
             </a>
@@ -47,7 +47,7 @@ export const Header = ({ workspace, className, ...props }: HeaderProps) => {
           {workspace === "portfolio" && (
             <a
               href={process.env.NEXT_PUBLIC_BLOG_URL}
-              className={cn("text-primary", "font-semibold")}
+              className={cn("text-primary-linear", "font-semibold")}
             >
               Blog
             </a>
@@ -57,7 +57,7 @@ export const Header = ({ workspace, className, ...props }: HeaderProps) => {
             href="https://github.com/yoosion030/onlyon"
             target="_blank"
             rel="noreferrer"
-            className={cn("text-primary", "font-semibold")}
+            className={cn("text-primary-linear", "font-semibold")}
           >
             Github
           </a>

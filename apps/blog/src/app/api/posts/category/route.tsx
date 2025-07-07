@@ -1,14 +1,15 @@
 import { NextResponse } from "next/server";
-import { getPosts } from "@blog/libs";
+import { getAllPosts } from "@blog/libs";
+import { Category } from "@blog/types";
 
 /**
  * 게시글의 카테고리 목록과 각 카테고리별 게시글 수를 반환합니다.
  */
 export async function GET(): Promise<
-  NextResponse<{ category: string; count: number }[] | { error: unknown }>
+  NextResponse<Category[] | { error: unknown }>
 > {
   try {
-    const posts = await getPosts();
+    const posts = await getAllPosts();
     const categoryCountMap = new Map<string, number>();
 
     posts.forEach((post) => {

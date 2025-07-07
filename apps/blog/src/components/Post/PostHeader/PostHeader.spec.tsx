@@ -1,4 +1,3 @@
-import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import PostHeader from "./PostHeader";
 import { CategoryBadgeProps } from "@blog/components/Category/CategoryBadge";

@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("relative")}>{children}</body>
+      <body className={cn("relative")} suppressHydrationWarning>{children}</body>
     </html>
   );
 }

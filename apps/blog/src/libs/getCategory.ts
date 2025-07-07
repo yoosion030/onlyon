@@ -1,7 +1,4 @@
-type Category = {
-  category: string;
-  count: number;
-};
+import { type Category } from "@blog/types";
 
 export const getCategory = async (): Promise<Category[]> => {
   const categories: Category[] = await fetch(

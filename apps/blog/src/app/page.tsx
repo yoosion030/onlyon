@@ -4,26 +4,30 @@ import {
   RepresentPost,
   CategoryFilter,
   RecommendPost,
+  PostPagination,
 } from "@blog/components";
 import { Header, Footer } from "@repo/ui";
 import { getPosts, getCategory, getRecommendPosts } from "@blog/libs";
 
 type HomeProps = {
-  searchParams: Promise<{ category?: string }>;
+  searchParams: Promise<{ category?: string; page?: string }>;
 };
 
 export default async function Home(props: HomeProps) {
   const { searchParams } = props;
-  const selectedCategory = (await searchParams).category;
+  const params = await searchParams;
+  const selectedCategory = params.category;
+  const currentPage = parseInt(params.page || "1");
 
-  const [posts, categories, recommendPosts] = await Promise.all([
-    getPosts({ category: selectedCategory }),
+  const [postsData, categories, recommendPosts] = await Promise.all([
+    getPosts({ category: selectedCategory, page: currentPage, limit: 10 }),
     getCategory(),
     getRecommendPosts(),
   ]);
 
-  const representPost = posts[0];
-  const otherPosts = posts.slice(1);
+  const { posts, totalPages } = postsData;
+  const representPost = posts?.[0];
+  const otherPosts = posts?.slice(1);
 
   return (
     <>
@@ -44,9 +48,14 @@ export default async function Home(props: HomeProps) {
                 <CategoryFilter categories={categories} />
                 {representPost && <RepresentPost post={representPost} />}
               </div>
-              {recommendPosts.length > 0 && (
+              {recommendPosts?.length > 0 && (
                 <div
-                  className={cn("lg:block", "hidden", "flex-1", "space-y-6")}
+                  className={cn(
+                    "max-lg:hidden",
+                    "flex-1",
+                    "space-y-6",
+                    "block"
+                  )}
                 >
                   <h2
                     className={cn(
@@ -69,12 +78,19 @@ export default async function Home(props: HomeProps) {
             </div>
           </div>
           <div className={cn("flex", "flex-col", "gap-[3.125rem]")}>
-            {otherPosts.length > 0 && (
+            {otherPosts?.length > 0 && (
               <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5">
                 {otherPosts.map((post, index) => (
                   <PostItem key={index} post={post} />
                 ))}
               </div>
+            )}
+
+            {totalPages > 1 && (
+              <PostPagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+              />
             )}
           </div>
         </main>
