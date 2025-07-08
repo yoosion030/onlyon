@@ -1,4 +1,4 @@
-import { renderHook, act, fireEvent } from "@testing-library/react";
+import { act, fireEvent, renderHook } from "@testing-library/react";
 import { usePostToc } from "./usePostToc";
 
 const mockUsePathname = vi.fn();

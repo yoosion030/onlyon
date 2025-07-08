@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import CodeBlock from "./CodeBlock";
 import userEvent from "@testing-library/user-event";
+import CodeBlock from "./CodeBlock";
 
 const mockWriteText = vi.fn();
 
@@ -30,23 +30,23 @@ describe("CodeBlock", () => {
 
   it("코드와 언어 정보가 노출되어야 한다.", () => {
     const { container } = render(
-      <CodeBlock>{mockChildrenWithLanguage}</CodeBlock>
+      <CodeBlock>{mockChildrenWithLanguage}</CodeBlock>,
     );
 
     expect(screen.getByText("javascript")).toBeInTheDocument();
     expect(container.querySelector("pre")?.textContent).toBe(
-      "const greeting = 'Hello, World!';"
+      "const greeting = 'Hello, World!';",
     );
   });
 
   it("언어가 없는 경우 언어가 노출되지 않는다.", () => {
     const { container } = render(
-      <CodeBlock>{mockChildrenWithoutLanguage}</CodeBlock>
+      <CodeBlock>{mockChildrenWithoutLanguage}</CodeBlock>,
     );
 
     expect(screen.queryByText("javascript")).not.toBeInTheDocument();
     expect(container.querySelector("pre")?.textContent).toBe(
-      "console.log('Hello');"
+      "console.log('Hello');",
     );
   });
 
@@ -58,7 +58,7 @@ describe("CodeBlock", () => {
     await userEvent.click(copyButton);
 
     expect(mockWriteText).toHaveBeenCalledWith(
-      "const greeting = 'Hello, World!';"
+      "const greeting = 'Hello, World!';",
     );
     await waitFor(() => {
       expect(screen.getByText("Copied!")).toBeInTheDocument();
@@ -81,7 +81,7 @@ describe("CodeBlock", () => {
         expect(screen.queryByText("Copied!")).not.toBeInTheDocument();
         expect(screen.getByText("Copy")).toBeInTheDocument();
       },
-      { timeout: 3000 }
+      { timeout: 3000 },
     );
   });
 
@@ -99,7 +99,7 @@ describe("CodeBlock", () => {
     await waitFor(() => {
       expect(consoleErrorSpy).toHaveBeenCalledWith(
         "Failed to copy:",
-        expect.any(Error)
+        expect.any(Error),
       );
     });
 

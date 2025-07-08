@@ -11,7 +11,7 @@ const range = (start: number, end: number) => {
 export function getPagination(
   currentPage: number,
   totalPageCount: number,
-  siblingCount = 1
+  siblingCount = 1,
 ): PaginationType {
   if (!currentPage || !totalPageCount) {
     return [];
@@ -25,7 +25,7 @@ export function getPagination(
   const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
   const rightSiblingIndex = Math.min(
     currentPage + siblingCount,
-    totalPageCount
+    totalPageCount,
   );
 
   const shouldShowLeftDots = leftSiblingIndex > 3;
@@ -45,7 +45,7 @@ export function getPagination(
     const rightItemCount = 3 + 2 * siblingCount;
     const rightRange = range(
       totalPageCount - rightItemCount + 1,
-      totalPageCount
+      totalPageCount,
     );
     return [firstPageIndex, DOTS, ...rightRange];
   }

@@ -11,7 +11,7 @@ const PostSkeleton = () => {
         "duration-300",
         "ease-in-out",
         "animate-pulse",
-        "w-full"
+        "w-full",
       )}
     >
       <div
@@ -20,7 +20,7 @@ const PostSkeleton = () => {
           "rounded-2xl",
           "w-full",
           "bg-gray-200",
-          "animate-pulse"
+          "animate-pulse",
         )}
       />
 
@@ -31,7 +31,7 @@ const PostSkeleton = () => {
             "bg-gray-200",
             "rounded",
             "animate-pulse",
-            "w-20"
+            "w-20",
           )}
         />
 
@@ -42,7 +42,7 @@ const PostSkeleton = () => {
             "rounded",
             "animate-pulse",
             "w-3/4",
-            "mt-1"
+            "mt-1",
           )}
         />
 
@@ -53,7 +53,7 @@ const PostSkeleton = () => {
             "rounded",
             "animate-pulse",
             "w-2/3",
-            "mt-1"
+            "mt-1",
           )}
         />
       </div>

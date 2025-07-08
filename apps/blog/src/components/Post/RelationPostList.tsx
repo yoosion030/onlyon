@@ -1,9 +1,9 @@
 "use client";
 
-import { type Post as PostType } from "@blog/types";
-import { cn } from "@repo/utils";
+import { PostHeadingLink, PostItem, SkeletonPost } from "@blog/components";
 import { useGetRelationPosts } from "@blog/hooks";
-import { PostHeadingLink, SkeletonPost, PostItem } from "@blog/components";
+import type { Post as PostType } from "@blog/types";
+import { cn } from "@repo/utils";
 
 const RelationPostList = ({ post }: { post: PostType }) => {
   const { relationPosts, loading, error } = useGetRelationPosts({ post });
@@ -17,7 +17,7 @@ const RelationPostList = ({ post }: { post: PostType }) => {
           "font-bold",
           "text-[1.75rem]",
           "w-full",
-          "mb-2"
+          "mb-2",
         )}
       >
         연관 포스트 {!loading && `(${relationPosts.length})`}
@@ -28,7 +28,7 @@ const RelationPostList = ({ post }: { post: PostType }) => {
           "text-primary-400",
           "font-thin",
           "text-[0.75rem]",
-          "mb-4"
+          "mb-4",
         )}
       >
         Gemini AI Prompt 기반으로 생성한 연관 포스트입니다.
@@ -41,13 +41,16 @@ const RelationPostList = ({ post }: { post: PostType }) => {
             "gap-4",
             "w-full",
             "overflow-x-scroll",
-            "overflow-y-hidden"
+            "overflow-y-hidden",
           )}
         >
           <div className={cn("flex", "gap-4", "w-full")}>
             {[...Array(3)].map((_, i) => {
               return (
-                <div className={cn("w-[18.75rem]", "shrink-0")} key={i}>
+                <div
+                  className={cn("w-[18.75rem]", "shrink-0")}
+                  key={`skeleton-${i}`}
+                >
                   <SkeletonPost />
                 </div>
               );
@@ -65,7 +68,7 @@ const RelationPostList = ({ post }: { post: PostType }) => {
             "gap-4",
             "w-full",
             "overflow-x-scroll",
-            "overflow-y-hidden"
+            "overflow-y-hidden",
           )}
         >
           {relationPosts.map((post: PostType) => (

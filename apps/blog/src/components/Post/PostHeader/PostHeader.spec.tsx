@@ -1,8 +1,8 @@
+import type { CategoryBadgeProps } from "@blog/components/Category/CategoryBadge";
+import type { PostHeadingLinkProps } from "@blog/components/Post/PostHeadingLink";
 import { render, screen } from "@testing-library/react";
+import type { ComponentProps } from "react";
 import PostHeader from "./PostHeader";
-import { CategoryBadgeProps } from "@blog/components/Category/CategoryBadge";
-import { PostHeadingLinkProps } from "@blog/components/Post/PostHeadingLink";
-import { ComponentProps } from "react";
 
 vi.mock("@blog/components", () => ({
   ...vi.importActual("@blog/components"),
@@ -60,7 +60,7 @@ describe("PostHeader", () => {
     render(<PostHeader post={mockPost} />);
 
     expect(screen.getByTestId("post-heading")).toHaveTextContent(
-      "테스트 포스트 제목"
+      "테스트 포스트 제목",
     );
   });
 
@@ -109,7 +109,7 @@ describe("PostHeader", () => {
     expect(heading).toHaveClass(
       "text-[2.5rem]",
       "text-primary-linear",
-      "font-bold"
+      "font-bold",
     );
   });
 

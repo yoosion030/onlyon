@@ -1,5 +1,5 @@
-import fs from "fs/promises";
-import path from "path";
+import fs from "node:fs/promises";
+import path from "node:path";
 import { glob } from "glob";
 
 async function collectCoverageFiles() {
@@ -41,12 +41,12 @@ async function collectCoverageFiles() {
             const directoryName = path.basename(match);
             const destinationFile = path.join(
               destinationDir,
-              `${directoryName}.json`
+              `${directoryName}.json`,
             );
 
             await fs.copyFile(coverageFilePath, destinationFile);
           } catch (err) {
-            // File doesn't exist in this directory, skip
+            console.error(err);
           }
         }
       }
@@ -59,7 +59,7 @@ async function collectCoverageFiles() {
       console.log(
         `Found coverage.json in: ${directoriesWithCoverage
           .map(replaceDotPatterns)
-          .join(", ")}`
+          .join(", ")}`,
       );
     }
 

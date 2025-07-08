@@ -1,12 +1,12 @@
-import { cn } from "@repo/utils";
-import Image from "next/image";
 import {
   Dialog,
-  DialogContent,
-  DialogTrigger,
-  DialogTitle,
   DialogClose,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
 } from "@repo/ui";
+import { cn } from "@repo/utils";
+import Image from "next/image";
 
 type ImageZoomProps = {
   src: string;
@@ -38,7 +38,7 @@ const ImageZoom = ({ src, alt, width, height, className }: ImageZoomProps) => {
             "rounded-none",
             "outline-none",
             "h-screen",
-            "max-w-none"
+            "max-w-none",
           )}
           showCloseButton={false}
           aria-describedby={undefined}
@@ -53,7 +53,7 @@ const ImageZoom = ({ src, alt, width, height, className }: ImageZoomProps) => {
                   "rounded-lg",
                   "flex",
                   "items-center",
-                  "justify-center"
+                  "justify-center",
                 )}
               >
                 <Image

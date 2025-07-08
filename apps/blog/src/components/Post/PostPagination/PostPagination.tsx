@@ -1,6 +1,5 @@
 "use client";
 
-import { cn } from "@repo/utils";
 import {
   Pagination,
   PaginationContent,
@@ -10,9 +9,9 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@repo/ui";
-
-import { getPagination } from "./pagination";
+import { cn } from "@repo/utils";
 import { useRouter, useSearchParams } from "next/navigation";
+import { getPagination } from "./pagination";
 
 type PostPaginationProps = {
   currentPage: number;

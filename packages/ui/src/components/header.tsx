@@ -1,5 +1,5 @@
 import { cn } from "@repo/utils";
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
 type WorkspaceType = "blog" | "portfolio";
 type HeaderProps = {
@@ -15,7 +15,7 @@ export const Header = ({ workspace, className, ...props }: HeaderProps) => {
         "top-0",
         "backdrop-blur-sm",
         "bg-white/10",
-        "z-10"
+        "z-10",
       )}
     >
       <div
@@ -26,7 +26,7 @@ export const Header = ({ workspace, className, ...props }: HeaderProps) => {
           "flex",
           "justify-between",
           "items-center",
-          className
+          className,
         )}
       >
         <a

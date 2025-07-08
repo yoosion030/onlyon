@@ -1,7 +1,6 @@
-import { type Post } from "@blog/types";
-import { cn } from "@repo/utils";
-
 import { CategoryBadge, ImageZoom, PostHeadingLink } from "@blog/components";
+import type { Post } from "@blog/types";
+import { cn } from "@repo/utils";
 
 type PostHeaderProps = {
   post: Post;

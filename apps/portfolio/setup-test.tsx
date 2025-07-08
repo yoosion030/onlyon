@@ -1,5 +1,4 @@
 import "@testing-library/jest-dom";
-import React from "react";
 
 vi.mock("next/image", () => ({
   default: ({ src, alt, ...props }: { src: string; alt: string }) => (

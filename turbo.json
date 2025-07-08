@@ -13,9 +13,6 @@
         "NEXT_PUBLIC_GOOGLE_GEMINI_API_KEY"
       ]
     },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
     "check-types": {
       "dependsOn": ["^check-types"]
     },
@@ -33,6 +30,14 @@
     },
     "transit": {
       "dependsOn": ["^transit"]
+    },
+    "lint": {},
+    "lint:fix": {},
+    "lint:summary": {
+      "cache": false
+    },
+    "lint:ci": {
+      "cache": false
     }
   },
   "globalDependencies": ["tsconfig.json"]

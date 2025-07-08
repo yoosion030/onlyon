@@ -1,9 +1,9 @@
 "use client";
 
+import { usePostToc } from "@blog/components/Post/PostToc";
 import { cn } from "@repo/utils";
 import Link from "next/link";
-import { MouseEvent } from "react";
-import { usePostToc } from "@blog/components/Post/PostToc";
+import type { MouseEvent } from "react";
 
 const STYLES = {
   MARGIN_PER_LEVEL: 16,
@@ -41,7 +41,7 @@ const PostToc = () => {
         "right-30",
         "3xl:block",
         "hidden",
-        "max-w-[21.875rem]"
+        "max-w-[21.875rem]",
       )}
     >
       <div className={cn("sticky", "top-13", "p-4")}>
@@ -71,7 +71,7 @@ const PostToc = () => {
                       "text-ellipsis",
                       isActive
                         ? ["text-primary-200", "font-semibold", "bg-blue-50"]
-                        : ["text-primary-400"]
+                        : ["text-primary-400"],
                     )}
                     style={{
                       marginLeft: `${getMarginLeft(level)}px`,

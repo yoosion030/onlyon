@@ -1,13 +1,13 @@
-import { cn } from "@repo/utils";
 import {
-  PostItem,
-  RepresentPost,
   CategoryFilter,
-  RecommendPost,
+  PostItem,
   PostPagination,
+  RecommendPost,
+  RepresentPost,
 } from "@blog/components";
-import { Header, Footer } from "@repo/ui";
-import { getPosts, getCategory, getRecommendPosts } from "@blog/libs";
+import { getCategory, getPosts, getRecommendPosts } from "@blog/libs";
+import { Footer, Header } from "@repo/ui";
+import { cn } from "@repo/utils";
 
 type HomeProps = {
   searchParams: Promise<{ category?: string; page?: string }>;
@@ -39,7 +39,7 @@ export default async function Home(props: HomeProps) {
             "flex",
             "flex-col",
             "gap-[3.125rem]",
-            "my-[3.125rem]"
+            "my-[3.125rem]",
           )}
         >
           <div className={cn("flex", "flex-col", "gap-6")}>
@@ -54,7 +54,7 @@ export default async function Home(props: HomeProps) {
                     "max-lg:hidden",
                     "flex-1",
                     "space-y-6",
-                    "block"
+                    "block",
                   )}
                 >
                   <h2
@@ -63,7 +63,7 @@ export default async function Home(props: HomeProps) {
                       "font-bold",
                       "text-[1.75rem]",
                       "pl-2",
-                      "w-full"
+                      "w-full",
                     )}
                   >
                     추천 포스팅

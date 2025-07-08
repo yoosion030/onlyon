@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type HeadingType = {
   id: string;
@@ -111,13 +111,13 @@ export const usePostToc = (): UsePostTocReturnType => {
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("headingClick", () =>
-      handleScrollToHeading(window.location.hash ?? "")
+      handleScrollToHeading(window.location.hash ?? ""),
     );
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.addEventListener("headingClick", () =>
-        handleScrollToHeading(window.location.hash ?? "")
+        handleScrollToHeading(window.location.hash ?? ""),
       );
     };
   }, [handleScroll, handleScrollToHeading]);

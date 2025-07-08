@@ -1,8 +1,8 @@
-import { cn } from "@repo/utils";
-import { type Post } from "@blog/types";
 import { GeneratedPosterImage } from "@blog/components";
-import Link from "next/link";
+import type { Post } from "@blog/types";
+import { cn } from "@repo/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 const RepresentPost = ({ post }: { post: Post }) => {
   const { title, description, publishDate, posterImage, categories, slug } =
@@ -19,7 +19,7 @@ const RepresentPost = ({ post }: { post: Post }) => {
         "p-2",
         "transition",
         "duration-300",
-        "ease-in-out"
+        "ease-in-out",
       )}
     >
       {posterImage ? (
@@ -48,7 +48,7 @@ const RepresentPost = ({ post }: { post: Post }) => {
             "font-thin",
             "text-[0.75rem]",
             "flex",
-            "gap-1"
+            "gap-1",
           )}
         >
           <span>{new Date(publishDate).toLocaleDateString()}</span>

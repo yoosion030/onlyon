@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
+import type { CategoryBadgeProps } from "../CategoryBadge";
 import CategoryFilter from "./CategoryFilter";
-import { type CategoryBadgeProps } from "../CategoryBadge";
 
 const mockUseSearchParams = vi.fn();
 
@@ -68,19 +68,19 @@ describe("CategoryFilter", () => {
 
     expect(screen.getByTestId("category-badge-전체")).toHaveAttribute(
       "data-count",
-      "10"
+      "10",
     );
     expect(screen.getByTestId("category-badge-React")).toHaveAttribute(
       "data-count",
-      "5"
+      "5",
     );
     expect(screen.getByTestId("category-badge-TypeScript")).toHaveAttribute(
       "data-count",
-      "3"
+      "3",
     );
     expect(screen.getByTestId("category-badge-JavaScript")).toHaveAttribute(
       "data-count",
-      "2"
+      "2",
     );
   });
 

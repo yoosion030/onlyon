@@ -1,9 +1,9 @@
 "use client";
 
 import { cn } from "@repo/utils";
-import { useState } from "react";
+import { Check, Copy } from "lucide-react";
 import { Highlight, themes } from "prism-react-renderer";
-import { Copy, Check } from "lucide-react";
+import { useState } from "react";
 
 type CodeBlockProps = {
   children: {
@@ -42,7 +42,7 @@ const CodeBlock = ({ children, ...props }: CodeBlockProps) => {
         "overflow-hidden",
         "relative",
         "backdrop-blur-xl",
-        "shadow-2xl"
+        "shadow-2xl",
       )}
     >
       <div
@@ -58,11 +58,12 @@ const CodeBlock = ({ children, ...props }: CodeBlockProps) => {
           "flex",
           "items-center",
           language ? "justify-between" : "justify-end",
-          "shadow-lg"
+          "shadow-lg",
         )}
       >
         {language && <span>{language}</span>}
         <button
+          type="button"
           onClick={handleCopy}
           className={cn(
             "flex",
@@ -79,7 +80,7 @@ const CodeBlock = ({ children, ...props }: CodeBlockProps) => {
             "border",
             copied
               ? "bg-blue-500/20 border-blue-400/30 text-blue-300"
-              : "bg-white/10 border-white/20 text-white/80 hover:bg-white/20 hover:border-white/30"
+              : "bg-white/10 border-white/20 text-white/80 hover:bg-white/20 hover:border-white/30",
           )}
         >
           {copied ? <Check size={14} /> : <Copy size={14} />}
@@ -97,14 +98,14 @@ const CodeBlock = ({ children, ...props }: CodeBlockProps) => {
               "text-sm",
               "leading-relaxed",
               "bg-primary-400/90",
-              "backdrop-blur-sm"
+              "backdrop-blur-sm",
             )}
             {...props}
           >
             {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line })}>
+              <div key={`line-${i}`} {...getLineProps({ line })}>
                 {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token })} />
+                  <span key={`token-${key}`} {...getTokenProps({ token })} />
                 ))}
               </div>
             ))}

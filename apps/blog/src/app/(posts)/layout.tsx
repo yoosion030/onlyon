@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
-import { Header, Footer } from "@repo/ui";
-import { cn } from "@repo/utils";
 import { PostToc } from "@blog/components";
+import { Footer, Header } from "@repo/ui";
+import { cn } from "@repo/utils";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Create Next App",

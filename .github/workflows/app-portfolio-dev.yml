@@ -8,6 +8,33 @@ on:
       - ".github/workflows/app-portfolio-dev.yml"
 
 jobs:
+  linting:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: ./.github/actions/setup-pnpm
+
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          version: latest
+
+      - name: Run linting
+        run: turbo lint:ci --filter=portfolio
+
+      - name: Report linting results
+        if: always()
+        uses: mongolyy/reviewdog-action-biome@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+
   unit-testing:
     runs-on: ubuntu-latest
     permissions:

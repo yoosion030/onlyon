@@ -1,4 +1,4 @@
-import { type Post } from "@blog/types";
+import type { Post } from "@blog/types";
 
 type GetPostsProps = {
   category?: string;
@@ -32,7 +32,7 @@ export const getPosts = async ({
       next: {
         tags: ["posts", category || "all", `page-${page}`],
       },
-    }
+    },
   ).then((res) => res.json());
 
   return {

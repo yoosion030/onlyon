@@ -12,7 +12,6 @@
     }
   },
   "scripts": {
-    "lint": "eslint",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
@@ -20,7 +19,6 @@
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*",
-    "@repo/eslint-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*"
   }
 }

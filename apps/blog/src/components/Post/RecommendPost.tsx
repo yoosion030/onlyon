@@ -1,4 +1,4 @@
-import { type Post } from "@blog/types";
+import type { Post } from "@blog/types";
 import { cn } from "@repo/utils";
 import Link from "next/link";
 
@@ -16,7 +16,7 @@ const RecommendPost = ({ title, publishDate, categories, slug }: Post) => {
         "transition",
         "duration-300",
         "ease-in-out",
-        "w-full"
+        "w-full",
       )}
     >
       <h2 className={cn("text-primary-400", "font-bold")}>{title}</h2>
@@ -26,7 +26,7 @@ const RecommendPost = ({ title, publishDate, categories, slug }: Post) => {
           "font-thin",
           "text-[0.75rem]",
           "flex",
-          "gap-1"
+          "gap-1",
         )}
       >
         <span>{new Date(publishDate).toLocaleDateString()}</span>

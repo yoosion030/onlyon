@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { PostHeadingLink } from "./PostHeadingLink";
 import userEvent from "@testing-library/user-event";
+import { PostHeadingLink } from "./PostHeadingLink";
 
 // window.history.pushState 모킹
 const mockPushState = vi.fn();
@@ -22,7 +22,7 @@ describe("PostHeadingLink", () => {
     render(
       <PostHeadingLink as="h1" className="test-class">
         테스트 제목
-      </PostHeadingLink>
+      </PostHeadingLink>,
     );
 
     expect(screen.getByText("테스트 제목")).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe("PostHeadingLink", () => {
     const { container } = render(
       <PostHeadingLink as="h2" className="test-class">
         테스트 제목
-      </PostHeadingLink>
+      </PostHeadingLink>,
     );
 
     const heading = container.querySelector("h2");
@@ -43,7 +43,7 @@ describe("PostHeadingLink", () => {
     const { container } = render(
       <PostHeadingLink as="h1" className="test-class">
         테스트 제목
-      </PostHeadingLink>
+      </PostHeadingLink>,
     );
 
     const heading = container.querySelector("[data-heading='true']");
@@ -54,7 +54,7 @@ describe("PostHeadingLink", () => {
     const { container } = render(
       <PostHeadingLink as="h1" className="test-class">
         테스트 제목
-      </PostHeadingLink>
+      </PostHeadingLink>,
     );
 
     const link = screen.getByRole("link");
@@ -70,7 +70,7 @@ describe("PostHeadingLink", () => {
     render(
       <PostHeadingLink as="h1" className="test-class">
         테스트 제목
-      </PostHeadingLink>
+      </PostHeadingLink>,
     );
 
     expect(screen.getByText("#")).toBeInTheDocument();
@@ -80,7 +80,7 @@ describe("PostHeadingLink", () => {
     render(
       <PostHeadingLink as="h1" className="test-class">
         {["배열", "형태", "제목"]}
-      </PostHeadingLink>
+      </PostHeadingLink>,
     );
 
     const link = screen.getByRole("link");
@@ -91,7 +91,7 @@ describe("PostHeadingLink", () => {
     render(
       <PostHeadingLink as="h1" className="test-class">
         {""}
-      </PostHeadingLink>
+      </PostHeadingLink>,
     );
 
     const link = screen.getByRole("link");

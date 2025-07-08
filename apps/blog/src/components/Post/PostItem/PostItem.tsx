@@ -1,8 +1,8 @@
-import { cn } from "@repo/utils";
-import { type Post as PostType } from "@blog/types";
 import { GeneratedPosterImage } from "@blog/components";
-import Link from "next/link";
+import type { Post as PostType } from "@blog/types";
+import { cn } from "@repo/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 type PostProps = {
   post: PostType;
@@ -22,7 +22,7 @@ const Post = ({ post }: PostProps) => {
         "transition",
         "duration-300",
         "ease-in-out",
-        "inline-block"
+        "inline-block",
       )}
     >
       {posterImage ? (
@@ -50,7 +50,7 @@ const Post = ({ post }: PostProps) => {
             "font-thin",
             "text-[0.75rem]",
             "flex",
-            "gap-1"
+            "gap-1",
           )}
         >
           <span>{new Date(publishDate).toLocaleDateString()}</span>

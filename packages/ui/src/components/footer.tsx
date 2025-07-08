@@ -1,6 +1,6 @@
 import { cn } from "@repo/utils";
+import type { HTMLAttributes } from "react";
 import { GithubIcon, LinkedinIcon, VelogIcon } from "../assets";
-import { HTMLAttributes } from "react";
 
 type FooterProps = {
   className?: string;
