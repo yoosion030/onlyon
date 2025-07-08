@@ -1,5 +1,5 @@
-import { readdir } from "node:fs/promises";
-import path from "node:path";
+import { readdir } from "fs/promises";
+import path from "path";
 import { NextResponse } from "next/server";
 import { type Post } from "@blog/types";
 
