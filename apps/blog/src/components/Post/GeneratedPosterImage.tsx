@@ -1,5 +1,5 @@
 import { cn } from "@repo/utils";
-import Image, { ImageProps } from "next/image";
+import Image, { type ImageProps } from "next/image";
 
 type GeneratedPosterImageProps = {
   title: string;

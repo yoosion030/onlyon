@@ -66,7 +66,7 @@ describe("ImageZoom", () => {
     it("alt 텍스트가 없을 때 alt 텍스트가 노출되지 않아야 한다.", async () => {
       render(<ImageZoom src="/test.jpg" />);
 
-      const imageZoomTrigger = screen.getByRole("img");
+      const imageZoomTrigger = screen.getByTestId("next-image");
       await userEvent.click(imageZoomTrigger);
 
       await waitFor(() => {

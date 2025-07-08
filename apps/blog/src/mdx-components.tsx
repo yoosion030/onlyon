@@ -1,12 +1,12 @@
-import { cn } from "@repo/utils";
-import type { MDXComponents } from "mdx/types";
 import {
-  PostHeader,
-  RelationPostList,
-  PostHeadingLink,
   CodeBlock,
   ImageZoom,
+  PostHeader,
+  PostHeadingLink,
+  RelationPostList,
 } from "@blog/components";
+import { cn } from "@repo/utils";
+import type { MDXComponents } from "mdx/types";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -20,7 +20,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           "font-bold",
           "text-[2.5rem]",
           "mt-10",
-          "mb-4"
+          "mb-4",
         )}
       >
         {children}
@@ -34,7 +34,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           "font-bold",
           "text-[2rem]",
           "mt-10",
-          "mb-4"
+          "mb-4",
         )}
       >
         {children}
@@ -48,7 +48,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           "font-bold",
           "text-[1.5rem]",
           "mt-10",
-          "mb-2"
+          "mb-2",
         )}
       >
         {children}
@@ -73,7 +73,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           "underline",
           "transition-colors",
           "duration-300",
-          "ease-in-out"
+          "ease-in-out",
         )}
         target={href?.startsWith("http") ? "_blank" : undefined}
         rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
@@ -99,7 +99,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           "[&>p:first-child]:mt-0",
           "[&>p:last-child]:mb-0",
           "w-full",
-          "break-all"
+          "break-all",
         )}
       >
         {children}
@@ -113,7 +113,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           "h-px",
           "bg-gray-300",
           "w-full",
-          "mx-auto"
+          "mx-auto",
         )}
       />
     ),
@@ -140,7 +140,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             "font-mono",
             "text-sm",
             "border",
-            "border-gray-200"
+            "border-gray-200",
           )}
           {...props}
         >

@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@repo/utils";
-import { MouseEvent, ReactNode, useRef } from "react";
+import { type MouseEvent, type ReactNode, useRef } from "react";
 
 function extractTextFromChildren(children: ReactNode): string {
   if (typeof children === "string") {
@@ -56,11 +56,11 @@ export function PostHeadingLink({
           "transition-opacity",
           "duration-200",
           "no-underline",
-          "inline-block"
+          "inline-block",
         )}
         onClick={handlePostHeadingLinkClick}
       >
-        <span aria-hidden="true">#</span>
+        <span>#</span>
       </a>
     </Component>
   );

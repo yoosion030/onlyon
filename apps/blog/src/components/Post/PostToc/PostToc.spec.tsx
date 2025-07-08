@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import PostToc from "./PostToc";
 import userEvent from "@testing-library/user-event";
+import PostToc from "./PostToc";
 
 const mockUsePostToc = vi.fn();
 
@@ -58,7 +58,7 @@ describe("PostToc", () => {
     expect(activeLink).toHaveClass(
       "text-primary-200",
       "font-semibold",
-      "bg-blue-50"
+      "bg-blue-50",
     );
   });
 

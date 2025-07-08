@@ -1,17 +1,15 @@
-import * as React from "react";
+import { cn } from "@repo/utils";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   MoreHorizontalIcon,
 } from "lucide-react";
-
-import { cn } from "@repo/utils";
+import type * as React from "react";
 import { Button, buttonVariants } from "./button";
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
     <nav
-      role="navigation"
       aria-label="pagination"
       data-slot="pagination"
       className={cn("mx-auto flex w-full justify-center", className)}
@@ -58,7 +56,7 @@ function PaginationLink({
           variant: isActive ? "outline" : "ghost",
           size,
         }),
-        className
+        className,
       )}
       {...props}
     />

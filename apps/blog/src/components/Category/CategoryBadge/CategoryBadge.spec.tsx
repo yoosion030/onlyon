@@ -5,7 +5,7 @@ describe("CategoryBadge", () => {
   it("카테고리 정보를 전달하면, 카테고리 정보가 노출되어야 한다.", () => {
     const categoryName = "example";
     render(
-      <CategoryBadge category={categoryName} isActive={false} count={0} />
+      <CategoryBadge category={categoryName} isActive={false} count={0} />,
     );
 
     expect(screen.getByRole("link")).toHaveTextContent(categoryName);
@@ -19,11 +19,11 @@ describe("CategoryBadge", () => {
   it("카테고리 이름이 '전체'가 아니라면, 링크에 category 파라미터가 있어야 한다.", () => {
     const categoryName = "example";
     render(
-      <CategoryBadge category={categoryName} isActive={false} count={0} />
+      <CategoryBadge category={categoryName} isActive={false} count={0} />,
     );
     expect(screen.getByRole("link")).toHaveAttribute(
       "href",
-      `?category=${encodeURIComponent(categoryName)}`
+      `?category=${encodeURIComponent(categoryName)}`,
     );
   });
 
@@ -36,7 +36,7 @@ describe("CategoryBadge", () => {
   it("카테고리 개수가 0이면, 개수가 노출되지 않아야 한다.", () => {
     const categoryName = "example";
     render(
-      <CategoryBadge category={categoryName} isActive={false} count={0} />
+      <CategoryBadge category={categoryName} isActive={false} count={0} />,
     );
     expect(screen.getByRole("link")).not.toHaveTextContent("(0)");
   });

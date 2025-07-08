@@ -1,10 +1,10 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { NextRequest, NextResponse } from "next/server";
-import { type Post } from "@blog/types";
 import { getAllPosts } from "@blog/libs";
+import type { Post } from "@blog/types";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { type NextRequest, NextResponse } from "next/server";
 
 const genAI = new GoogleGenerativeAI(
-  process.env.NEXT_PUBLIC_GOOGLE_GEMINI_API_KEY || ""
+  process.env.NEXT_PUBLIC_GOOGLE_GEMINI_API_KEY || "",
 );
 
 const DEFAULT_RECOMMENDATIONS = [0, 1, 2];
@@ -37,7 +37,7 @@ const extractIndices = (responseText: string, totalPosts: number): number[] => {
 
 const sortRecommendationsByDate = (
   recommendations: Post[],
-  currentPost: Post
+  currentPost: Post,
 ): Post[] => {
   const currentDate = new Date(currentPost.publishDate);
 
@@ -45,28 +45,28 @@ const sortRecommendationsByDate = (
     .filter((post) => new Date(post.publishDate) > currentDate)
     .sort(
       (a, b) =>
-        new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime()
+        new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime(),
     );
 
   const past = recommendations
     .filter((post) => new Date(post.publishDate) <= currentDate)
     .sort(
       (a, b) =>
-        new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime()
+        new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime(),
     );
 
   return [...future, ...past];
 };
 
 export async function POST(
-  request: NextRequest
+  request: NextRequest,
 ): Promise<NextResponse<Post[]>> {
   try {
     const { currentPost } = await request.json();
     const currentTitle = currentPost?.title || "";
 
     const allPosts = (await getAllPosts()).filter(
-      (post) => post.title !== currentTitle
+      (post) => post.title !== currentTitle,
     );
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -82,7 +82,7 @@ export async function POST(
 
     const sortedRecommendations = sortRecommendationsByDate(
       recommendations,
-      currentPost
+      currentPost,
     );
     return NextResponse.json(sortedRecommendations);
   } catch {
@@ -92,7 +92,7 @@ export async function POST(
         .sort(
           (a, b) =>
             new Date(b.publishDate).getTime() -
-            new Date(a.publishDate).getTime()
+            new Date(a.publishDate).getTime(),
         )
         .slice(0, 3);
       return NextResponse.json(fallback);

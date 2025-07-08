@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
-import { type Post } from "@blog/types";
 import { getAllPosts } from "@blog/libs";
+import type { Post } from "@blog/types";
+import { NextResponse } from "next/server";
 
 export async function GET(): Promise<
   NextResponse<Post[] | { error: unknown }>

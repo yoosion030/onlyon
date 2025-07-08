@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-
 import { getRelationPosts } from "@blog/libs";
-import { Post as PostType } from "@blog/types";
+import type { Post as PostType } from "@blog/types";
+import { useEffect, useState } from "react";
 
 type GetRelationPostsProps = {
   post: PostType;

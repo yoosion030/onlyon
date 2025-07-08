@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
 import { getAllPosts } from "@blog/libs";
-import { Category } from "@blog/types";
+import type { Category } from "@blog/types";
+import { NextResponse } from "next/server";
 
 /**
  * 게시글의 카테고리 목록과 각 카테고리별 게시글 수를 반환합니다.
@@ -16,7 +16,7 @@ export async function GET(): Promise<
       post.categories?.forEach((category) => {
         categoryCountMap.set(
           category,
-          (categoryCountMap.get(category) ?? 0) + 1
+          (categoryCountMap.get(category) ?? 0) + 1,
         );
       });
     });

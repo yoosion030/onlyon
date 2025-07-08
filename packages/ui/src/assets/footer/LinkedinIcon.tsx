@@ -1,4 +1,4 @@
-import { SVGProps } from "react";
+import type { SVGProps } from "react";
 
 const LinkedinIcon = ({ ...props }: SVGProps<SVGSVGElement>) => {
   return (

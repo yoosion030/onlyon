@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { type Post } from "@blog/types";
 import { getAllPosts } from "@blog/libs";
+import type { Post } from "@blog/types";
+import { type NextRequest, NextResponse } from "next/server";
 
 type PaginatedResponse = {
   posts: Post[];
@@ -8,11 +8,10 @@ type PaginatedResponse = {
 };
 
 export async function GET(
-  request: NextRequest
+  request: NextRequest,
 ): Promise<NextResponse<PaginatedResponse | { error: unknown }>> {
   try {
     let posts = await getAllPosts();
-
 
     const { searchParams } = new URL(request.url);
     const category = decodeURIComponent(searchParams.get("category") || "전체");
@@ -21,13 +20,13 @@ export async function GET(
 
     if (category && category !== "전체") {
       posts = posts.filter((post) =>
-        post.categories?.some((cat) => cat === category)
+        post.categories?.some((cat) => cat === category),
       );
     }
 
     const sortedPosts = posts?.sort(
       (a, b) =>
-        new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+        new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime(),
     );
 
     const totalPosts = sortedPosts.length;

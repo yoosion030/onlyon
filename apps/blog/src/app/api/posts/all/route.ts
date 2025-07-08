@@ -1,7 +1,7 @@
 import { readdir } from "node:fs/promises";
 import path from "node:path";
+import type { Post } from "@blog/types";
 import { NextResponse } from "next/server";
-import { type Post } from "@blog/types";
 
 export async function GET(): Promise<
   NextResponse<Post[] | { error: unknown }>
@@ -10,7 +10,7 @@ export async function GET(): Promise<
     const postPath = path.resolve(process.cwd(), "src", "app", "(posts)");
 
     const slugs = (await readdir(postPath, { withFileTypes: true })).filter(
-      (dirent) => dirent.isDirectory()
+      (dirent) => dirent.isDirectory(),
     );
     const posts: (Post | null)[] = await Promise.all(
       slugs.map(async ({ name: slug }) => {
@@ -22,7 +22,7 @@ export async function GET(): Promise<
         } catch {
           return null;
         }
-      })
+      }),
     );
 
     const sortedPosts = posts

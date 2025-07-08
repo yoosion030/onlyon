@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import PostPagination from "./PostPagination";
 import userEvent from "@testing-library/user-event";
+import PostPagination from "./PostPagination";
 
 const mockPush = vi.fn();
 const mockSearchParams = new URLSearchParams();
@@ -21,12 +21,12 @@ describe("PostPagination", () => {
 
   it("totalPages가 1 이하일 때는 페이지네이션 버튼이 노출되지 않아야 한다.", () => {
     const { container } = render(
-      <PostPagination currentPage={1} totalPages={1} />
+      <PostPagination currentPage={1} totalPages={1} />,
     );
     expect(container.firstChild).toBeNull();
 
     const { container: container2 } = render(
-      <PostPagination currentPage={1} totalPages={0} />
+      <PostPagination currentPage={1} totalPages={0} />,
     );
     expect(container2.firstChild).toBeNull();
   });
@@ -104,11 +104,11 @@ describe("PostPagination", () => {
 
   it("페이지가 많을 때 ellipsis가 표시되어야 한다.", () => {
     const { container } = render(
-      <PostPagination currentPage={10} totalPages={20} />
+      <PostPagination currentPage={10} totalPages={20} />,
     );
 
     const ellipsis = container.querySelectorAll(
-      "span[data-slot='pagination-ellipsis']"
+      "span[data-slot='pagination-ellipsis']",
     );
     expect(ellipsis.length).toBeGreaterThan(0);
   });

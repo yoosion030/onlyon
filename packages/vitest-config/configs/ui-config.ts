@@ -1,6 +1,6 @@
+import react from "@vitejs/plugin-react";
 import { defineProject, mergeConfig } from "vitest/config";
 import { baseConfig } from "./base-config.js";
-import react from "@vitejs/plugin-react";
 
 export const uiConfig = mergeConfig(
   baseConfig,
@@ -12,5 +12,5 @@ export const uiConfig = mergeConfig(
       pool: "threads",
       globals: true,
     },
-  })
+  }),
 );
