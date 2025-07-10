@@ -1,11 +1,13 @@
-name: App Blog Dev
+name: App Portfolio Prod
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
     paths:
-      - "apps/blog/**"
+      - "apps/portfolio/**"
       - "packages/**"
-      - ".github/workflows/app-blog-dev.yml"
+      - ".github/workflows/app-portfolio-prod.yml"
 
 jobs:
   linting:
@@ -26,14 +28,7 @@ jobs:
           version: latest
 
       - name: Run linting
-        run: turbo lint:ci --filter=blog
-
-      - name: Report linting results
-        if: always()
-        uses: mongolyy/reviewdog-action-biome@v1
-        with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
+        run: turbo lint:ci --filter=portfolio
 
   unit-testing:
     runs-on: ubuntu-latest
@@ -48,15 +43,7 @@ jobs:
         uses: ./.github/actions/setup-pnpm
 
       - name: Run unit tests
-        run: turbo test --filter=blog && turbo report
-
-      - name: Upload Coverage Report
-        if: always()
-        uses: davelosert/vitest-coverage-report-action@v2
-        with:
-          working-directory: apps/blog
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          name: "Coverage Report - ${{ github.sha }}"
+        run: turbo test --filter=portfolio
 
   docker-ecs-build:
     needs: [linting, unit-testing]
@@ -66,11 +53,11 @@ jobs:
 
     env:
       AWS_REGION: ap-northeast-2
-      ECR_REPOSITORY: onlyon/blog-dev
-      ECS_SERVICE: onlyon-blog-dev
-      ECS_CLUSTER: onlyon-blog-dev
-      ECS_TASK_DEFINITION: .aws/task-definition-blog-dev.json
-      CONTAINER_NAME: onlyon-blog-dev
+      ECR_REPOSITORY: onlyon/portfolio-prod
+      ECS_SERVICE: onlyon-portfolio-prod
+      ECS_CLUSTER: onlyon-portfolio-prod
+      ECS_TASK_DEFINITION: .aws/task-definition-portfolio-prod.json
+      CONTAINER_NAME: onlyon-portfolio-prod
 
     steps:
       - name: Checkout
@@ -93,11 +80,10 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build --build-arg WORKSPACE=blog \
-            --build-arg NEXT_PUBLIC_GOOGLE_GEMINI_API_KEY=${{ secrets.GOOGLE_GEMINI_API_KEY }} \
+          docker build --build-arg WORKSPACE=portfolio \
             --build-arg NEXT_PUBLIC_PORTFOLIO_URL=https://portfolio.sionly.one \
-            --build-arg NEXT_PUBLIC_BLOG_URL=https://dev.blog.sionly.one \
-            --build-arg NEXT_PUBLIC_API_URL=https://dev.blog.sionly.one \
+            --build-arg NEXT_PUBLIC_BLOG_URL=https://blog.sionly.one \
+            --build-arg NEXT_PUBLIC_API_URL=https://portfolio.sionly.one \
             -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
@@ -109,8 +95,6 @@ jobs:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build_image.outputs.image }}
-          environment-variables: |
-            NEXT_PUBLIC_GOOGLE_GEMINI_API_KEY=${{ secrets.GOOGLE_GEMINI_API_KEY }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
