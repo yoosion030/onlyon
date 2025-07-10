@@ -39,8 +39,8 @@ const PostToc = () => {
         "top-0",
         "h-full",
         "right-30",
-        "3xl:block",
-        "hidden",
+        "max-3xl:hidden",
+        "block",
         "max-w-[21.875rem]",
       )}
     >
