@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body suppressHydrationWarning>
         <Header workspace="portfolio" className={cn("max-w-[52rem]", "px-8")} />
         <section className={cn("max-w-[52rem]", "mx-auto", "px-8")}>
           {children}
