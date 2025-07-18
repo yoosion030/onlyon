@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import "./global.css";
+
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { pretendard } from "@repo/ui";
 import favicon from "@repo/ui/assets/favicon.ico";
 import ogImage from "@repo/ui/assets/og-image.png";
+
 import { cn } from "@repo/utils";
 
 const title = "유시온 블로그";
@@ -48,8 +51,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body className={cn("relative")} suppressHydrationWarning>
+    <html lang="ko" className={`${pretendard.variable}`}>
+      <body
+        className={cn("relative", pretendard.className)}
+        suppressHydrationWarning
+      >
         {children}
       </body>
       <GoogleAnalytics gaId={"G-R5Q71YVCLP"} />
