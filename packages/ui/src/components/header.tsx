@@ -59,7 +59,7 @@ export const Header = ({ workspace, className, ...props }: HeaderProps) => {
             rel="noreferrer"
             className={cn("text-primary-linear", "font-semibold")}
           >
-            Github
+            GitHub
           </a>
         </div>
       </div>

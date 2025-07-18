@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./global.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Footer, Header } from "@repo/ui";
+import { Footer, Header, pretendard } from "@repo/ui";
 import favicon from "@repo/ui/assets/favicon.ico";
 import ogImage from "@repo/ui/assets/og-image.png";
 import { cn } from "@repo/utils";
@@ -45,13 +45,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body suppressHydrationWarning>
-        <Header workspace="portfolio" className={cn("max-w-[52rem]", "px-8")} />
-        <section className={cn("max-w-[52rem]", "mx-auto", "px-8")}>
+    <html lang="en" className={`${pretendard.variable}`}>
+      <body suppressHydrationWarning className={pretendard.className}>
+        <Header workspace="portfolio" className={cn("max-w-[75rem]", "px-8")} />
+        <section
+          className={cn("max-w-[75rem]", "mx-auto", "px-8", "mb-[5rem]")}
+        >
           {children}
         </section>
-        <Footer className={cn("max-w-[52rem]", "px-8")} />
+        <Footer className={cn("max-w-[75rem]", "px-8")} />
       </body>
       <GoogleAnalytics gaId={"G-NH85R0L62G"} />
     </html>

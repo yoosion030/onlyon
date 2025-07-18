@@ -76,7 +76,6 @@ const PostPagination = ({ currentPage, totalPages }: PostPaginationProps) => {
           <PaginationNext
             onClick={() => {
               if (currentPage === totalPages) return;
-
               handlePageChange(currentPage + 1);
             }}
             disabled={currentPage === totalPages}

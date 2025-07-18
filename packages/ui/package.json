@@ -11,8 +11,9 @@
   "exports": {
     "./styles.css": "./dist/styles.css",
     "./theme.css": "./src/styles/theme.css",
-    ".": "./src/components/index.ts",
-    "./assets/*": "./src/assets/*"
+    ".": "./src/index.ts",
+    "./assets/*": "./src/assets/*",
+    "./components/*": "./src/components/*"
   },
   "scripts": {
     "build": "tailwindcss -i ./src/styles/styles.css -o ./dist/styles.css",

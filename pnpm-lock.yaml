@@ -125,12 +125,24 @@ importers:
         specifier: workspace:*
         version: link:../../packages/utils
     devDependencies:
+      '@mdx-js/loader':
+        specifier: ^3.1.0
+        version: 3.1.0(acorn@8.14.0)
+      '@mdx-js/react':
+        specifier: ^3.1.0
+        version: 3.1.0(@types/react@19.0.8)(react@19.0.0)
+      '@next/mdx':
+        specifier: ^15.2.0
+        version: 15.2.0(@mdx-js/loader@3.1.0(acorn@8.14.0))(@mdx-js/react@3.1.0(@types/react@19.0.8)(react@19.0.0))
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@repo/vitest-config':
         specifier: workspace:*
         version: link:../../packages/vitest-config
+      '@types/mdx':
+        specifier: ^2.0.13
+        version: 2.0.13
 
   packages/typescript-config: {}
 

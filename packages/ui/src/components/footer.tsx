@@ -13,7 +13,7 @@ export const Footer = ({ className, ...props }: FooterProps) => {
       className={cn("w-full", "h-[12.5rem]", "space-y-4", "mx-auto", className)}
     >
       <p className={cn("text-[0.75rem]", "font-thin", "text-primary-linear")}>
-        ©2025. OnlyOn all rights reserved.
+        ©2025. Only On all rights reserved.
       </p>
 
       <div>

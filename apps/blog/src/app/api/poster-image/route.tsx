@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     >
       <p
         style={{
-          fontSize: "70px",
+          fontSize: Number(width) >= 700 ? "100px" : "60px",
           color: "white",
           wordBreak: "keep-all",
           maxWidth: "90%",

@@ -1,0 +1,281 @@
+import { ProfileSection } from "@portfolio/components";
+
+# 안녕하세요, 유시온입니다.
+
+<Description color="black">
+UI 개발뿐만 아니라 프로젝트 환경 구성, 자동화, 배포까지 서비스 전반적인 프로세스에 관심을 갖는 개발자입니다. <br/>
+개인 사이드 프로젝트를 운영하며 기획부터 개발, 배포까지 진행하였고 <br/>
+Turborepo 기반 모노레포 구성, GitHub Actions를 활용한 테스트/배포 자동화 경험을 통해 엔지니어링 역량을 넓혀가고 있습니다. <br/>
+<br/>
+주어진 일만 하기 보다는 주도적으로 할 일을 찾고, 맡은 업무 외에도 관심을 갖습니다. <br/>
+이슈가 발생하였을 때 작업자가 아니어도 관심을 가지며 팀원과 함께 해결하였고, 코드리뷰를 통해 <br/>
+이러한 태도로 실제 동료들로부터 “같이 일하고 싶은 동료”라는 평가를 받았습니다. <br/>
+<br/>
+배움을 기록하고 나누는 것을 즐기며, 조회수 12만 회를 기록한 포트폴리오 글을 시작으로 <br/>
+50명 이상의 신입 개발자 이력서 멘토링을 진행해왔습니다. <br/>
+현재까지도 링크드인과 벨로그에서 꾸준히 커리어를 회고하며 소통하고있습니다.
+
+</Description>
+
+<ProfileSection
+  info={[
+    { label: "연락처", value: "010-9201-5497" },
+    { label: "이메일", value: "yoosioff@gmail.com" },
+    {
+      label: "GitHub",
+      value: "@yoosion030",
+      href: "https://github.com/yoosion030",
+    },
+    {
+      label: "LinkedIn",
+      value: "@yoosion",
+      href: "https://www.linkedin.com/in/yoosion/",
+    },
+    {label: "기술 블로그", value: "blog.sionly.one", href: "https://blog.sionly.one"},
+  ]}
+  profileImage="https://onlyon.s3.ap-southeast-2.amazonaws.com/ProfileImage.png"
+  className="mt-20"
+/>
+
+# 기술
+
+- React, TypeScript, Tailwind CSS 기반으로 개발합니다.
+- Jest, Vitest 환경에서 유닛 테스트 작성 경험이 있습니다. 코드 수정 시 기존에 작성된 테스트 코드 기반으로 안정성을 확보한 경험이 있습니다.
+- Turborepo, Nx, PNPM 환경의 모노레포 서비스를 구축하고 유지보수한 경험이 있습니다.
+- 메모이제이션, 트리 셰이킹, 번들 사이즈 최적화를 통해 프론트엔드 성능을 개선한 경험이 있습니다.
+- GitHub Actions를 활용하여 린트, 테스트, 배포 자동화 환경 구축 경험이 있습니다.
+- AI 도구 활용에 적극적이며, 주로 Claude Code를 사용하고, Figma MCP를 활용해 퍼블리싱 시간을 단축한 경험이 있습니다.
+
+# 경력
+
+<Group variant="xl">
+
+<Group variant="sm">
+## [클래스팅](https://www.classing.com/)
+
+<span>
+  <Description size="sm">프론트엔드 개발자</Description>
+  <Description size="sm">2024. 03. ~ 재직중</Description>
+</span>
+<Description size="md" color="black">
+  클래스팅은 교육기관에서 데이터 기반 맞춤 교육 전략을 제공하는 에듀테크
+  기업입니다.
+</Description>
+</Group>
+
+<Group variant="smd">
+<Group variant="sm">
+### [클래스팅 AI 디지털 교과서](https://aidt.classting.com/)
+
+<Description size="sm">2024. 03. ~ 2025. 07(유지보수중)</Description>
+</Group>
+
+<Description size="md" color="black">
+인공지능을 활용해 학습자의 수준과 이해도를 분석하고, 맞춤형 콘텐츠와 피드백을 제공하는 차세대 교과서입니다. <br/>
+<br/>
+약 1년 3개월간 클래스팅의 신규 사업 AI 디지털 교과서를 개발하였습니다. <br/>
+AI 디지털 교과서의 주요 기능인 수업 업무를 맡아 전반적인 프론트엔드 개발을 담당하였습니다.
+
+</Description>
+</Group>
+
+<Group variant="sm">
+  #### 기술 스택
+
+  <Description color="black">
+    NX, React 18, Shadcn, Radix UI, Tailwind CSS, Apollo Client, GraphQL, Sentry
+  </Description>
+</Group>
+
+<Group variant="smd">
+<Group variant="sm">
+  #### 프로젝트 유지보수 진행
+  <Description size="sm">2025. 07 (최근 진행한 업무)</Description>
+</Group>
+
+<Description size="sm" color="black">
+  추후 유지보수를 위해 의존성 업그레이드, 문서화 작업을 주도적으로
+  진행하였습니다.
+</Description>
+
+##### Tailwind CSS v3 → v4 업그레이드 진행
+
+- 전체 스타일 파일 크기  407KB → 260KB로 약 36% 개선하여 초기 로딩 속도 향상.
+- @tailwindcss/upgrade 툴을 활용하여 breaking changes를 빠르게 대응함.
+
+##### Radix UI 의존성 26개 업그레이드 진행
+
+- 공통 디자인 시스템으로 사용하던 Radix UI 의존성 전체 업그레이드를 진행함.
+
+##### 프론트엔드 서비스 문서화 진행
+
+- 총 4개의 프론트엔드 서비스와 3개의 라이브러리에 대한 README.md 문서를 정리함.
+- 유지보수 편의성을 높이기 위해 주요 로직 설명과 프로젝트 세팅 관련 온보딩 가이드를 정리함.
+
+</Group>
+
+<Group variant="smd">
+<Group variant="sm">
+### 교과서 필기 기능 구현
+<Description size="sm">2024. 09</Description>
+</Group>
+
+<Description size="md" color="black">
+  교과서 콘텐츠 위에 사용자가 다양한 도구로 필기를 할 수 있는 기능을
+  구현하였습니다.
+</Description>
+
+##### 리액트 메모이제이션 통해 페이지 리렌더링 개선
+
+- 필기 동작 혹은 스크롤 시 페이지 레이아웃에서 리렌더링이 발생하고 있어 메모이제이션을 적용하여 페이지 성능을 개선함.
+
+
+##### Tldraw 커스텀 툴바 구현
+
+- Tldraw 라이브러리 API를 연동하여 필기 이벤트를 제어하는 커스텀 툴바를 직접 구현함.
+
+</Group>
+</Group>
+
+# 프로젝트
+
+<Group variant="xl">
+  <Group variant="smd">
+  <Group variant="sm">
+    ## [Only On](https://blog.sionly.one)
+
+<Description size="sm">
+  1인 개발(프론트엔드, 디자인, 기획, 배포 진행)
+</Description>
+
+<Description size="sm">2025. 02. ~ 운영중</Description>
+</Group>
+
+<Description color="black" size="md">
+  “오직 하나뿐인 나만의 서비스"를 만들겠다는 뜻을 담아 시작한 개인 브랜딩
+  프로젝트입니다. <br />
+  기획부터 디자인, 개발, 배포까지 전 과정을 1인 개발자로서 직접 경험하며 구축했습니다.{" "}
+  <br />
+  현재는 포트폴리오와 블로그 서비스로 구성되어 있으며, 향후에는 포트폴리오
+  피드백 신청, 커피챗 등 소통 중심의 서비스도 개발할 예정입니다.
+</Description>
+
+<Group variant="sm">
+- GitHub: [https://github.com/yoosion030/onlyon](https://github.com/yoosion030/onlyon)
+- 블로그: [https://blog.sionly.one](https://blog.sionly.one)
+- 포트폴리오: [https://onlyon.sionly.one](https://onlyon.sionly.one)
+</Group>
+
+</Group>
+
+<Group variant="smd">
+#### Turborepo 모노레포 환경 구성
+
+  <Description color="black" size="md">
+    블로그와 포트폴리오 서비스를 독립적으로 관리하기 위해 모노레포 방식을
+    도입하였으며, <br />
+    Turborepo를 활용해 각 서비스의 빌드와 배포를 효율적으로 분리하고 통합 관리할 수
+    있도록 환경 구성을 해보았습니다.
+  </Description>
+</Group>
+
+<Group variant="smd">
+  #### Vitest 테스트 환경 구축
+
+<Description size="md" color="black">
+  1인 개발 특성상 제한된 QA 리소스를 보완하고 안정적인 서비스 운영을 위해 <br />
+  Vitest 기반 테스트 환경을 구축하였습니다.
+</Description>
+
+##### 테스트 커버리지 리포트 자동화 환경 구성
+
+- 프로젝트 중간에 테스트 코드를 도입하여 초기에는 검증되지 않은 코드가 많아 커버리지 측정에 어려움이 있었음.
+- PR마다 커버리지 리포트 자동화를 구축하여, 테스트 작성의 안정성과 효율성을 높임.
+- 테스트 커버리지 30% → 42%로 약 12%정도 증가
+
+</Group>
+
+<Group variant="smd">
+  #### Biome 린트 환경 구축
+
+<Description size="md" color="black">
+  엄격한 린트 규칙보다는 쉽고 빠른 린트 환경을 목적으로 <br />
+  ESLint를 사용하지 않고 Biome을 사용하여 린트 환경을 구축하였습니다.
+</Description>
+
+##### 린트 자동화 환경 구성
+
+- 기존에는 Vercel 배포 워크플로우에서만 린트 오류 확인이 가능해, 오류 발견이 지연되는 불편함이 있었음.
+- Biome 기반 린트 환경을 구축하여 로컬에서도 빠르게 린트 오류를 확인할 수 있도록 함.
+- 써드파티 플러그인을 활용해 잘못된 코드 위치를 GitHub 코멘트로 자동으로 표시하여, 신속한 오류 파악과 수정이 가능하도록 개선함.
+
+</Group>
+
+
+
+</Group>
+
+# 대외활동
+
+
+
+
+<Group variant="xl">
+  <Group variant="sm">
+    ## 항해 플러스 프론트엔드 코스 2기 참여
+
+<Description size="sm">
+   <span>2024. 06 ~ 2024. 09</span>
+</Description>
+
+<Description color="black" variant="md">항해 플러스 프론트엔드 코스는 시니어 개발자들의 밀착 멘토링과 실무 중심 커리큘럼으로 <br/>
+10주 동안 주니어 프론트엔드 개발자의 실력과 커리어를 빠르게 성장시키는 교육 프로그램입니다.</Description>
+</Group>
+
+<Group variant="smd">
+### 20개 과제 중 17번 Best Practice 선정
+주어진 20개 과제를 모두 성실히 제출하였고, 이 중 17개 과제가 Best Practice로 선정되어 동료들로부터 기술적 역량과 성실함을 인정받았습니다.
+##### 1주차 React 메모이제이션 구현 과제 ([과제 링크 →](https://github.com/hanghae-plus/front_2nd/pull/3))
+- React의 렌더링 동작 원리를 분석하고, 메모이제이션을 통해 불필요한 렌더링을 줄이는 최적화 과제를 수행함.
+- 이를 통해 React.memo, useMemo, useCallback의 역할을 이해하며, 이를 통해 실제 업무에서 렌더 성능을 95% 개선함.
+##### 6주차 CI/CD 자동화 과제 ([과제 링크 →](https://github.com/yoosion030/front_2nd/pull/5))
+- GitHub Actions을 통해 CI/CD 파이프라인을 직접 설계하고 구현한 과제를 수행함.
+- Cypress 오픈 소스를 참고하여 scripts를 yml 에서 분리하여 JS 파일로 구성함으로써 재사용성과 안정성을 확보함.
+- 린트, 테스트 커버리지, Lighthouse 성능 측정, PR 리뷰 알림까지 포함된 워크플로우를 구성하였고, 이후 개인 프로젝트에서CI/CD 환경을 자체적으로 구축할 수 있게 됨.
+##### 8주차 TDD 과제 ([과제 링크 →](https://github.com/hanghae-plus/front_2nd/pull/519))
+- TDD를 하며 유닛 테스트를 작성하고, 테스트 전략에 대해 학습하는 과제를 수행함.
+- TDD로 유닛 테스트를 작성해보았고, 또한 Cypress를 사용하여  여러 테스트 전략 중 E2E 테스트를 경험함.
+</Group>
+
+<Group variant="smd">
+### 팀장 역할을 맡아 팀원 전원 수료
+팀장 역할을 맡아 팀원들의 학습 상황을 지속적으로 파악하고, 멘토링을 주도하며 <br/>
+과제 피드백을 적극적으로 수용하여 팀원 전원의 완주를 이끌었습니다. (14개 조 중 팀원 전원 수료는 2개 조) <br/>
+이를 통해 협업과 리더십 역량을 한층 성장시킬 수 있었습니다.
+</Group>
+
+<Group variant="smd">
+<Group variant="sm">
+## 신입 개발자 이력서&포트폴리오 멘토링
+<Description>개인 멘토링 진행 및 항해 취업코스 5기 이력서 코치 참여</Description>
+<Description size="sm">2024. 01. ~ 2024. 11.</Description>
+</Group>
+신입 개발자 포트폴리오 작성법에 대한 포스팅을 통해 약 37명의 포트폴리오 멘토링을 진행했으며, <br/>
+멘티들로부터 서류 합격률이 높아졌다는 긍정적인 반응을 얻었습니다. <br/>
+<br/>
+또한 항해 취업코스 5기에서 이력서 코치로 활동하며, 2주 동안 총 13명의 이력서를 피드백하였으며, <br/>
+이를 통해 주니어 개발자들에게 실질적인 도움을 줄 수 있었고 저 역시 이력서 작성 및 서류 검토 역량을 크게 향상시킬 수 있었습니다.
+</Group>
+</Group>
+
+# 교육
+<Group variant="smd">
+<Group variant="sm">
+## 광주소프트웨어마이스터고등학교
+<Description>소프트웨어 개발과</Description>
+<Description size="sm">2021. 03. ~  2024. 01. 졸업</Description>
+</Group>
+</Group>
+
+
+
