@@ -1,0 +1,432 @@
+import { generateMetadata } from "@blog/libs";
+
+export const post = {
+  title: "4. Only On 서비스 제작기 - Tailwind CSS V4 환경 구축",
+  description: "개인 브랜딩 페이지인 Only On 서비스의 Tailwind CSS V4 환경 구축 과정을 공유합니다.",
+  publishDate: new Date("2025-07-22"),
+  categories: ["사이드 프로젝트"],
+};
+
+export const metadata = generateMetadata({ post });
+
+<PostHeader post={post} />
+
+
+[이전 글](../2025-07-21-onlyon-turborepo)에선 기술 스택 선정 과정을 정리해보았는데요. <br />
+이번 글에선 기술 스택 선정 과정을 마친 후 Tailwind CSS V4 환경을 구축하는 과정을 정리해보겠습니다.
+
+
+### Why Tailwind CSS V4?
+
+`Tailwind CSS`는 유틸리티 퍼스트(Utility-first) 접근 방식을 사용하는 CSS 프레임워크로,  <br/>
+클래스 이름만으로 스타일을 빠르게 적용할 수 있는 것이 가장 큰 특징입니다!
+
+또한 zero-runtime 환경에서 동작합니다.
+
+### Zero-runtime
+
+zero runtime에서 동작한다는 것은 런타임 환경에서 어떠한 코드도 실행되지 않는다는 것을 의미합니다. <br/>
+즉, 스타일이 빌드 시점에 미리 처리되고, 런타임에는 별도의 스타일 생성/조작 코드가 필요 없는 상태를 말합니다.
+
+이러한 특성이 중요한 이유는 Next.js SSR과 서버 컴포넌트 환경에서 더욱 효과적으로 작동하기 때문입니다. <br/>
+서버 컴포넌트에서는 런타임 환경이 아니라 빌드 시점에 생성되기 때문에 서버 환경에서 스타일을 적용시키기 위해선 zero-runtime 환경에서 동작하는 라이브러리가 이어야 합니다.
+
+그래서 대표적인 CSS in JS 라이브러리인 styled-components는 런타임 환경에서 스타일 컴포넌트를 일반 컴포넌트로 변환하고, 스타일을 생성시키기 위한 JavaScript 컴파일러가 필요하기 때문에 <br/>
+서버 컴포넌트에서 동작시키기 위해선 별도의 처리가 필요합니다.
+
+[https://styled-components.com/docs/advanced#server-side-rendering](https://styled-components.com/docs/advanced#server-side-rendering)
+
+
+또한 저는 현업에서 Tailwind CSS를 사용하면서, 유틸리티 클래스 선언 방식과 html 마크업과 스타일 로직이 한 파일에 구성되어있는 점에서 훨씬 편리하다고 느꼈기 때문에
+이러한 이유로 Tailwind CSS V4를 선택하게 되었습니다.
+
+
+### Tailwind CSS V4 환경 구축
+
+
+> PostCSS 사용 방법을 기준으로 설명합니다!
+
+이번에 Tailwind CSS v4가 출시되면서 v3와 다르게 환경 구축을 해주어야 합니다. <br/>
+
+기존에는 tailwind config 파일이 따로 존재하였고, autoprefixer 의존성을 설치해주어야 했는데, <br/>
+V4에서는 config 파일 따로 필요 없이 tailwindcss, postcss와 @tailwindcss/postcss 의존성을 설치해주어야 합니다.
+
+```bash
+npm install tailwindcss @tailwindcss/postcss postcss
+```
+
+PostCSS 설정 파일에서 @tailwindcss/postcss 플러그인을 선언해줍니다:
+
+```jsx
+// postcss.config.js
+export default {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  }
+}
+```
+
+styles.css 파일에서 Tailwind CSS 클래스를 사용할 수 있도록 선언해줍니다:
+
+```css
+@import "tailwindcss";
+```
+
+이러면 기본적으로 Tailwind CSS 환경 구축이 끝났습니다!
+
+
+## V4에서 달라진 점
+
+[Tailwind 공식 문서](https://tailwindcss.com/docs/upgrade-guide#changes-from-v3) 내용을 기반으로 V4에서 어떤 것들이 달라졌는지 정리해보겠습니다. <br/>
+
+
+### 1. @tailwind 지시어 제거되었습니다.
+
+@tailwind 지시어가 제거되었고, @import 일반 CSS 명령문을 사용하여 Tailwind를 불러옵니다.
+
+
+```css
+- @tailwind base;
+- @tailwind components;
+- @tailwind utilities;
++ @import "tailwindcss";
+```
+
+
+### 2. 사용되지 않는 유틸리티 클래스가 제거되었습니다.
+
+v3에서 지원이 중단되어 수년간 유지보수되지 않았던 클래스들이 제거되었습니다. <br/>
+배경 투명도 관련해선 배경 색과 별도로 투명도를 지정해주어야 했었는데, 이젠 배경색 선언 뒤에 투명도를 명시해주도록 변경되었습니다!
+
+
+| 제거된 클래스 | 대안 |
+|--|--|
+|bg-opacity-*	| bg-black/50|
+|text-opacity-*	| text-black/50|
+|border-opacity-*	| border-black/50|
+|divide-opacity-*	| divide-black/50|
+|ring-opacity-*	| ring-black/50|
+|placeholder-opacity-*	| placeholder-black/50|
+|flex-shrink-*	| shrink-*|
+|flex-grow-*	| grow-*|
+|overflow-ellipsis	| text-ellipsis|
+|decoration-slice	| box-decoration-slice|
+|decoration-clone	| box-decoration-clone|
+
+
+
+### 3. 일부 유틸리티 클래스 명이 변경되었습니다.
+
+|v3 | v4|
+|--|--|
+|shadow-sm|shadow-xs|
+|shadow|shadow-sm|
+|drop-shadow-sm|drop-shadow-xs|
+|drop-shadow|drop-shadow-sm|
+|blur-sm|blur-xs|
+|blur|blur-sm|
+|backdrop-blur-sm|backdrop-blur-xs|
+|backdrop-blur|backdrop-blur-sm|
+|rounded-sm|rounded-xs|
+|rounded|rounded-sm|
+|outline-none|outline-hidden|
+|ring|ring-3|
+
+
+### 4. outline유틸리티 클래스 명이 변경되었습니다.
+
+기존에는 outline 클래스를 사용할 때에는 outline 클래스 + outline-number 클래스를 함께 사용했어야 되었지만,
+이젠 outline은 `outline-width: 1px`이 기본값으로 설정되어 더욱 일관성이 높아졌습니다.
+
+```html
+- <input class="outline outline-2" />
++ <input class="outline-2" />
+```
+
+
+또한, 기존의 outline-none 클래스는 실제로 윤곽선(outline)이 완전히 사라지는 것이 아니라,
+접근성을 고려해 투명한 윤곽선을 설정하는 방식이었습니다.
+
+Tailwind CSS v4에서는 이러한 동작을 더 명확하게 표현하기 위해 해당 클래스의 이름을 outline-hidden으로 변경하였습니다.
+
+그리고 새롭게 추가된 outline-none 클래스는 이름 그대로 outline: none을 적용하여 윤곽선을 완전히 제거하는 역할을 합니다.
+
+### 5. 기본 링 너비가 변경되었습니다.
+
+v4에선 border 및 outline과 너비 일관성을 유지하기 위해 기본 링 너비 3px에서 1px로 변경되었습니다.
+
+기존에 ring 클래스를 사용하는 곳에서 ring-3 으로 너비 3px을 명시해주어야 합니다.
+
+
+### 6. space-between 선택자 방식이 변경되었습니다.
+
+대규모 서비스에서 space-x-*, space-y-* 클래스로 간격을 정의할 경우 성능을 향상 시키기 위해 처리하는 방식을 변경하였습니다.
+
+```css
+/* Before */
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 1rem;
+}
+/* Now */
+.space-y-4 > :not(:last-child) {
+  margin-bottom: 1rem;
+}
+```
+
+인라인 요소에서 space-x-*, space-y-* 클래스를 사용하여 간격을 조정한 경우 간격이 설정되지 않을 수 있습니다.
+
+이 변경으로 인해 프로젝트에 문제가 발생하는 경우 flex 또는 grid 레이아웃으로 마이그레이션하고, gap을 사용하는 것이 좋습니다.
+
+
+### 7. container 설정 옵션이 존재하지 않습니다.
+
+v3에서는 container 유틸리티의 center, padding과 같은 여러가지 옵션이 존재하였는데, v4에서는 더이상 존재하지 않습니다.
+
+v4에서 유틸리티를 사용하려면 @utility 지시어를 사용하여 container를 확장합니다.
+
+
+```css
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
+```
+
+
+
+### 8. 기본 테두리 색상이 변경되었습니다.
+
+
+v3에서 border-*, divide-* 유틸리티가 기본적으로 gray-200 색상을 사용하였습니다.
+v4에서는 Tailwind의 독단성을 줄이고 브라우저 기본값과 일치하도록 기본 회색 테두리 색상을 현재 폰트 색상을 따라가도록 currentColor로 변경되었습니다.
+
+이 변경사항에 맞게 border-*, divide-* 유틸리티를 사용하는 모든 위치에서 색깔을 지정하도록 변경해야합니다.
+
+
+```css
+<div class="border border-gray-200 px-2 py-3 ...">
+  <!-- ... -->
+</div>
+```
+
+또는 전역적으로 테두리 색상을 정의합니다.
+
+
+```css
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+```
+
+또한 ring에서도 기본 색상을 blue-500에서 currentColor로 변경하여 일관성을 높였습니다.
+
+ring을 사용하는 모든 위치에서 색깔을 지정하도록 변경해야합니다.
+
+```css
+<button class="focus:ring-3 focus:ring-blue-500 ...">
+  <!-- ... -->
+</button>
+```
+
+또는 전역적으로 ring 색상을 정의합니다.
+
+
+```css
+@theme {
+  --default-ring-width: 3px;
+  --default-ring-color: var(--color-blue-500);
+}
+```
+
+### 9. 기본 placeholder 색상이 변경되었습니다.
+
+v3에서는 플레이스홀더 텍스트 색상이 gray-400이었지만, v4에서는 currentColor 색상의 50% 불투명도로 사용하도록 간소화되었습니다.
+
+v3 동작을 유지하려면 프로젝트에 다음 CSS를 추가하세요.
+
+```css
+@layer base {
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+}
+```
+
+### 10. 버튼은 기본 커서를 사용합니다.
+
+이제 버튼은 기본 브라우저 동작과 일치하도록 `cursor: pointer` 대신 `cursor: default`를 사용합니다.
+
+기본적으로 계속 사용하려면 `cursor: pointer` CSS에 다음 기본 스타일을 추가하세요.
+
+```css
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+```
+
+### 11. dialog의 여백이 제거되었습니다.
+
+`<dialog>` 요소는 다른 요소가 재설정되는 방식과 일관성을 유지하기 위해 요소의 여백을 기본적으로 제거합니다.
+
+다이얼로그를 기본적으로 가운데 정렬하려면 프로젝트에 다음 CSS를 추가하세요.
+
+```css
+@layer base {
+  dialog {
+    margin: auto;
+  }
+}
+```
+
+### 12. 접두사 사용 방식이 변경되었습니다.
+
+v4에서 prefix를 설정하면, 모든 클래스 이름 앞에 접두사가 붙습니다. 해당 접두사는 항상 클래스 맨 앞에 위치합니다.
+
+
+```css
+<!-- 예시 -->
+<div class="tw:flex tw:bg-red-500 tw:hover:bg-red-600">
+  <!-- ... -->
+</div>
+```
+
+
+테마 변수 설정은 접두사 없이 작성합니다. @theme 내의 사용자 정의 변수는 접두사를 사용하지 않고 일반적으로 작성합니다.
+
+```css
+@import "tailwindcss" prefix(tw);
+
+@theme {
+  --font-display: "Satoshi", "sans-serif";
+  --breakpoint-3xl: 120rem;
+  --color-avocado-100: oklch(0.99 0 0);
+  --color-avocado-200: oklch(0.98 0.04 113.22);
+  --color-avocado-300: oklch(0.94 0.11 115.03);
+}
+```
+
+tailwind가 해당 스타일을 빌드할 때 기존 프로젝트에 정의된 변수 충돌을 막기 위해 변수 앞에 자동으로 접두사를 붙인 채 변환합니다.
+
+```css
+:root {
+  --tw-font-display: "Satoshi", "sans-serif";
+  --tw-breakpoint-3xl: 120rem;
+  --tw-color-avocado-100: oklch(0.99 0 0);
+  --tw-color-avocado-200: oklch(0.98 0.04 113.22);
+  --tw-color-avocado-300: oklch(0.94 0.11 115.03);
+}
+```
+
+### 14. 커스텀 유틸리티가 추가 방식이 변경되었습니다.
+
+v3에서는 사용자가 정의한 커스텀 클래스는 @layer utilities 또는 @layer components 지시어를 사용하여 추가했습니다.
+
+```css
+@layer utilities {
+  .tab-4 {
+    tab-size: 4;
+  }
+}
+
+@layer components {
+  .btn {
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: ButtonFace;
+  }
+}
+```
+
+v4에서는 tailwind가 @layer를 내부적으로 탈취(hijacking)하지 않고 CSS의 native cascade layers 사용하야 @layer를 대체하는 @utiltity 지시어를 도입하였습니다.
+
+
+```css
+@utility tab-4 {
+  tab-size: 4;
+}
+
+@utility btn {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: ButtonFace;
+}
+```
+
+### 15. 변수값 사용하는 방식이 변경되었습니다.
+
+v3에서는 CSS 변수를 `var()` 없이 임의의 값으로 사용할 수 있었지만, 최근 CSS 업데이트로 인해 모호한 경우가 많아 v4에서는 대괄호 대신 괄호를 사용하도록 구문을 변경하였습니다.
+
+
+```css
+- <div class="bg-[--brand-color]"></div>
++ <div class="bg-(--brand-color)"></div>
+```
+
+
+### 16. 모바일에서의 호버 스타일 방식이 변경되었습니다.
+
+v4에서는 기기가 호버를 지원하는 경우에만 `hover`가 적용되도록 변경되었습니다.
+
+터치 기기에서 탭 시 호버가 발생하는 방식으로 사이트를 구축한 경우에는 프로젝트에 문제가 발생할 수 있습니다. <br/>
+문제가 밠애하는 경우, `hover`를 기존 구현 방식을 사용하도록 재정의할 수 있습니다.
+
+```css
+@custom-variant hover (&:hover);
+```
+
+### 17. theme() 함수 사용 방식이 변경되었습니다.
+
+v4에는 모든 테마 값에 대한 CSS 변수가 포함되어 있으므로 가능한 경우 `theme()`함수 대신 해당 `var()`변수를 사용하는 것이 좋습니다 .
+
+```css
+.my-class {
+  background-color: theme(colors.red.500);
+  background-color: var(--color-red-500);
+}
+```
+
+CSS 변수가 지원되지 않는 미디어 쿼리와 같이 여전히 함수를 사용해야 하는 경우에는 점 표기법 대신 CSS 변수 이름을 사용해야 합니다.
+
+```css
+- @media (width >= theme(screens.xl)) {
++ @media (width >= theme(--breakpoint-xl)) {
+  /* ... */
+}
+```
+
+
+### 18. JavaScript config 파일이 자동으로 호환되지 않습니다.
+
+tailwind.config.js 파일은 자동으로 호환되었지만, v4에서는 자동으로 감지되지 않습니다.
+
+여전히 JavaScript config 파일을 사용하려면 @config 지시문을 사용하여 명시적으로 로드할 수 있습니다.
+
+
+```css
+@config "../tailwind.config.js";
+```
+
+## 마무리
+
+이렇게 Tailwind CSS V4 환경 구축 과정을 정리해보았는데요. <br/>
+
+v4에선 구축 과정이 간소화되어서 훨씬 더 편하게 프로젝트에 적용할 수 있었고,  <br/>
+breaking changes가 많지만 프로젝트 초기에 바로 v4로 업그레이드해서 그런지 큰 어려움이 없었던 것 같습니다!
+
+해당 글이 v4 마이그레이션에 도움이 되었길 바라며 다음 글에선 Vitest 환경 구축 과정을 정리해보겠습니다!
+
+<RelationPostList post={post} />
+
+
+
+
