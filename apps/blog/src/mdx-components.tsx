@@ -12,6 +12,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     PostHeader,
     RelationPostList,
+    ImageZoom,
     h1: ({ children }) => (
       <PostHeadingLink
         as="h1"
