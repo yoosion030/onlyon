@@ -27,6 +27,7 @@ const ImageZoom = ({ src, alt, width, height, className }: ImageZoomProps) => {
             width={width || 800}
             height={height || 400}
             className={cn("cursor-pointer", className)}
+            loading="lazy"
           />
         </DialogTrigger>
         <DialogContent

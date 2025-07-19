@@ -1,4 +1,6 @@
-export const metadata = {
+import { generateMetadata } from "@blog/libs";
+
+export const post = {
   title: "Git, 왜 쓰는거야?",
   description: "비유 하면서 git 배우기",
   publishDate: new Date("2023-03-24"),
@@ -6,7 +8,9 @@ export const metadata = {
   recommended: true,
 };
 
-<PostHeader post={metadata} />
+export const metadata = generateMetadata({ post });
+
+<PostHeader post={post} />
 
 ## Git 사용하고 있긴 한데..
 
@@ -156,4 +160,4 @@ git-flow에는 5가지 종류의 브랜치가 존재합니다.
 
 [우린 Git-flow를 사용하고 있어요 | 우아한형제들 기술블로그](https://techblog.woowahan.com/2553/)
 
-<RelationPostList post={metadata} />
+<RelationPostList post={post} />

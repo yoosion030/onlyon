@@ -21,8 +21,8 @@ export async function GET(request: Request) {
         justifyContent: "center",
         width: "100%",
         height: "100%",
-        borderRadius: "16px",
-        background: "linear-gradient(135deg, #8BB5F5 0%, #A1C3F7 100%)",
+        background:
+          "linear-gradient(135deg, #C8E3FF 0%, #AED5FF 25%, #A9D3FF 50%, #A5D1FF 75%, #B3D8FF 100%)",
       }}
     >
       <p

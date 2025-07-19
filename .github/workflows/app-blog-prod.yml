@@ -81,6 +81,7 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build --build-arg WORKSPACE=blog \
+            --build-arg NEXT_PUBLIC_STAGE=prod \
             --build-arg NEXT_PUBLIC_GOOGLE_GEMINI_API_KEY=${{ secrets.GOOGLE_GEMINI_API_KEY }} \
             --build-arg NEXT_PUBLIC_PORTFOLIO_URL=https://portfolio.sionly.one \
             --build-arg NEXT_PUBLIC_BLOG_URL=https://blog.sionly.one \

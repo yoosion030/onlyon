@@ -1,4 +1,6 @@
-export const metadata = {
+import { generateMetadata } from "@blog/libs";
+
+export const post = {
   title: "Shadcn/ui가 무엇이고, 왜 사용할까?",
   publishDate: new Date("2024-02-21"),
   categories: ["Shadcn/ui"],
@@ -7,7 +9,9 @@ description: "",
 recommended: true,
 };
 
-<PostHeader post={metadata} />
+export const metadata = generateMetadata({ post });
+
+<PostHeader post={post} />
 
 이전에 내가 알고있던 배경 지식은 vercel 디자인 ai [v0](https://www.notion.so/Shadcn-4b75777f759445bd96c2a82b8f7df135?pvs=21)이 shadcn/ui 기반인 것만 알고있었다.
 
@@ -225,4 +229,4 @@ shadcn이 왜 컴포넌트 라이브러리라고 주장하지 않는지 알 것 
 
 [부트스트랩 ( bootstrap ) 이란?](https://velog.io/@5o_hyun/%EB%B6%80%ED%8A%B8%EC%8A%A4%ED%8A%B8%EB%9E%A9-bootstrap-%EC%9D%B4%EB%9E%80)
 
-<RelationPostList post={metadata} />
+<RelationPostList post={post} />

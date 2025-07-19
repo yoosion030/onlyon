@@ -1,4 +1,6 @@
-export const metadata = {
+import { generateMetadata } from "@blog/libs";
+
+export const post = {
   title: "2024년 회고",
   description: "1년차 주니어 프론트엔드 개발자의 2024년 회고",
   publishDate: new Date("2025-01-10"),
@@ -8,7 +10,9 @@ export const metadata = {
   recommended: true,
 };
 
-<PostHeader post={metadata} />
+export const metadata = generateMetadata({ post });
+
+<PostHeader post={post} />
 
 ### 들어가기 전에..
 
@@ -392,4 +396,4 @@ PoC 과정은 순탄하지 않았지만, 결국엔 빠르게 기능 구현이 �
 
 1년 뒤에 다시 이 글을 보면서 그때는 또 더 많은 것들을 느꼈으면 좋겠다!
 
-<RelationPostList post={metadata} />
+<RelationPostList post={post} />

@@ -1,4 +1,6 @@
-export const metadata = {
+import { generateMetadata } from "@blog/libs";
+
+export const post = {
   title: "Error: Invalid Hook Call Error, React 종속성 문제 해결",
   publishDate: new Date("2024-01-02"),
   categories: ["React", "Trouble Shooting"],
@@ -7,7 +9,9 @@ export const metadata = {
   recommended: false,
 };
 
-<PostHeader post={metadata} />
+export const metadata = generateMetadata({ post });
+
+<PostHeader post={post} />
 
 이전에 개발했던 next 프로젝트를 수정 없이 실행했는데, 3달전에는 멀쩡히 실행됐던 프로젝트가 다음과 같은 에러가 발생하여 실행되지 않았습니다.
 
@@ -56,4 +60,4 @@ yarn react react-dom -W
 
 관련 pr 첨부하면서 글 마치도록 하겠습니다!
 
-<RelationPostList post={metadata} />
+<RelationPostList post={post} />

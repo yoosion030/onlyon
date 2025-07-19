@@ -15,10 +15,8 @@ export async function GET(): Promise<
     const posts: (Post | null)[] = await Promise.all(
       slugs.map(async ({ name: slug }) => {
         try {
-          const { metadata } = await import(
-            `../../../(posts)/${slug}/page.mdx`
-          );
-          return { slug, ...metadata };
+          const { post } = await import(`../../../(posts)/${slug}/page.mdx`);
+          return { slug, ...post };
         } catch {
           return null;
         }

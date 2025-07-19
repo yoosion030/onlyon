@@ -1,4 +1,6 @@
-export const metadata = {
+import { generateMetadata } from "@blog/libs";
+
+export const post = {
   title: "신입 개발자의 면접 준비 방법(기술)",
   description:
     "나만의 면접 준비 방법, 10번의 면접 중 4번의 최종 탈락에도 극복하는 방법",
@@ -7,7 +9,9 @@ export const metadata = {
   recommended: true,
 };
 
-<PostHeader post={metadata} />
+export const metadata = generateMetadata({ post });
+
+<PostHeader post={post} />
 
 이전 글로 <a href="https://velog.io/@yoosion030/%EC%8B%A0%EC%9E%85%EA%B0%9C%EB%B0%9C%EC%9E%90%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4%EC%9E%91%EC%84%B1%EB%B2%95" target="_blank" >포트폴리오 작성법</a>을 정리해 보았고, 그다음 단계인 면접 준비 방법에 대해 정리해 보았습니다.
 
@@ -271,4 +275,4 @@ Q&A 시간은 회사에 대한 정보도 얻고, 회사 관심도를 어필할 �
 - [프론트엔드 면접 질문 및 답변 정리](https://amyhyemi.tistory.com/224)
 - [프론트엔드 기술 면접 필수 질문 정리](https://zero-base.co.kr/event/media_insight_contents_FE_frontend_tech_Interview)
 
-<RelationPostList post={metadata} />
+<RelationPostList post={post} />
