@@ -1,7 +1,7 @@
 name: App Blog Dev
 
 on:
-  pull_request:
+  push:
     paths:
       - "apps/blog/**"
       - "packages/**"
@@ -17,23 +17,34 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+
       - name: Setup pnpm
         uses: ./.github/actions/setup-pnpm
+
+
 
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
         with:
           version: latest
 
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
       - name: Run linting
         run: turbo lint:ci --filter=blog
 
-      - name: Report linting results
-        if: always()
-        uses: mongolyy/reviewdog-action-biome@v1
-        with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
+      # - name: Report linting results
+      #   if: always()
+      #   uses: mongolyy/reviewdog-action-biome@v1
+      #   with:
+      #     github_token: ${{ secrets.github_token }}
+      #     reporter: github-pr-review
 
   unit-testing:
     runs-on: ubuntu-latest
@@ -47,16 +58,24 @@ jobs:
       - name: Setup pnpm
         uses: ./.github/actions/setup-pnpm
 
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
       - name: Run unit tests
         run: turbo test --filter=blog && turbo report
 
-      - name: Upload Coverage Report
-        if: always()
-        uses: davelosert/vitest-coverage-report-action@v2
-        with:
-          working-directory: apps/blog
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          name: "Coverage Report - ${{ github.sha }}"
+      # - name: Upload Coverage Report
+      #   if: always()
+      #   uses: davelosert/vitest-coverage-report-action@v2
+      #   with:
+      #     working-directory: apps/blog
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     name: "Coverage Report - ${{ github.sha }}"
 
   docker-ecs-build:
     needs: [linting, unit-testing]
@@ -86,6 +105,14 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
 
       - name: Build, tag, and push image to Amazon ECR
         id: build_image

@@ -28,5 +28,15 @@ runs:
           ${{ runner.os }}-pnpm-store-
 
     - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
       shell: bash
-      run: pnpm install && pnpm install -g turbo
+      run: pnpm install
+
+    - name: Verify installation (cache hit)
+      if: steps.cache.outputs.cache-hit == 'true'
+      shell: bash
+      run: pnpm install --frozen-lockfile --prefer-offline
+
+    - name: Install turbo globally
+      shell: bash
+      run: pnpm install -g turbo@2.5.5
