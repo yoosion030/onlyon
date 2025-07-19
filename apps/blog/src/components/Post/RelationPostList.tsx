@@ -40,7 +40,7 @@ const RelationPostList = ({ post }: { post: PostType }) => {
             "flex",
             "gap-4",
             "w-full",
-            "overflow-x-scroll",
+            "overflow-x-auto",
             "overflow-y-hidden",
           )}
         >
@@ -67,7 +67,7 @@ const RelationPostList = ({ post }: { post: PostType }) => {
             "flex",
             "gap-4",
             "w-full",
-            "overflow-x-scroll",
+            "overflow-x-auto",
             "overflow-y-hidden",
           )}
         >
