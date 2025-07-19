@@ -1,4 +1,6 @@
-export const metadata = {
+import { generateMetadata } from "@blog/libs";
+
+export const post = {
   title: "2. tldraw features (tldraw 기능)",
   publishDate: new Date("2024-09-28"),
   posterImage:
@@ -8,7 +10,9 @@ export const metadata = {
   recommended: false,
 };
 
-<PostHeader post={metadata} />
+export const metadata = generateMetadata({ post });
+
+<PostHeader post={post} />
 
 ### 들어가기 전에
 
@@ -233,4 +237,4 @@ const handleMount = (editor: Editor) => {
 
 이렇게 내가 기능 개발하면서 유용하게 사용했던 옵션들을 알아보았다. 다음 포스팅에서는 커스텀 툴바를 제작하는 방법을 정리해보겠다.
 
-<RelationPostList post={metadata} />
+<RelationPostList post={post} />

@@ -1,4 +1,6 @@
-export const metadata = {
+import { generateMetadata } from "@blog/libs";
+
+export const post = {
   title:
     "jest.mock hoisting (The module factory of `jest.mock()` is not allowed to reference any out-of-scope variables.)",
   publishDate: new Date("2024-04-28"),
@@ -7,7 +9,9 @@ categories: ["Jest", "Trouble Shooting"],
 recommended: false,
 };
 
-<PostHeader post={metadata} />
+export const metadata = generateMetadata({ post });
+
+<PostHeader post={post} />
 
 특정 use hook을 모킹 하여 테스트 코드를 작성 중 다음과 같은 에러가 발생하였다.
 
@@ -68,4 +72,5 @@ jest.mock("@components/ui", () => ({
 
 [https://lukerogerson.medium.com/two-ways-to-fix-the-jest-test-error-the-module-factory-of-jest-mock-is-not-allowed-to-bf022b5175dd](https://lukerogerson.medium.com/two-ways-to-fix-the-jest-test-error-the-module-factory-of-jest-mock-is-not-allowed-to-bf022b5175dd)
 
-<RelationPostList post={metadata} />
+import
+<RelationPostList post={post} />

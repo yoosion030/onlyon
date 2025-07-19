@@ -1,6 +1,6 @@
-import { ImageZoom } from "@blog/components";
+import { generateMetadata } from "@blog/libs";
 
-export const metadata = {
+export const post = {
   title: "신입 개발자의 포트폴리오 작성법",
   description:
     "60개 회사에 지원해서 8개의 회사(오후두시랩, 신한은행, 토스뱅크, 미리디, 데이원컴퍼니, 베이글코드, 클래스팅, 팀스파르타)에 서류 합격한 방법",
@@ -11,7 +11,9 @@ export const metadata = {
   recommended: true,
 };
 
-<PostHeader post={metadata} />
+export const metadata = generateMetadata({ post });
+
+<PostHeader post={post} />
 
 안녕하세요, 저는 현재 광주소프트웨어마이스터고등학교에 재학중인 유시온입니다! 제가 9개월 동안 취업준비를 하면서 약 60개 기업에 지원하여 8개의 회사에 서류합격을 하였는데요.
 
@@ -199,4 +201,4 @@ export const metadata = {
 - [워니님의 개발자 이력서 작성하기](https://wonny.space/writing/work/engineer-resume)
 - [개발자의 서류 작성에 유용한 자료들을 모아두는 Repo](https://github.com/codingmonster-tv/Awesome_Resume_Portfolio?tab=readme-ov-file)
 
-<RelationPostList post={metadata} />
+<RelationPostList post={post} />

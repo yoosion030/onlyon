@@ -10,6 +10,7 @@
     "format:check": "biome check ."
   },
   "dependencies": {
+    "@next/third-parties": "^15.4.2",
     "@tailwindcss/postcss": "^4.1.11",
     "class-variance-authority": "^0.7.1",
     "lucide-react": "^0.525.0",

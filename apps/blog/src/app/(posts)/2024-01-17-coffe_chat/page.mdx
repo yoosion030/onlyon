@@ -1,4 +1,6 @@
-export const metadata = {
+import { generateMetadata } from "@blog/libs";
+
+export const post = {
   title: "신입 개발자의 질문 방법(커피챗)",
   description: "잘 질문하는 방법과 커피챗하는 방법",
   publishDate: new Date("2024-01-17"),
@@ -6,7 +8,9 @@ export const metadata = {
   recommended: true,
 };
 
-<PostHeader post={metadata} />
+export const metadata = generateMetadata({ post });
+
+<PostHeader post={post} />
 
 [이전 글](https://velog.io/@yoosion030/%EC%8B%A0%EC%9E%85-%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%9D%98-%EB%A9%B4%EC%A0%91-%EC%A4%80%EB%B9%84-%EB%B0%A9%EB%B2%95%EA%B8%B0%EC%88%A0) 이후로 컬처핏 면접에 대해 정리하려고 했는데 중복된 내용이 많아 새로운 주제로 글을 작성하게 되었습니다.
 이번에는 커피챗 방법과 질문하는 방법에 대해 작성해 보려고 합니다.
@@ -180,4 +184,4 @@ B의 질문 이후 F의 답변이 왔습니다. (자세한 답변 내용은 생�
 
 [‘일 잘한다' 칭찬받는 사람들의 공통점](https://eopla.net/magazines/87#)
 
-<RelationPostList post={metadata} />
+<RelationPostList post={post} />

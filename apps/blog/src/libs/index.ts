@@ -1,3 +1,4 @@
+export * from "./generateMetadata";
 export * from "./getAllPosts";
 export * from "./getCategory";
 export * from "./getPosts";

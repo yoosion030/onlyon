@@ -24,6 +24,7 @@ const Post = ({ post }: PostProps) => {
         "ease-in-out",
         "inline-block",
       )}
+      prefetch={true}
     >
       {posterImage ? (
         <Image

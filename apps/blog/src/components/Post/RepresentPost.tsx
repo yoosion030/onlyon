@@ -21,6 +21,7 @@ const RepresentPost = ({ post }: { post: Post }) => {
         "duration-300",
         "ease-in-out",
       )}
+      prefetch={true}
     >
       {posterImage ? (
         <Image

@@ -18,6 +18,7 @@ const RecommendPost = ({ title, publishDate, categories, slug }: Post) => {
         "ease-in-out",
         "w-full",
       )}
+      prefetch={true}
     >
       <h2 className={cn("text-primary-400", "font-bold")}>{title}</h2>
       <p

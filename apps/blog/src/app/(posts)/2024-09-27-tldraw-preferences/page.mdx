@@ -1,4 +1,6 @@
-export const metadata = {
+import { generateMetadata } from "@blog/libs";
+
+export const post = {
   title: "1. tldraw preferences (tldraw 기본 설정)",
   publishDate: new Date("2024-09-27"),
   posterImage:
@@ -8,7 +10,10 @@ export const metadata = {
   recommended: false,
 };
 
-<PostHeader post={metadata} />
+export const metadata = generateMetadata({ post });
+
+<PostHeader post={post} />
+
 
 ### 들어가기 전에
 
@@ -114,4 +119,4 @@ export default function App() {
 
 튜토리얼 코드: [https://tldraw.dev/quick-start](https://tldraw.dev/quick-start)
 
-<RelationPostList post={metadata} />
+<RelationPostList post={post} />
