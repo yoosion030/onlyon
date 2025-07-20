@@ -17,8 +17,6 @@ describe("ImageZoom", () => {
   it("이미지가 정상적으로 노출되어야 한다.", () => {
     render(<ImageZoom {...defaultProps} />);
 
-    screen.debug();
-
     const image = screen.getByRole("img");
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute("src", "/test-image.jpg");

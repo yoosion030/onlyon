@@ -22,12 +22,12 @@
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.2.0",
     "@repo/ui": "workspace:*",
+    "@repo/utils": "workspace:*",
     "@vercel/og": "^0.6.5",
     "prism-react-renderer": "^2.4.1"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@repo/utils": "workspace:*",
     "@repo/vitest-config": "workspace:*",
     "@types/mdx": "^2.0.13"
   }

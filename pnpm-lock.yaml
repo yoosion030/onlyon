@@ -96,6 +96,9 @@ importers:
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       '@vercel/og':
         specifier: ^0.6.5
         version: 0.6.5
@@ -106,9 +109,6 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
-      '@repo/utils':
-        specifier: workspace:*
-        version: link:../../packages/utils
       '@repo/vitest-config':
         specifier: workspace:*
         version: link:../../packages/vitest-config
@@ -121,13 +121,13 @@ importers:
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
-      '@repo/utils':
-        specifier: workspace:*
-        version: link:../../packages/utils
       '@repo/vitest-config':
         specifier: workspace:*
         version: link:../../packages/vitest-config
