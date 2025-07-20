@@ -17,11 +17,11 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@repo/ui": "workspace:*"
+    "@repo/ui": "workspace:*",
+    "@repo/utils": "workspace:*"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@repo/utils": "workspace:*",
     "@repo/vitest-config": "workspace:*"
   }
 }

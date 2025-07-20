@@ -33,7 +33,7 @@ export const Header = ({ workspace, className, ...props }: HeaderProps) => {
           href="/"
           className={cn("text-primary-linear", "font-extrabold", "text-xl")}
         >
-          OnlyOn.
+          Only On.
         </a>
         <div className={cn("flex", "gap-10")}>
           {workspace === "blog" && (
