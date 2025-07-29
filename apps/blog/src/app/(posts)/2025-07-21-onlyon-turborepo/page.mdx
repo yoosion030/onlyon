@@ -1,0 +1,291 @@
+export const metadata = {
+  title: "3. OnlyOn 서비스 제작기 - TurboRepo 환경 구축",
+  description: "개인 브랜딩 페이지인 OnlyOn 서비스의 TurboRepo 환경 구축 과정을 공유합니다.",
+  publishDate: new Date("2025-07-22"),
+  categories: ["사이드 프로젝트"],
+};
+
+<PostHeader post={metadata} />
+
+
+[이전 글](../2025-07-20-onlyon-tech-stack)에선 기술 스택 선정 과정을 정리해보았는데요. <br />
+이번 글에선 기술 스택 선정 과정을 마친 후 TurboRepo를 통해 모노레포 환경을 구축하는 과정을 정리해보겠습니다.
+
+
+
+### Why TurboRepo?
+
+왜 TurboRepo를 선택했냐? 라고 하면 이유론 빠르고 생성이 쉽습니다. <br/>
+현업에서는 NX를 사용하는데, 느리기도 하고 환경을 구축하는데에 있어 조금 복잡하다고 느꼈습니다.
+
+다만 규모가 크고 복잡성이 있는 프로젝트에선 NX가 더 정교하게 환경을 구축할 수 있지만, <br/>
+제 서비스는 규모가 작고 다른 개발자와 협업하는 것이 아니라 혼자서 개발하기 때문에 쉽고 빠른 환경 구축이 필요하다고 생각하였습니다.
+
+TurboRepo가 빠른 이유는 원격 캐시를 통해 모든 작업의 결과를 저장하여 동일한 작업을 2번 수행할 필요가 없습니다. <br/>
+이렇게 모든 서비스의 린트를 실행시켜도, 변경사항이 없다면 이전 결과의 캐시를 통해 빠르게 결과를 얻을 수 있습니다.
+
+또한 가장 큰 특징으로는 실행 가능한 테스크를 항상 병렬로 실행하여 더 빠르게 결과물을 얻을 수 있습니다.
+
+### TurboRepo 프로젝트 생성 방법
+
+TurboRepo 프로젝트를 생성하는 과정은 간단합니다. <br/>
+아래 명령어를 실행하여 몇가지 질문에 답을하게 되면 프로젝트가 생성됩니다:
+```bash
+pnpm dlx create-turbo@latest
+```
+
+1. 프로젝트 이름 입력
+2. 패키지 매니저 선택 (npm, yarn, pnpm, bun)
+
+
+이후 기본 템플릿에 맞게 프로젝트가 생성된 것을 확인할 수 있습니다.
+- apps/docs
+- apps/web
+- packages/eslint-config
+- packages/typescript-config
+- packages/ui
+
+![](https://onlyon.s3.ap-southeast-2.amazonaws.com/OnlyOn/3/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA+2025-07-19+%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE+8.14.43.png)
+
+이후 turbo를 전역적으로 설치하면 turbo 저장소 내에서 명령어를 빠르게 실행할 수 있습니다.
+
+```bash
+pnpm add turbo --global
+```
+
+## OnlyOn TurboRepo 구축 과정
+
+위에서 설명한 명령어는 기본 템플릿을 통해 생성이 되는데요, 해당 방법 외에 나에게 맞는 example을 선택하여 <br/>
+기술스택에 맞는 환경을 구축할 수 있습니다.
+
+```bash
+# Use an example listed below
+pnpm dlx create-turbo@latest --example [example-name]
+
+# Use a GitHub repository from the community
+pnpm dlx create-turbo@latest --example [github-url]
+```
+
+OnlyOn에서는 Tailwind CSS를 사용하기 때문에 아래와 같이 명령어를 실행하였습니다:
+
+```bash
+pnpm dlx create-turbo@latest --example tailwindcss
+```
+
+### OnlyOn TurboRepo 구조
+
+현재 OnlyOn 프로젝트 구조는 아래와 같습니다:
+
+```filetree
+onlyon/
+├── apps
+│   ├── blog
+│   ├── portfolio
+├── packages
+│   ├── typescript-config
+│   ├── ui
+│   ├── utils
+│   └── vitest-config
+└── turbo.json
+```
+
+예제와 다른 점은 tailwind-config, eslint-config 패키지가 존재하지 않고, <br/>
+vitest-config, utils 패키지를 새로 구성하였습니다.
+
+전반적인 구조는 [@bytaesu](https://github.com/bytaesu/turborepo-shadcn-tailwind-v4) 개발자님의 boilerplate를 참고하였습니다.
+
+이제 해당 구조가 어떻게 연결되어 있는지 살펴보겠습니다:
+```json
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "env": [
+        "NEXT_PUBLIC_PORTFOLIO_URL",
+        "NEXT_PUBLIC_BLOG_URL",
+        "NEXT_PUBLIC_API_URL",
+        "NEXT_PUBLIC_GOOGLE_GEMINI_API_KEY"
+      ]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "test": {
+      "dependsOn": ["transit", "@repo/vitest-config#build"],
+      "outputs": ["coverage/**", "!coverage/coverage.json"]
+    },
+    "test:watch": {
+      "cache": false,
+      "persistent": true
+    },
+    "transit": {
+      "dependsOn": ["^transit"]
+    },
+    "lint": {},
+    "lint:fix": {},
+    "lint:summary": {
+      "cache": false
+    },
+    "lint:ci": {
+      "cache": false
+    }
+  },
+  "globalDependencies": ["tsconfig.json"]
+}
+
+```
+
+### 태스크 정의
+
+TurboRepo에서 명령 단위를 태스크(작업)이라고 정의할 수 있겠는데요. task 내에 실행할 명령을 정의하고,
+해당 패키지 내에서 명령어를 정의하면 turbo 명령어를 통해 작업을 실행할 수 있습니다.
+
+예를 들어 root의 turbo.json 파일에서 아래와 같이 명령어를 정의하였습니다:
+
+```json
+"tasks": {
+  "build": {
+    "dependsOn": ["^build"]
+  }
+}
+```
+
+그리고 각 패키지의 package.json scripts에 build 명령어를 정의하였습니다:
+
+```json
+"scripts": {
+  "build": "next build"
+}
+```
+
+이렇게 하면 root에서 turbo 명령어를 통해 각 패키지의 build 명령어를 병렬적으로 실행할 수 있게됩니다.
+
+```bash
+turbo build
+```
+
+### 특정 패키지의 명령어 실행
+
+`--filter` 옵션을 통해 특정 패키지의 build 명령어를 실행할 수 있습니다:
+```bash
+turbo build --filter=@repo/ui
+```
+
+`#` 으로도 특정 패키지 명령을 실행할 수 있습니다:
+
+```bash
+turbo @repo/ui#build
+```
+
+이렇게 하면 `@repo/ui` 패키지의 build 명령어를 실행할 수 있습니다.
+여기서 주의해야할 점은 package.json에 정의된 이름으로 접근해야합니다:
+
+```json
+"name": "@repo/ui"
+```
+
+명령어로 `@repo/ui`에 접근하는데, package.json에 정의된 이름이 ui일 경우 오류가 발생합니다.
+
+
+### 태스크 의존 선언
+
+앞서 말했듯이 TurboRepo의 장점은 태스크를 병렬적으로 실행한다는 것입니다. <br/>
+예를들어 root에서 `turbo build` 명령어를 실행하면 아래 태스크가 병렬로 실행될 것입니다.:
+- apps/blog
+- apps/portfolio
+- packages/ui
+- pacakges/vitest-config
+
+하지만, 애플리케이션 상 사용하는 라이브러리 패키지들이 먼저 빌드가 되어야 안전하게 빌드가 될 것입니다. <br/>
+이럴 때 `dependsOn` 옵션을 통해 태스크 간의 의존 관계를 선언할 수 있습니다:
+
+```json
+"tasks": {
+  "build": {
+    "dependsOn": ["^build"]
+  }
+}
+```
+`^`는 맨 종속성 그래프의 맨 아래부터 작업을 실행하도록 지시하는 명령어입니다. <br/>
+해당 선언은 애플리케이션 `build` 스크립트가 실행되기 전에 라이브러리 스크립트가 완료되기를 기다립니다.
+
+
+아래 예시는 애플리케이션 `test` 스크립트가 완료되기 전까지 `transit`, `vitest-config#build` 태스크가 완료되기를 기다립니다:
+
+```json
+"test": {
+  "dependsOn": ["transit", "@repo/vitest-config#build"],
+  "outputs": ["coverage/**", "!coverage/coverage.json"]
+},
+```
+
+OnlyOn의 각 애플리케이션은 `@repo/vitest-config`의 config 파일을 공용으로 사용하기 때문에 config 파일의 빌드가 완료되어야 테스트 테스크를 실행해야합니다.
+
+### 라이브러리 패키지 사용
+
+라이브러리 패키지를 사용하는 방법은 아래와 같습니다. <br/>
+사용할 프로젝트의 pacakge.json에 `workspace:*` 을 명시하여 라이브러리 패키지를 사용할 수 있습니다.
+
+```json
+"dependencies": {
+  "@repo/ui": "workspace:*"
+}
+```
+
+라이브러리 패키지에선 package.json에 내보낼 모듈을 명시해야합니다:
+
+```json
+"exports": {
+  "./styles.css": "./dist/styles.css",
+  "./theme.css": "./src/styles/theme.css",
+  ".": "./src/components/index.ts",
+  "./assets/*": "./src/assets/*"
+},
+```
+
+위와 같이 선언한 뒤 `pnpm install` 명령어를 실행하여 의존성을 설치하면, pnpm-lock.yaml 파일에 아래와 같이 라이브러리 패키지가 추가됩니다:
+
+```yaml
+apps/portfolio:
+  dependencies:
+    '@repo/ui':
+      specifier: workspace:*
+      version: link:../../packages/ui
+```
+
+이렇게 하면 사용할 프로젝트에서 라이브러리 패키지를 사용할 수 있습니다.
+
+```tsx
+import { Button } from "@repo/ui";
+```
+
+### 사용 후기
+
+TurboRepo를 사용하면서 느낀 점은 태스크 처리 속도가 빠르다는 것입니다. <br/>
+전체 빌드는 15초, 테스트는 7초, 린트는 1초 정도 걸렸습니다.
+
+![](https://onlyon.s3.ap-southeast-2.amazonaws.com/OnlyOn/3/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA+2025-07-19+%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE+8.02.34.png)
+
+로컬에서 빠른 속도를 자랑하며 자연스럽게 개발자 경험도 향상되었습니다. <br/>
+현재 프로젝트에서 아쉬운점은 CI 환경에서 캐시를 적용하지 않아 CI 환경에서는 실행 속도가 느리긴합니다.
+공식문서에 [CI 환경에서의 캐시 활성화](https://turborepo.com/docs/crafting-your-repository/constructing-ci) 내용이 있어 추후에 한번 적용해보려 합니다.
+
+앞으로 개인 프로젝트할 때 TurboRepo를 꾸준히 사용하지 않을까 싶네요!
+
+### 마무리
+
+
+이번 글에선 OnlyOn 서비스의 TurboRepo 환경 구축 과정을 정리해보았습니다. <br/>
+글을 정리하면서 TurboRepo의 기본 개념에 대해서도 정리할 수 있어 좋았습니다. <br/>
+
+다음 글에선 Tailwind CSS V4 마이그레이션 과정을 정리해보겠습니다.
+
+<RelationPostList metadata={metadata} />
