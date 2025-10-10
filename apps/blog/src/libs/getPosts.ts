@@ -29,9 +29,7 @@ export const getPosts = async ({
   const { posts, totalPages }: PostResponse = await fetch(
     buildApiUrl("/api/posts"),
     {
-      next: {
-        tags: ["posts", category || "all", `page-${page}`],
-      },
+      cache: "no-store"
     },
   ).then((res) => res.json());
 
